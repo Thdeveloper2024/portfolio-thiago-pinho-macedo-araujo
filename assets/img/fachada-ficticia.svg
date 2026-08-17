@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img" aria-labelledby="t d">
+  <title id="t">Fachada fictícia contemporânea EJS</title>
+  <desc id="d">Ilustração arquitetônica fictícia de uma residência moderna de dois pavimentos.</desc>
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#77736f"/><stop offset="1" stop-color="#2b2724"/></linearGradient>
+    <linearGradient id="wall" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f7f3ee"/><stop offset="1" stop-color="#cfc3bc"/></linearGradient>
+    <linearGradient id="dark" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#352b25"/><stop offset="1" stop-color="#181514"/></linearGradient>
+    <linearGradient id="glass" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#7990a1"/><stop offset="1" stop-color="#18242a"/></linearGradient>
+    <linearGradient id="wood" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#6b3f28"/><stop offset=".5" stop-color="#9a6040"/><stop offset="1" stop-color="#4d2e20"/></linearGradient>
+    <filter id="shadow"><feDropShadow dx="0" dy="18" stdDeviation="16" flood-opacity=".34"/></filter>
+    <filter id="glow"><feGaussianBlur stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <rect width="1600" height="1000" fill="url(#sky)"/>
+  <rect y="790" width="1600" height="210" fill="#24211f"/>
+  <rect y="842" width="1600" height="158" fill="#5a5652"/>
+  <g filter="url(#shadow)">
+    <rect x="205" y="345" width="1160" height="500" rx="5" fill="url(#wall)"/>
+    <rect x="235" y="310" width="770" height="300" fill="#f2eee9"/>
+    <rect x="1005" y="395" width="330" height="450" fill="url(#dark)"/>
+    <rect x="178" y="575" width="1185" height="88" fill="#1c1918"/>
+    <rect x="238" y="355" width="515" height="220" fill="url(#glass)"/>
+    <g stroke="#1b1b1b" stroke-width="10"><line x1="410" y1="355" x2="410" y2="575"/><line x1="582" y1="355" x2="582" y2="575"/></g>
+    <rect x="780" y="347" width="225" height="228" fill="url(#wood)"/>
+    <g opacity=".25" stroke="#2a1710" stroke-width="4"><line x1="810" y1="347" x2="810" y2="575"/><line x1="850" y1="347" x2="850" y2="575"/><line x1="890" y1="347" x2="890" y2="575"/><line x1="930" y1="347" x2="930" y2="575"/><line x1="970" y1="347" x2="970" y2="575"/></g>
+    <rect x="305" y="663" width="245" height="182" fill="url(#glass)"/>
+    <rect x="565" y="655" width="205" height="190" fill="url(#wood)"/>
+    <rect x="800" y="663" width="180" height="182" fill="#d5cec8"/>
+    <rect x="1015" y="663" width="300" height="182" fill="#151414"/>
+    <g stroke="#0e0e0e" stroke-width="7"><line x1="363" y1="663" x2="363" y2="845"/><line x1="425" y1="663" x2="425" y2="845"/><line x1="487" y1="663" x2="487" y2="845"/></g>
+    <rect x="605" y="705" width="10" height="100" rx="5" fill="#e6bd68" filter="url(#glow)"/>
+    <rect x="930" y="350" width="405" height="12" fill="#f0b84f" opacity=".95" filter="url(#glow)"/>
+    <rect x="245" y="603" width="1090" height="7" fill="#f0b84f" opacity=".75" filter="url(#glow)"/>
+  </g>
+  <g fill="#1f3a2a">
+    <ellipse cx="250" cy="820" rx="95" ry="36"/><ellipse cx="730" cy="842" rx="150" ry="28"/><ellipse cx="1350" cy="830" rx="90" ry="40"/>
+  </g>
+  <g fill="#4d7d4f"><circle cx="240" cy="777" r="42"/><circle cx="275" cy="790" r="35"/><circle cx="1320" cy="770" r="48"/><circle cx="1370" cy="790" r="40"/></g>
+  <path d="M200 860h590l-80 140H120z" fill="#c9c3be"/>
+  <path d="M1030 850h350l115 150h-540z" fill="#a9a6a1"/>
+  <g fill="#e5e0db"><rect x="300" y="858" width="275" height="22"/><rect x="328" y="892" width="250" height="22"/><rect x="356" y="927" width="225" height="22"/></g>
+</svg>
