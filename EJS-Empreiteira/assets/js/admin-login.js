@@ -1,0 +1,1 @@
+const form=document.getElementById('loginForm');form.addEventListener('submit',e=>{e.preventDefault();const u=document.getElementById('user').value.trim(),p=document.getElementById('pass').value;if(u==='admin'&&p==='EJS@2026'){sessionStorage.setItem('ejsAdminAuth','1');location.href='index.html'}else document.getElementById('loginMsg').textContent='Usuário ou senha inválidos.'});
