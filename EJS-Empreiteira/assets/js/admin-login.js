@@ -8,7 +8,7 @@ if (form) {
     const pass = document.getElementById('pass').value;
     const message = document.getElementById('loginMsg');
 
-    if (user === 'admin' && pass === 'EJS@2026') {
+    if (user === 'barriga@123456' && pass === 'ejs@2026') {
       sessionStorage.setItem('ejsAdminAuth', '1');
 
       // Caminho absoluto: dominio.com/admin/index.html
