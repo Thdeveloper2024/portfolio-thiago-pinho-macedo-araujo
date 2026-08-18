@@ -1,133 +1,54 @@
-# EJS Empreiteira — site HTML/CSS/JS
+# EJS Empreiteira — V22 Online (Vercel Blob + OIDC)
 
-Projeto estático pronto para publicar na Vercel.
+Projeto HTML/CSS/JS pronto para Vercel, com painel administrativo e persistência online.
 
-## Estrutura
-- `index.html`: site principal + animação de construção.
-- `obra.html`: página dinâmica de cada obra.
-- `admin/login.html`: login simples do painel.
-- `admin/index.html`: painel para contatos e obras.
-- `assets/css/style.css`: layout responsivo.
-- `assets/js/*.js`: interação, carrossel, intro e painel.
+## O que mudou nesta versão
+- O painel não usa mais `localStorage` para obras e configurações.
+- Obras, CNPJ, WhatsApp, Instagram e contador são salvos online no Vercel Blob.
+- Imagens cadastradas pelo ADM são enviadas ao Blob privado e servidas ao site por `/api/media`.
+- O site público e `obra.html` carregam os mesmos dados em qualquer dispositivo.
+- Login administrativo usa cookie HttpOnly e rotas de API.
+- O Blob conectado via OIDC funciona sem `BLOB_READ_WRITE_TOKEN` fixo quando o projeto está conectado ao Store na Vercel.
 
-## Login inicial do painel
-- Usuário: `admin`
-- Senha: `EJS@2026`
+## Estrutura nova
+- `/api/login.js` — autenticação ADM.
+- `/api/logout.js` — encerra sessão.
+- `/api/session.js` — valida sessão.
+- `/api/cms.js` — lê/salva configurações e obras.
+- `/api/upload.js` — envia imagens ao Blob privado.
+- `/api/media.js` — entrega as imagens privadas no site público.
+- `/lib/auth.js` e `/lib/cms.js` — lógica do servidor.
+- `package.json` — dependência `@vercel/blob`.
 
-> Troque essas credenciais em `assets/js/admin-login.js` antes de publicar.
+## Vercel Blob / OIDC
+O Store Blob precisa estar conectado ao MESMO projeto Vercel que hospeda este site. A conexão OIDC atual cria `BLOB_STORE_ID` e fornece credenciais temporárias automaticamente às Functions. Não exponha tokens no JavaScript do navegador.
 
-## Importante sobre o painel ADM
-Esta versão é 100% HTML/CSS/JS, por isso os dados e imagens adicionados pelo painel são gravados no `localStorage` do navegador. Isso funciona para demonstração e para edição no mesmo navegador, mas NÃO sincroniza alterações entre celulares/computadores.
+Depois de enviar esta versão ao GitHub, faça um novo deploy na Vercel.
 
-Para transformar o painel em um CMS real na Vercel, use Supabase/Firebase/Vercel Blob para persistir imagens e dados, além de autenticação segura no servidor.
+## Credenciais administrativas
+Para maior segurança, crie estas variáveis em Vercel > Project Settings > Environment Variables:
+- `ADMIN_USER`
+- `ADMIN_PASSWORD`
+- `ADMIN_SESSION_SECRET` (uma sequência longa e aleatória)
 
-## Publicar na Vercel
-1. Descompacte o projeto.
-2. Envie a pasta para um repositório GitHub ou use o upload/import da Vercel.
-3. Framework preset: `Other`.
-4. Build command: deixe vazio.
-5. Output directory: deixe vazio / raiz do projeto.
-6. Deploy.
+Se essas variáveis ainda não existirem, esta versão mantém temporariamente as credenciais que já estavam no projeto enviado:
+- usuário: `barriga@123456`
+- senha: `ejs@2026`
 
-## Personalização rápida
-Edite os contatos padrão em `assets/js/app.js` e/ou use o painel local.
+Recomenda-se configurar as três variáveis antes de usar o painel em produção.
 
-## Atualização de acessibilidade e visual
-- Controle de tema com 4 opções: Claro, Areia, Escuro e Alto contraste.
-- Controle de tamanho do texto: normal, A+ e A++.
-- Preferências ficam salvas no navegador do visitante.
-- Link “Pular para o conteúdo principal” para navegação por teclado.
-- Estados de foco visíveis em botões e links.
-- Nova abertura animada simulando uma obra corporativa: terreno, estrutura, lajes, fachada, vidros, acabamentos e paisagismo.
-- Tema padrão agora é claro/cimento, reduzindo o uso de grandes blocos pretos e melhorando a leitura do conteúdo.
+## Rotas
+- Site: `/index.html`
+- Login: `/admin/login.html`
+- Painel: `/admin/index.html`
 
+## Teste de sincronização
+1. Faça deploy.
+2. Entre em `/admin/login.html`.
+3. Em Configurações, altere o CNPJ ou WhatsApp e salve.
+4. Abra o site em outro celular ou janela anônima.
+5. O novo valor deve aparecer.
+6. Cadastre uma obra com imagem e confirme que ela aparece também em outro dispositivo.
 
-## Atualização V3
-- Tema inicial definido como **Escuro** em cada nova sessão, mantendo as opções de acessibilidade disponíveis durante a navegação.
-- Nova abertura com transformação de fachada em antes/depois, usando a foto final fornecida como resultado da reforma.
-- O efeito é controlado em JavaScript com etapas, progresso e revelação gradual da fachada final.
-
-## Atualização V5 — abertura em formato time-lapse vertical
-A apresentação inicial foi reajustada para o formato 9:16, inspirado em vídeos de evolução de obra: terreno vazio, fundação, estrutura, alvenaria, acabamento, fachada, paisagismo e resultado final. O conteúdo é fictício e desenhado em HTML/CSS com controle por JavaScript, sem utilizar o vídeo de referência dentro do site.
-
-## Atualização V6 — carrossel de evolução da obra
-- A capa fixa foi removida da página inicial.
-- O topo do site agora inicia sempre na etapa 01 e percorre automaticamente 7 imagens: terreno, fundação, estrutura, alvenaria, acabamentos, fachada e resultado final.
-- O visitante pode avançar/voltar, escolher uma etapa pelos indicadores e pausar a rotação automática.
-- O cabeçalho agora mostra também o texto: “Construindo sonhos. Entregando excelência.”
-
-## Atualização V7
-- Cabeçalho redesenhado em estilo escuro premium, mantendo **a mesma logo original** do projeto.
-- Nome centralizado em caixa alta com maior espaçamento e subtítulo “Construindo sonhos. Entregando excelência.”.
-- Botão MENU em formato retangular no desktop e compacto no celular.
-- O carrossel principal continua exibindo as 7 etapas automaticamente, agora usando elementos `<img>` para maior compatibilidade em hospedagem.
-- Barra superior com as 7 etapas da obra e destaque automático da etapa atual.
-- A imagem de evolução completa fornecida foi incluída no projeto e pode ser aberta pelo botão “Ver evolução completa” no resultado final.
-- Tema escuro volta a ser o padrão em todo novo carregamento do site; os controles de acessibilidade continuam disponíveis durante a navegação.
-
-## Atualização V8
-- Cabeçalho corrigido sem alterar o arquivo da logo EJS.
-- O cabeçalho, menu e botão de acessibilidade passam a acompanhar Cimento Claro, Areia, Escuro e Alto Contraste.
-- O tema padrão de uma nova sessão continua sendo Escuro; alterações de acessibilidade permanecem durante a navegação da sessão.
-- Carrossel principal com entrada 3D: cada foto entra girando da esquerda para a direita e a anterior sai para a direita.
-- Fundo de segurança usa a cor atual do tema enquanto uma foto ainda não carregou ou se houver falha no arquivo.
-
-
-## Atualização V9
-- Removidas todas as legendas e textos sobre o carrossel inicial.
-- O carrossel usa as 7 imagens já ajustadas em `assets/img/hero-stages/`.
-- As fotos entram sequencialmente da esquerda para a direita com rotação 3D, uma atrás da outra.
-- Ao chegar à sétima imagem, o carrossel permanece no resultado final.
-- Se alguma imagem ainda não tiver carregado, o fundo mantém a cor do tema atual do site.
-
-## Atualização V11
-- Botão do cabeçalho mostra apenas a palavra `Menu`, sem ícone hambúrguer.
-- A apresentação principal usa os 7 recortes fotográficos em sequência progressiva.
-- Cada nova foto entra girando da esquerda para a direita e permanece na tela.
-- Ao final, as 7 fotos ficam visíveis juntas, formando o panorama completo.
-- Não há margem lateral no carrossel: a primeira e a última imagem encostam nas laterais da página.
-- Legendas e títulos sobre as imagens foram removidos.
-
-## Atualização V12
-- Cabeçalho responsivo para celulares e telas pequenas.
-- Botão MENU sem a linha herdada do antigo ícone hambúrguer e com texto centralizado.
-- Recortes 01 a 07 processados para remover bordas brancas externas e frestas entre as etapas.
-- Sequência visual mais rápida (aprox. 1,05 s entre novas fotos).
-- Ao concluir as sete etapas, uma mensagem institucional aparece com os botões “Fazer orçamento” e “Ver mais”.
-
-## Atualização V13
-- Imagens críticas convertidas para WebP e reduzidas para acelerar o carregamento inicial.
-- Primeira etapa da apresentação com preload/fetchpriority alto; demais imagens usam decodificação assíncrona.
-- Seções abaixo da dobra usam content-visibility para reduzir trabalho de renderização inicial.
-- Em telas menores, o cabeçalho fica mais alto e o botão MENU vira apenas um ícone hambúrguer.
-- Portfólio permite arrastar horizontalmente com scroll-snap, leve rotação 3D e setas anterior/próximo.
-- Card final da apresentação recebeu botão X para fechar.
-
-## Atualização V14 — Rotas do painel ADM
-- Login oficial: `/admin/login.html`.
-- Após autenticação válida, redireciona para `/admin/index.html` usando caminho absoluto.
-- Acesso direto a `/admin/index.html` sem sessão volta para `/admin/login.html`.
-- `/login`, `/login.html`, `/admin` e `/admin/login` redirecionam para `/admin/login.html` na Vercel.
-- `cleanUrls` foi desativado para preservar `.html` na URL do painel.
-
-
-## Atualização V15
-- Tema inicial: Claro.
-- Menu de acessibilidade abre em painel separado.
-- Cabeçalho responsivo; em telas pequenas o botão MENU vira hambúrguer.
-- Carrossel inicial usa as 7 imagens fornecidas, alinhadas pela mesma linha de composição e sem bordas brancas entre elas.
-- Portfólio mostra uma obra completa por vez, com arraste horizontal e setas laterais.
-- Rotas administrativas: `/admin/login.html` e `/admin/index.html`.
-
-## Atualização V17
-- O carrossel inicial agora usa uma única imagem panorâmica fornecida pelo cliente.
-- A faixa superior com números/títulos foi removida por recorte, sem reconstruir a arquitetura.
-- O panorama foi dividido matematicamente em 7 recortes contíguos, sem sobreposição ou lacunas.
-- Ao final da animação, as 7 partes recompõem exatamente o mesmo panorama.
-
-## Atualização V18
-- Panorama inicial sem emendas brancas: as sete etapas usam a mesma imagem mestre como recorte sincronizado.
-- Menu de navegação sempre visível no desktop; hambúrguer apenas em telas menores.
-- Nova seção de indicadores antes do portfólio, incluindo contagem dinâmica de obras finalizadas.
-- O administrador pode definir a contagem inicial de obras finalizadas; cada nova obra adicionada incrementa automaticamente o total.
-- Portfólio com um projeto completo por posição de rolagem/arraste e navegação por setas.
+## Observação
+O Blob criado pelo usuário está em modo privado. Por isso as imagens cadastradas no painel não são usadas por URL direta do Blob; o site as entrega através da Function `/api/media`.
