@@ -82,7 +82,7 @@ function resetForm(){
   $('workFormTitle').textContent='Cadastrar nova obra';
   $('addWork').textContent='Publicar obra';
   $('cancelEdit').hidden=true;
-  $('workTitle').value='';$('workDesc').value='';$('workImage').value='';$('workGallery').value='';$('workVideos').value='';
+  $('workTitle').value='';$('workDesc').value='';$('workImage').value='';$('workGallery').value='';$('workVideos').value='';if($('workAppendGallery'))$('workAppendGallery').value='';if($('workAppendVideos'))$('workAppendVideos').value='';if($('editAppendMedia'))$('editAppendMedia').hidden=true;
 }
 $('cancelEdit').onclick=resetForm;
 
@@ -108,6 +108,12 @@ $('addWork').addEventListener('click',async()=>{
       if($('workVideos').files.length){
         for(const file of $('workVideos').files){const up=await uploadFile(file);videos.push(up.url);videoPaths.push(up.pathname);}
       }
+      if($('workAppendGallery')?.files.length){
+        for(const file of $('workAppendGallery').files){const up=await uploadFile(file);gallery.push(up.url);galleryPaths.push(up.pathname);}
+      }
+      if($('workAppendVideos')?.files.length){
+        for(const file of $('workAppendVideos').files){const up=await uploadFile(file);videos.push(up.url);videoPaths.push(up.pathname);}
+      }
       state.works[editingIndex]={...current,title,desc:$('workDesc').value.trim(),cover,coverPath,gallery,galleryPaths,videos,videoPaths};
       await saveState('Obra atualizada online.');
     }else{
@@ -129,6 +135,7 @@ function startEdit(i){
   editingIndex=i;const w=state.works[i];
   $('workFormTitle').textContent='Editar obra';$('addWork').textContent='Salvar alterações';$('cancelEdit').hidden=false;
   $('workTitle').value=w.title||'';$('workDesc').value=w.desc||'';$('workImage').value='';$('workGallery').value='';$('workVideos').value='';
+  if($('workAppendGallery'))$('workAppendGallery').value='';if($('workAppendVideos'))$('workAppendVideos').value='';if($('editAppendMedia'))$('editAppendMedia').hidden=false;
   showView('new');window.scrollTo({top:0,behavior:'smooth'});
 }
 
@@ -144,7 +151,7 @@ function renderWorks(){
   if(!state.works.length){host.innerHTML='<div class="admin-empty">Nenhuma obra cadastrada.</div>';return;}
   state.works.forEach((w,i)=>{
     const row=document.createElement('article');row.className='admin-work';
-    row.innerHTML=`<img src="${escapeHtml(w.cover)}" alt=""><div class="admin-work-copy"><strong>${escapeHtml(w.title)}</strong><p>${escapeHtml(w.desc||'')}</p><small>${w.builtin?'Projeto inicial/fictício':'Projeto publicado pelo painel'}</small></div><div class="admin-work-actions"><button class="edit-work" type="button">Editar</button><button class="delete-work" type="button">Excluir</button></div>`;
+    row.innerHTML=`<img src="${escapeHtml(w.cover)}" alt=""><div class="admin-work-copy"><strong>${escapeHtml(w.title)}</strong><p>${escapeHtml(w.desc||'')}</p><small>${w.builtin?'Projeto inicial/fictício':'Projeto publicado pelo painel'} · ${(w.gallery||[]).length} foto(s) · ${(w.videos||[]).length} vídeo(s)</small></div><div class="admin-work-actions"><button class="edit-work" type="button">Editar</button><button class="delete-work" type="button">Excluir</button></div>`;
     row.querySelector('.edit-work').onclick=()=>startEdit(i);row.querySelector('.delete-work').onclick=()=>removeWork(i);host.appendChild(row);
   });
 }

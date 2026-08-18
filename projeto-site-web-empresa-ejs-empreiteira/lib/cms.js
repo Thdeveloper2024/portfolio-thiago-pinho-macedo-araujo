@@ -59,6 +59,8 @@ function cleanState(input) {
       gallery: Array.isArray(w.gallery) ? w.gallery.map(String).slice(0, 30) : [],
       coverPath: w.coverPath ? String(w.coverPath) : '',
       galleryPaths: Array.isArray(w.galleryPaths) ? w.galleryPaths.map(String).slice(0, 30) : [],
+      videos: Array.isArray(w.videos) ? w.videos.map(String).slice(0, 20) : [],
+      videoPaths: Array.isArray(w.videoPaths) ? w.videoPaths.map(String).slice(0, 20) : [],
       counted: Boolean(w.counted),
       builtin: Boolean(w.builtin)
     }))

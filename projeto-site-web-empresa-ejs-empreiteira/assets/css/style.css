@@ -1641,3 +1641,31 @@ body{background:var(--page-bg);color:var(--text);transition:background .25s,colo
   .build-carousel.is-complete{margin-bottom:244px!important}
   .build-final-message p{font-size:14px!important}
 }
+
+
+/* ===== V28 — correções de galeria, card final, vídeo e WhatsApp ===== */
+/* Ao fechar o card final o espaço reservado desaparece junto, controlado por .is-complete. */
+@media(max-width:620px){
+  .build-carousel:not(.is-complete){margin-bottom:0!important;}
+}
+
+/* Galeria da obra: mostrar a foto inteira também no desktop, sem corte por object-fit:cover. */
+.project-media-track{background:color-mix(in srgb,var(--page-bg) 92%,#000 8%)}
+.project-media-slide{height:min(72vh,760px);aspect-ratio:auto!important;background:color-mix(in srgb,var(--page-bg) 90%,#000 10%)}
+.project-media-slide img,.project-media-slide video{width:100%!important;height:100%!important;object-fit:contain!important;object-position:center center!important}
+@media(max-width:700px){
+  .project-media-slide{height:min(70vh,760px);max-height:none!important;aspect-ratio:auto!important}
+  .project-media-slide img,.project-media-slide video{object-fit:contain!important}
+}
+
+/* WhatsApp: desenho centralizado geometricamente dentro do círculo. */
+.floating-whatsapp{padding:0!important}
+.floating-whatsapp svg{width:32px!important;height:32px!important;display:block!important;margin:0!important;transform:none!important;overflow:visible!important}
+@media(max-width:620px){.floating-whatsapp svg{width:32px!important;height:32px!important}}
+
+/* Área explícita para acrescentar mídia durante a edição. */
+.admin-append-media{margin-top:20px;padding:18px;border:1px solid rgba(99,76,60,.18);border-radius:14px;background:rgba(207,195,188,.12)}
+.admin-append-media[hidden]{display:none!important}
+
+.project-video-slide{position:relative}
+.project-media-type{position:absolute;top:14px;left:14px;z-index:3;padding:7px 11px;border-radius:999px;background:rgba(38,33,32,.82);color:#fff;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;pointer-events:none}
