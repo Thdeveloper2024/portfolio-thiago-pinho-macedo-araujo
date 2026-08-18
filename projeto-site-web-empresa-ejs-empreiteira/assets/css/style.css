@@ -1437,3 +1437,155 @@ body{background:var(--page-bg);color:var(--text);transition:background .25s,colo
   .floating-whatsapp{width:58px;height:58px;right:16px;bottom:18px;border-width:4px}
   .floating-whatsapp svg{width:31px;height:31px}
 }
+
+/* ===== V26 — rodapé responsivo desktop/mobile + WhatsApp fixo + card final mobile ===== */
+/* Desktop: recupera a composição horizontal do rodapé original. */
+@media (min-width:621px){
+  .footer.footer-centered{
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr) auto!important;
+    grid-template-rows:auto auto!important;
+    align-items:center!important;
+    justify-content:initial!important;
+    gap:24px 36px!important;
+    text-align:left!important;
+    padding:42px clamp(24px,6vw,100px)!important;
+  }
+  .footer-brand.footer-brand-centered{
+    display:flex!important;
+    flex-direction:row!important;
+    justify-content:flex-start!important;
+    align-items:center!important;
+    text-align:left!important;
+    gap:18px!important;
+    min-width:0;
+  }
+  .footer-brand.footer-brand-centered div{
+    display:grid!important;
+    justify-items:start!important;
+    text-align:left!important;
+    gap:5px!important;
+  }
+  .footer-text-links{
+    justify-self:end!important;
+    justify-content:flex-end!important;
+    gap:14px!important;
+    white-space:nowrap;
+  }
+  .footer.footer-centered .footer-copy{
+    grid-column:1/-1!important;
+    text-align:center!important;
+    width:100%!important;
+  }
+}
+
+/* Mobile: mantém o rodapé centralizado da versão anterior. */
+@media (max-width:620px){
+  .footer.footer-centered{
+    display:flex!important;
+    flex-direction:column!important;
+    align-items:center!important;
+    justify-content:center!important;
+    text-align:center!important;
+    gap:15px!important;
+    padding:38px 20px 88px!important;
+  }
+  .footer-brand.footer-brand-centered{
+    display:flex!important;
+    flex-direction:column!important;
+    align-items:center!important;
+    justify-content:center!important;
+    text-align:center!important;
+    gap:10px!important;
+  }
+  .footer-brand.footer-brand-centered div{
+    display:grid!important;
+    justify-items:center!important;
+    text-align:center!important;
+    gap:5px!important;
+  }
+  .footer-text-links{
+    justify-content:center!important;
+    justify-self:auto!important;
+    gap:11px!important;
+    font-size:14px!important;
+  }
+  .footer.footer-centered .footer-copy{
+    width:100%!important;
+    text-align:center!important;
+  }
+}
+
+/* Botão flutuante: acompanha a rolagem e fica inteiramente dentro da viewport. */
+.floating-whatsapp{
+  position:fixed!important;
+  right:clamp(18px,2vw,34px)!important;
+  bottom:clamp(18px,2.2vw,30px)!important;
+  z-index:999!important;
+  margin:0!important;
+  padding:0!important;
+  line-height:0!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  box-sizing:border-box!important;
+  overflow:hidden!important;
+}
+.floating-whatsapp svg{
+  display:block!important;
+  margin:0!important;
+  transform:translateX(.5px)!important;
+  flex:0 0 auto!important;
+}
+@media (max-width:620px){
+  .floating-whatsapp{
+    width:56px!important;
+    height:56px!important;
+    right:16px!important;
+    bottom:16px!important;
+    border-width:4px!important;
+  }
+  .floating-whatsapp svg{width:30px!important;height:30px!important}
+}
+
+/* No celular, a mensagem final fica abaixo da imagem, sem cobrir o panorama. */
+@media (max-width:620px){
+  .build-carousel.is-complete{
+    margin-bottom:188px!important;
+  }
+  .build-final-message{
+    top:calc(100% + 10px)!important;
+    bottom:auto!important;
+    width:calc(100% - 20px)!important;
+    max-width:none!important;
+    padding:18px 16px 15px!important;
+    border-radius:14px!important;
+    transform:translate(-50%,16px)!important;
+  }
+  .build-final-message.show{
+    transform:translate(-50%,0)!important;
+  }
+  .build-final-message p{
+    font-size:13px!important;
+    line-height:1.55!important;
+  }
+  .build-final-actions{
+    gap:9px!important;
+    margin-top:13px!important;
+  }
+  .build-final-actions .btn{
+    min-height:42px!important;
+    padding:11px 9px!important;
+    font-size:10.5px!important;
+  }
+  .build-final-close{
+    width:28px!important;
+    height:28px!important;
+    right:8px!important;
+    top:8px!important;
+  }
+}
+@media (max-width:390px){
+  .build-carousel.is-complete{margin-bottom:204px!important}
+  .build-final-message p{font-size:12.5px!important}
+}

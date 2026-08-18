@@ -58,3 +58,10 @@ O Blob criado pelo usuário está em modo privado. Por isso as imagens cadastrad
 - Painel ADM aceita vídeos MP4/WebM/MOV além de fotos.
 - Vídeos são armazenados no Vercel Blob privado e exibidos ao cliente através de `/api/media`.
 - Página individual da obra recebeu rodapé completo da EJS, mantendo o mesmo padrão do site principal.
+
+## Atualização V26
+- Rodapé desktop voltou ao layout horizontal original: marca à esquerda, links sociais à direita e copyright centralizado abaixo.
+- Rodapé mobile permanece centralizado.
+- WhatsApp flutuante permanece fixo durante toda a rolagem e foi reposicionado para não encostar/cortar na lateral da viewport.
+- Ícone do WhatsApp centralizado dentro do círculo.
+- Em celulares, a mensagem exibida ao concluir o carrossel agora aparece abaixo da imagem, com texto maior, mantendo o panorama totalmente visível.
