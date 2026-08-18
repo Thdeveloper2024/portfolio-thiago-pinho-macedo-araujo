@@ -1273,3 +1273,61 @@ body{background:var(--page-bg);color:var(--text);transition:background .25s,colo
   .project-media-slide img{object-fit:cover}
   .project-media-slide video{object-fit:contain;background:#111}
 }
+
+/* ===== V25 — panorama mobile sem distorção =====
+   Mantém a proporção panorâmica da imagem mestre em telas pequenas.
+   Evita esticar verticalmente a fachada/construção. */
+@media (max-width:900px){
+  .build-hero{
+    min-height:0!important;
+    height:auto!important;
+    padding:0!important;
+    margin:0!important;
+  }
+  .build-carousel{
+    width:100%!important;
+    height:auto!important;
+    min-height:0!important;
+    max-height:none!important;
+    aspect-ratio:16 / 9!important;
+    overflow:hidden!important;
+    background:var(--page-bg)!important;
+  }
+  .build-panorama{
+    position:absolute!important;
+    inset:0!important;
+    width:100%!important;
+    height:100%!important;
+  }
+  .build-panel{
+    height:100%!important;
+    background-size:700% 100%!important;
+  }
+  .impact{
+    margin-top:0!important;
+  }
+}
+
+@media (max-width:620px){
+  .build-carousel{
+    aspect-ratio:16 / 9!important;
+    height:auto!important;
+    min-height:0!important;
+    max-height:none!important;
+  }
+  .impact{
+    padding-top:38px!important;
+  }
+  .build-final-message{
+    max-width:calc(100% - 24px)!important;
+  }
+}
+
+@media (max-width:390px){
+  .build-carousel{
+    aspect-ratio:16 / 9!important;
+    height:auto!important;
+    min-height:0!important;
+    max-height:none!important;
+  }
+}
