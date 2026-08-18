@@ -52,3 +52,9 @@ Recomenda-se configurar as três variáveis antes de usar o painel em produção
 
 ## Observação
 O Blob criado pelo usuário está em modo privado. Por isso as imagens cadastradas no painel não são usadas por URL direta do Blob; o site as entrega através da Function `/api/media`.
+
+## Atualização V24 — mídia das obras
+- Página individual da obra agora exibe fotos e vídeos em um carrossel horizontal, com arraste por toque/mouse, setas e indicadores.
+- Painel ADM aceita vídeos MP4/WebM/MOV além de fotos.
+- Vídeos são armazenados no Vercel Blob privado e exibidos ao cliente através de `/api/media`.
+- Página individual da obra recebeu rodapé completo da EJS, mantendo o mesmo padrão do site principal.

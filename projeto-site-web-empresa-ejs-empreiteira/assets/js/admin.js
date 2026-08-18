@@ -58,7 +58,7 @@ async function uploadFile(file){
   });
   const data=await response.json().catch(()=>({}));
   if(response.status===401){window.location.replace('/admin/login.html');throw new Error('Sessão expirada.');}
-  if(!response.ok)throw new Error(data.error||'Falha no upload da imagem.');
+  if(!response.ok)throw new Error(data.error||'Falha no upload do arquivo.');
   return data;
 }
 
@@ -82,7 +82,7 @@ function resetForm(){
   $('workFormTitle').textContent='Cadastrar nova obra';
   $('addWork').textContent='Publicar obra';
   $('cancelEdit').hidden=true;
-  $('workTitle').value='';$('workDesc').value='';$('workImage').value='';$('workGallery').value='';
+  $('workTitle').value='';$('workDesc').value='';$('workImage').value='';$('workGallery').value='';$('workVideos').value='';
 }
 $('cancelEdit').onclick=resetForm;
 
@@ -96,6 +96,7 @@ $('addWork').addEventListener('click',async()=>{
       const current={...state.works[editingIndex]};
       let cover=current.cover,coverPath=current.coverPath||'';
       let gallery=[...(current.gallery||[])],galleryPaths=[...(current.galleryPaths||[])];
+      let videos=[...(current.videos||[])],videoPaths=[...(current.videoPaths||[])];
       const main=$('workImage').files[0];
       if(main){
         const up=await uploadFile(main);cover=up.url;coverPath=up.pathname;gallery=[up.url];galleryPaths=[up.pathname];
@@ -104,13 +105,18 @@ $('addWork').addEventListener('click',async()=>{
         if(!main){gallery=[cover];galleryPaths=coverPath?[coverPath]:[];}
         for(const file of $('workGallery').files){const up=await uploadFile(file);gallery.push(up.url);galleryPaths.push(up.pathname);}
       }
-      state.works[editingIndex]={...current,title,desc:$('workDesc').value.trim(),cover,coverPath,gallery,galleryPaths};
+      if($('workVideos').files.length){
+        for(const file of $('workVideos').files){const up=await uploadFile(file);videos.push(up.url);videoPaths.push(up.pathname);}
+      }
+      state.works[editingIndex]={...current,title,desc:$('workDesc').value.trim(),cover,coverPath,gallery,galleryPaths,videos,videoPaths};
       await saveState('Obra atualizada online.');
     }else{
       const main=await uploadFile($('workImage').files[0]);
       const gallery=[main.url],galleryPaths=[main.pathname];
+      const videos=[],videoPaths=[];
       for(const file of $('workGallery').files){const up=await uploadFile(file);gallery.push(up.url);galleryPaths.push(up.pathname);}
-      state.works.push({id:`obra-${Date.now()}`,title,desc:$('workDesc').value.trim(),cover:main.url,coverPath:main.pathname,gallery,galleryPaths,counted:true,builtin:false});
+      for(const file of $('workVideos').files){const up=await uploadFile(file);videos.push(up.url);videoPaths.push(up.pathname);}
+      state.works.push({id:`obra-${Date.now()}`,title,desc:$('workDesc').value.trim(),cover:main.url,coverPath:main.pathname,gallery,galleryPaths,videos,videoPaths,counted:true,builtin:false});
       state.settings.completedAdded=(Number(state.settings.completedAdded)||0)+1;
       await saveState('Nova obra publicada e salva online.');
     }
@@ -122,7 +128,7 @@ $('addWork').addEventListener('click',async()=>{
 function startEdit(i){
   editingIndex=i;const w=state.works[i];
   $('workFormTitle').textContent='Editar obra';$('addWork').textContent='Salvar alterações';$('cancelEdit').hidden=false;
-  $('workTitle').value=w.title||'';$('workDesc').value=w.desc||'';$('workImage').value='';$('workGallery').value='';
+  $('workTitle').value=w.title||'';$('workDesc').value=w.desc||'';$('workImage').value='';$('workGallery').value='';$('workVideos').value='';
   showView('new');window.scrollTo({top:0,behavior:'smooth'});
 }
 
