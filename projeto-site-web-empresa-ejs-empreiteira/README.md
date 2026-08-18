@@ -65,3 +65,10 @@ O Blob criado pelo usuário está em modo privado. Por isso as imagens cadastrad
 - WhatsApp flutuante permanece fixo durante toda a rolagem e foi reposicionado para não encostar/cortar na lateral da viewport.
 - Ícone do WhatsApp centralizado dentro do círculo.
 - Em celulares, a mensagem exibida ao concluir o carrossel agora aparece abaixo da imagem, com texto maior, mantendo o panorama totalmente visível.
+
+
+## V27 — ajustes finais mobile
+- Recarregar/atualizar a página inicial sempre volta ao topo e reinicia o carrossel.
+- Card institucional final corrigido no mobile e posicionado abaixo da imagem, sem cobrir o panorama.
+- WhatsApp flutuante movido para fora do rodapé, acompanha a viewport durante a rolagem e aparece somente em telas de até 620px.
+- Botão flutuante removido do desktop.

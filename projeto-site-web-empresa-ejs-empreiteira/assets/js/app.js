@@ -12,6 +12,16 @@ function preloadBuildImages(){const master=new Image();master.src='assets/img/he
 function clearBuildTimer(){clearTimeout(buildTimer);buildTimer=null;}function scheduleBuild(){clearBuildTimer();if(!buildPlaying||buildVisible>=buildPanels.length)return;buildTimer=setTimeout(()=>revealNextPanel(),BUILD_DELAY);}function showBuildFinalMessage(){buildCarousel?.classList.add('is-complete');if(buildFinalMessage){buildFinalMessage.classList.add('show');buildFinalMessage.setAttribute('aria-hidden','false');}}function hideBuildFinalMessage(){buildCarousel?.classList.remove('is-complete');if(buildFinalMessage){buildFinalMessage.classList.remove('show');buildFinalMessage.setAttribute('aria-hidden','true');}}
 function revealNextPanel(){if(buildVisible>=buildPanels.length){clearBuildTimer();showBuildFinalMessage();return;}const panel=buildPanels[buildVisible];panel.classList.add('visible','turning-in');setTimeout(()=>panel.classList.remove('turning-in'),700);buildVisible++;if(buildVisible>=buildPanels.length){clearBuildTimer();setTimeout(showBuildFinalMessage,420);return;}scheduleBuild();}
 function restartBuild(){clearBuildTimer();hideBuildFinalMessage();buildPanels.forEach(panel=>panel.classList.remove('visible','turning-in'));buildVisible=0;buildPlaying=true;if(buildPause){buildPause.textContent='❚❚';buildPause.setAttribute('aria-label','Pausar apresentação');}requestAnimationFrame(()=>revealNextPanel());}
+
+// Sempre que a página inicial for carregada/recarregada, começa no topo e reinicia a apresentação.
+if ('scrollRestoration' in history) history.scrollRestoration='manual';
+function resetHomeOnLoad(){
+  window.scrollTo({top:0,left:0,behavior:'auto'});
+  restartBuild();
+}
+window.addEventListener('pageshow',()=>requestAnimationFrame(resetHomeOnLoad));
+window.addEventListener('load',()=>requestAnimationFrame(()=>window.scrollTo(0,0)),{once:true});
+
 preloadBuildImages();buildPause?.addEventListener('click',()=>{buildPlaying=!buildPlaying;buildPause.textContent=buildPlaying?'❚❚':'▶';buildPause.setAttribute('aria-label',buildPlaying?'Pausar apresentação':'Continuar apresentação');if(buildPlaying)scheduleBuild();else clearBuildTimer();});buildNext?.addEventListener('click',()=>{clearBuildTimer();revealNextPanel();});buildRestart?.addEventListener('click',restartBuild);document.getElementById('buildFinalClose')?.addEventListener('click',()=>{buildFinalMessage?.classList.remove('show');buildFinalMessage?.setAttribute('aria-hidden','true');});restartBuild();
 
 const evolutionModal=document.getElementById('evolutionModal'),openEvolution=document.getElementById('openEvolution'),closeEvolution=document.getElementById('closeEvolution');function setEvolution(open){if(!evolutionModal)return;evolutionModal.classList.toggle('open',open);evolutionModal.setAttribute('aria-hidden',String(!open));document.body.style.overflow=open?'hidden':'';}openEvolution?.addEventListener('click',()=>setEvolution(true));closeEvolution?.addEventListener('click',()=>setEvolution(false));evolutionModal?.addEventListener('click',e=>{if(e.target===evolutionModal)setEvolution(false)});document.addEventListener('keydown',e=>{if(e.key==='Escape')setEvolution(false)});
