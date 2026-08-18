@@ -1331,3 +1331,109 @@ body{background:var(--page-bg);color:var(--text);transition:background .25s,colo
     max-height:none!important;
   }
 }
+
+
+/* ===== V25.1 — menu mobile + rodapé centralizado + WhatsApp flutuante ===== */
+/* Corrige o antigo seletor `.menu-toggle span`, que pintava o contêiner do hambúrguer. */
+.menu-toggle .menu-hamburger{
+  background:transparent!important;
+  box-shadow:none!important;
+  border:0!important;
+}
+.menu-toggle .menu-hamburger i{
+  background:currentColor!important;
+}
+@media(max-width:900px){
+  .menu-toggle{
+    color:var(--header-text)!important;
+    background:transparent!important;
+  }
+  .menu-toggle .menu-hamburger{
+    display:flex!important;
+    width:22px!important;
+    height:16px!important;
+    flex-direction:column!important;
+    justify-content:space-between!important;
+    align-items:stretch!important;
+  }
+  .menu-toggle .menu-hamburger i{
+    display:block!important;
+    width:100%!important;
+    height:2px!important;
+    min-height:2px!important;
+    border-radius:999px!important;
+    background:currentColor!important;
+  }
+}
+
+.footer.footer-centered{
+  position:relative;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:18px!important;
+  text-align:center!important;
+  padding:48px clamp(24px,6vw,100px) 42px!important;
+}
+.footer-brand.footer-brand-centered{
+  flex-direction:column!important;
+  justify-content:center!important;
+  align-items:center!important;
+  text-align:center!important;
+  gap:12px!important;
+}
+.footer-brand.footer-brand-centered div{
+  justify-items:center!important;
+  text-align:center!important;
+}
+.footer-text-links{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:14px!important;
+  justify-self:auto!important;
+}
+.footer-text-links a{
+  width:auto!important;
+  height:auto!important;
+  border:0!important;
+  border-radius:0!important;
+  display:inline!important;
+  padding:0!important;
+  color:#d8aa72!important;
+  font-weight:700!important;
+  text-decoration:none!important;
+}
+.footer-text-links a:hover{text-decoration:underline!important}
+.footer-text-links span{color:#8f8179}
+.footer.footer-centered .footer-copy{
+  grid-column:auto!important;
+  width:100%!important;
+  text-align:center!important;
+}
+.floating-whatsapp{
+  position:fixed;
+  right:22px;
+  bottom:22px;
+  z-index:250;
+  width:62px;
+  height:62px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:#25d366;
+  color:#fff!important;
+  border:5px solid rgba(255,255,255,.92);
+  box-shadow:0 10px 28px rgba(0,0,0,.28);
+  transition:transform .2s ease,box-shadow .2s ease;
+}
+.floating-whatsapp:hover{transform:translateY(-2px) scale(1.03);box-shadow:0 14px 32px rgba(0,0,0,.32)}
+.floating-whatsapp svg{width:34px;height:34px;display:block}
+@media(max-width:620px){
+  .footer.footer-centered{padding:42px 22px 96px!important}
+  .footer-brand.footer-brand-centered img{width:56px!important;height:56px!important}
+  .footer-text-links{gap:11px!important;font-size:14px!important}
+  .floating-whatsapp{width:58px;height:58px;right:16px;bottom:18px;border-width:4px}
+  .floating-whatsapp svg{width:31px;height:31px}
+}
