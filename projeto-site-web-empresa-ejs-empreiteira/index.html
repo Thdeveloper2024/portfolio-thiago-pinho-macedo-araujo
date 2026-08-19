@@ -1,172 +1,265 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="theme-color" content="#fffefc" />
-  <meta name="description" content="EJS Empreiteira — reformas, acabamentos e manutenção com atendimento personalizado." />
-  <title>EJS Empreiteira</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#262120">
+  <meta name="description" content="EJS Empreiteira — demolição, alvenaria, pintura, elétrica, gesso, hidráulica, reformas e manutenção. Conheça nossos serviços e obras realizadas.">
+  <title>EJS Empreiteira | Construção e Reforma</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="preload" as="image" href="assets/img/hero-stages/01.webp" fetchpriority="high">
-  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="preload" as="image" href="assets/img/hero-ejs.webp" fetchpriority="high">
+  <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body>
+<body class="public-site">
   <a class="skip-link" href="#conteudo">Pular para o conteúdo principal</a>
-  <main id="site" class="site">
-    <header class="header" id="inicio">
-      <a class="brand-logo" href="#inicio" aria-label="EJS Empreiteira - início">
-        <img src="assets/img/logo-ejs.webp" alt="Logo EJS Empreiteira" />
+
+  <header class="site-header" id="inicio">
+    <div class="site-header-inner">
+      <a class="site-brand" href="#inicio" aria-label="EJS Empreiteira - início">
+        <img src="assets/img/logo-ejs.webp" alt="Logo EJS Empreiteira">
+        <span><strong>EJS</strong><small>EMPREITEIRA</small></span>
       </a>
-      <div class="brand-center">
-        <div class="brand-name">EJS Empreiteira</div>
-        <div class="brand-tagline">Construindo sonhos. Entregando excelência.</div>
-      </div>
-<div class="header-actions">
-        <button class="accessibility-toggle" id="accessibilityToggle" aria-label="Abrir opções de acessibilidade" aria-expanded="false">◐</button>
-        <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu" aria-expanded="false">
-          <span class="menu-label">MENU</span>
-          <span class="menu-hamburger" aria-hidden="true"><i></i><i></i><i></i></span>
+
+      <nav class="desktop-nav" aria-label="Navegação principal">
+        <a class="active" href="#inicio">Início</a>
+        <a href="#sobre">Sobre</a>
+        <a href="#servicos">Serviços</a>
+        <a href="obras.html">Obras</a>
+        <a href="#depoimentos">Depoimentos</a>
+        <a href="#contato">Contato</a>
+      </nav>
+
+      <div class="header-cta-wrap">
+        <a class="header-whatsapp" id="headerWhatsapp" href="#" target="_blank" rel="noopener">
+          <span class="wa-mark">◔</span>
+          <span id="headerWhatsappText">WhatsApp</span>
+        </a>
+        <button class="accessibility-toggle" id="accessibilityToggle" type="button" aria-label="Abrir opções de acessibilidade" aria-expanded="false">◐</button>
+        <button class="mobile-menu-toggle" id="menuToggle" type="button" aria-label="Abrir menu" aria-expanded="false">
+          <i></i><i></i><i></i>
         </button>
       </div>
-      <nav class="menu" id="menu">
-        <a href="#inicio">Início</a>
-        <a href="#qualidade">Sobre nós</a>
-        <a href="#servicos">Serviços</a>
-        <a href="#obras">Portfólio</a>
-        <a href="#contato">Contato</a>
-        <a id="menuWhatsapp" href="#" target="_blank" rel="noopener">WhatsApp</a>
-        <a id="menuInstagram" href="#" target="_blank" rel="noopener">Instagram</a>
-        <button class="menu-accessibility" id="menuAccessibility" type="button">Acessibilidade</button>
-      </nav>
-      <aside class="accessibility-panel" id="accessibilityPanel" aria-label="Opções de acessibilidade">
-        <div class="accessibility-panel-head"><strong>Acessibilidade visual</strong><span>Escolha a visualização mais confortável.</span></div>
-        <div class="accessibility-group"><span>Tema do site</span><div class="theme-options">
+    </div>
+
+    <nav class="mobile-nav" id="mobileNav" aria-label="Menu mobile">
+      <a href="#inicio">Início</a>
+      <a href="#sobre">Sobre</a>
+      <a href="#servicos">Serviços</a>
+      <a href="obras.html">Obras</a>
+      <a href="#depoimentos">Depoimentos</a>
+      <a href="#contato">Contato</a>
+      <a id="mobileWhatsapp" href="#" target="_blank" rel="noopener">Falar no WhatsApp</a>
+    </nav>
+
+    <aside class="accessibility-panel" id="accessibilityPanel" aria-label="Opções de acessibilidade">
+      <div class="accessibility-panel-head">
+        <strong>Acessibilidade visual</strong>
+        <span>Escolha a visualização mais confortável.</span>
+      </div>
+      <div class="accessibility-group">
+        <span>Tema do site</span>
+        <div class="theme-options">
           <button type="button" data-theme-option="cimento"><i class="swatch swatch-cimento"></i>Claro</button>
           <button type="button" data-theme-option="areia"><i class="swatch swatch-areia"></i>Areia</button>
           <button type="button" data-theme-option="escuro"><i class="swatch swatch-escuro"></i>Escuro</button>
-          <button type="button" data-theme-option="contraste"><i class="swatch swatch-contraste"></i>Alto contraste</button>
-        </div></div>
-        <div class="accessibility-group"><span>Tamanho do texto</span><div class="text-options">
-          <button type="button" data-text-size="normal">A</button><button type="button" data-text-size="large">A+</button><button type="button" data-text-size="xlarge">A++</button>
-        </div></div>
-      </aside>
-    </header>
+          <button type="button" data-theme-option="contraste"><i class="swatch swatch-contraste"></i>Contraste</button>
+        </div>
+      </div>
+      <div class="accessibility-group">
+        <span>Tamanho do texto</span>
+        <div class="text-options">
+          <button type="button" data-text-size="normal">A</button>
+          <button type="button" data-text-size="large">A+</button>
+          <button type="button" data-text-size="xlarge">A++</button>
+        </div>
+      </div>
+    </aside>
+  </header>
 
-    <section class="build-hero" id="conteudo" aria-label="Evolução visual da obra, da primeira à sétima etapa">
-      <div class="build-carousel" id="buildCarousel">
-        <div class="build-panorama" id="buildPanorama" role="img" aria-label="Evolução visual contínua da obra em sete etapas, da preparação do terreno ao resultado final">
-          <div class="build-panel" aria-hidden="true"></div>
-          <div class="build-panel" aria-hidden="true"></div>
-          <div class="build-panel" aria-hidden="true"></div>
-          <div class="build-panel" aria-hidden="true"></div>
-          <div class="build-panel" aria-hidden="true"></div>
-          <div class="build-panel" aria-hidden="true"></div>
-          <div class="build-panel" aria-hidden="true"></div>
-        </div>
-        <div class="build-minimal-controls" aria-label="Controles da apresentação">
-          <button class="build-control" id="buildRestart" type="button" aria-label="Recomeçar apresentação">↺</button>
-          <button class="build-control build-pause" id="buildPause" type="button" aria-label="Pausar apresentação">❚❚</button>
-          <button class="build-control" id="buildNext" type="button" aria-label="Mostrar próxima foto">›</button>
-        </div>
-        <div class="build-final-message" id="buildFinalMessage" aria-live="polite" aria-hidden="true"><button class="build-final-close" id="buildFinalClose" type="button" aria-label="Fechar mensagem">×</button>
-          <p><strong>EJS Empreiteira</strong>, há mais de 6 anos no mercado. Faça seu orçamento agora e tenha a melhor experiência com a nossa assessoria, porque construir não deve ser uma dor de cabeça, mas sim a realização de um sonho.</p>
-          <div class="build-final-actions">
-            <button class="btn btn-primary" type="button" data-whatsapp>Fazer orçamento</button>
-            <a class="btn btn-ghost" href="#obras">Ver mais</a>
+  <main id="conteudo">
+    <section class="home-hero">
+      <div class="home-hero-media" aria-hidden="true"></div>
+      <div class="home-hero-overlay"></div>
+      <div class="container home-hero-content">
+        <div class="hero-copy">
+          <span class="section-kicker section-kicker-light"><i></i>Soluções completas em construção e reforma</span>
+          <h1>Construímos, reformamos e <em>transformamos</em> seu espaço.</h1>
+          <p>Da demolição ao acabamento, cuidamos de cada detalhe com qualidade, segurança e compromisso com o seu projeto.</p>
+          <div class="hero-actions">
+            <button class="btn btn-primary" type="button" data-whatsapp>Solicitar orçamento</button>
+            <a class="btn btn-outline-light" href="obras.html">Ver obras</a>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="impact section" id="impacto" aria-label="Resultados da EJS Empreiteira">
-      <div class="impact-intro reveal">
-        <span class="eyebrow">O QUE FAZEMOS</span>
-        <h2>Construímos mais que obras,<br>realizamos sonhos.</h2>
-      </div>
-      <div class="impact-stats reveal">
-        <article class="impact-card"><div class="impact-icon" aria-hidden="true">▥</div><strong id="completedProjectsCount">0+</strong><span>Obras finalizadas</span></article>
-        <article class="impact-card"><div class="impact-icon" aria-hidden="true">⌂</div><strong>6+</strong><span>Anos de experiência</span></article>
-        <article class="impact-card"><div class="impact-icon" aria-hidden="true">◇</div><strong>Sob medida</strong><span>Projetos personalizados</span></article>
-        <article class="impact-card"><div class="impact-icon" aria-hidden="true">◎</div><strong>100%</strong><span>Compromisso e qualidade</span></article>
-      </div>
-    </section>
-
-    <section class="section works" id="obras">
-      <div class="section-head reveal">
-        <div>
-          <span class="eyebrow">PORTFÓLIO</span>
-          <h2>Obras realizadas</h2>
+    <section class="home-services" id="servicos">
+      <div class="container">
+        <div class="compact-heading">
+          <span class="section-kicker">Nossos serviços</span>
+          <h2>Soluções completas para sua obra do início ao fim</h2>
         </div>
-        <p>Veja alguns projetos e abra cada obra para conferir a galeria completa.</p>
-      </div>
-      <div class="carousel-wrap reveal">
-        <button class="carousel-btn prev" id="prevWork" aria-label="Obra anterior">‹</button>
-        <div class="carousel" id="workCarousel"></div>
-        <button class="carousel-btn next" id="nextWork" aria-label="Próxima obra">›</button>
-      </div>
-      <div class="carousel-dots" id="carouselDots"></div>
-    </section>
 
-    <section class="section services" id="servicos">
-      <div class="section-head reveal">
-        <div>
-          <span class="eyebrow">O QUE FAZEMOS</span>
-          <h2>Soluções para sua obra</h2>
+        <div class="services-six-grid">
+          <article class="service-mini-card">
+            <div class="service-line-icon" aria-hidden="true">⌁</div>
+            <h3>Demolição</h3>
+            <p>Remoção segura e planejada, com organização e descarte responsável.</p>
+          </article>
+          <article class="service-mini-card">
+            <div class="service-line-icon" aria-hidden="true">▦</div>
+            <h3>Alvenaria</h3>
+            <p>Levantamento de paredes, adequações e estruturas com qualidade.</p>
+          </article>
+          <article class="service-mini-card">
+            <div class="service-line-icon" aria-hidden="true">▭</div>
+            <h3>Pintura</h3>
+            <p>Pintura interna e externa com preparação e acabamento cuidadoso.</p>
+          </article>
+          <article class="service-mini-card">
+            <div class="service-line-icon" aria-hidden="true">ϟ</div>
+            <h3>Elétrica</h3>
+            <p>Instalações, adequações e manutenções elétricas com segurança.</p>
+          </article>
+          <article class="service-mini-card">
+            <div class="service-line-icon" aria-hidden="true">⌔</div>
+            <h3>Gesso</h3>
+            <p>Forros, sancas, divisórias e acabamentos em gesso para valorizar o ambiente.</p>
+          </article>
+          <article class="service-mini-card">
+            <div class="service-line-icon" aria-hidden="true">⌘</div>
+            <h3>Hidráulica</h3>
+            <p>Instalações e manutenção hidráulica residencial e comercial.</p>
+          </article>
         </div>
-        <p>Conte com a EJS para cuidar dos detalhes e entregar um resultado alinhado ao que você imaginou.</p>
-      </div>
-      <div class="service-grid">
-        <article class="service-card reveal"><span>01</span><div class="service-icon">⌂</div><h3>Reformas</h3><p>Renovação de ambientes residenciais e comerciais, do planejamento aos acabamentos.</p></article>
-        <article class="service-card reveal"><span>02</span><div class="service-icon">▦</div><h3>Acabamentos</h3><p>Cuidado nos detalhes para deixar cada ambiente com acabamento de qualidade.</p></article>
-        <article class="service-card reveal"><span>03</span><div class="service-icon">◇</div><h3>Manutenção</h3><p>Serviços e reparos para manter sua casa, comércio ou imóvel sempre em boas condições.</p></article>
       </div>
     </section>
 
-    <section class="quality section" id="qualidade">
-      <div class="quality-copy reveal">
-        <span class="eyebrow">EJS EMPREITEIRA</span>
-        <h2>Qualidade que aparece em cada detalhe.</h2>
-        <p>Nosso objetivo é oferecer um serviço organizado, transparente e cuidadoso, buscando transformar cada projeto em um resultado que realmente faça sentido para o cliente.</p>
-        <button class="text-link" data-whatsapp>Solicitar orçamento →</button>
-      </div>
-      <div class="quality-list reveal">
-        <div><strong>01</strong><span>Atendimento personalizado</span></div>
-        <div><strong>02</strong><span>Compromisso com o projeto</span></div>
-        <div><strong>03</strong><span>Cuidado nos acabamentos</span></div>
+    <section class="trust-strip" aria-label="Indicadores da EJS Empreiteira">
+      <div class="container trust-grid">
+        <article><span class="trust-icon">◉</span><div><strong id="completedProjectsCount">0+</strong><small>Obras entregues</small></div></article>
+        <article><span class="trust-icon">☆</span><div><strong id="satisfactionRate">98%</strong><small>Clientes satisfeitos</small></div></article>
+        <article><span class="trust-icon">◇</span><div><strong id="experienceYears">6+</strong><small>Anos de experiência</small></div></article>
+        <article><span class="trust-icon">⌂</span><div><strong>100%</strong><small>Compromisso e qualidade</small></div></article>
       </div>
     </section>
 
-    <section class="cta" id="contato">
-      <span class="eyebrow reveal">VAMOS CONVERSAR?</span>
-      <h2 class="reveal">Tem uma obra em mente?</h2>
-      <p class="reveal">Envie uma mensagem para a EJS Empreiteira e conte um pouco sobre o que você precisa. Vamos conversar sobre seu projeto.</p>
-      <button class="btn btn-primary reveal" data-whatsapp>Solicitar orçamento</button>
+    <section class="featured-home-section" id="obras">
+      <div class="container split-heading">
+        <div>
+          <span class="section-kicker">Obras em destaque</span>
+          <h2>Transformamos ideias em espaços reais</h2>
+        </div>
+        <a class="text-action" href="obras.html">Ver todas as obras →</a>
+      </div>
+
+      <div class="container home-portfolio-layout">
+        <div class="home-projects" id="homeProjects"></div>
+
+        <section class="testimonial-box" id="depoimentos">
+          <span class="section-kicker">Depoimentos</span>
+          <h2>O que nossos clientes dizem</h2>
+          <div class="testimonial-card">
+            <div class="quote-mark">“</div>
+            <p>A EJS Empreiteira cuidou de cada etapa com organização e atenção aos detalhes. O resultado ficou excelente e o acompanhamento durante a obra fez toda a diferença.</p>
+            <div class="testimonial-person">
+              <div class="testimonial-avatar">EJS</div>
+              <div><strong>Cliente EJS</strong><span>Projeto residencial</span></div>
+            </div>
+            <div class="testimonial-dots"><i class="active"></i><i></i><i></i><i></i></div>
+          </div>
+        </section>
+      </div>
     </section>
 
-    <div class="evolution-modal" id="evolutionModal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Evolução completa da obra">
-      <button class="evolution-close" id="closeEvolution" type="button" aria-label="Fechar evolução completa">×</button>
-      <div class="evolution-frame">
-        <img src="assets/img/hero-stages/08-todas.webp" alt="Painel visual mostrando todas as etapas da construção, da preparação do terreno ao resultado final">
+    <section class="about-section" id="sobre">
+      <div class="container about-grid">
+        <div class="about-media">
+          <img src="assets/img/hero-stages/04.webp" alt="Equipe e processo de obra EJS Empreiteira" loading="lazy">
+          <span class="about-badge"><strong id="aboutExperienceYears">6+</strong> anos construindo com responsabilidade</span>
+        </div>
+        <div class="about-copy">
+          <span class="section-kicker">Sobre a EJS Empreiteira</span>
+          <h2>Uma equipe para cuidar da sua obra do começo ao acabamento.</h2>
+          <p>Atuamos em reformas, manutenção e execução de diferentes etapas da construção, com foco em planejamento, comunicação clara e cuidado com o acabamento.</p>
+          <div class="about-checks">
+            <span>✓ Atendimento personalizado</span>
+            <span>✓ Acompanhamento em cada etapa</span>
+            <span>✓ Soluções para diferentes tipos de obra</span>
+          </div>
+          <button class="btn btn-primary" type="button" data-whatsapp>Fazer orçamento</button>
+        </div>
       </div>
-    </div>
+    </section>
 
-    <footer class="footer footer-centered">
-      <div class="footer-brand footer-brand-centered"><img src="assets/img/logo-ejs.webp" alt="Logo EJS"><div><strong>EJS Empreiteira</strong><span id="footerCnpj">CNPJ: não informado</span><span>Mais de 6 anos de atuação</span></div></div>
-      <nav class="footer-social footer-text-links" aria-label="Redes sociais">
-        <a id="footerWhatsapp" href="#" target="_blank" rel="noopener">WhatsApp</a>
-        <span aria-hidden="true">|</span>
-        <a id="footerInstagram" href="#" target="_blank" rel="noopener">Instagram</a>
-      </nav>
-      <div class="footer-copy">© <span id="year"></span> EJS Empreiteira. Todos os direitos reservados.</div>
-    </footer>
-    <a id="floatingWhatsapp" class="floating-whatsapp" href="#" target="_blank" rel="noopener" aria-label="Falar com a EJS pelo WhatsApp">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M20.5 11.6a8.4 8.4 0 0 1-12.4 7.4L3.5 20.2l1.2-4.4A8.4 8.4 0 1 1 20.5 11.6Z"/><path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M8.1 7.8c.2-.4.4-.4.7-.4h.5c.2 0 .4.1.5.4l.8 1.9c.1.3.1.5-.1.7l-.7.8c-.2.2-.2.4 0 .7.7 1.2 1.7 2.2 3 2.9.3.2.5.1.7-.1l.9-1c.2-.2.4-.3.7-.2l1.9.9c.3.1.4.3.4.6 0 .5-.2 1.4-.8 2-.6.6-1.5.9-2.4.7-1.4-.2-3.3-1-5.2-2.7-2.1-1.9-3.2-4.2-3.5-5.7-.2-.8.1-1.7.7-2.3.5-.5 1.2-.8 1.9-.8Z"/></svg>
-    </a>
+    <section class="contact-strip" id="contato">
+      <div class="container contact-strip-grid">
+        <a id="contactWhatsapp" href="#" target="_blank" rel="noopener">
+          <span class="contact-circle contact-circle-wa">◔</span>
+          <div><small>WhatsApp</small><strong id="contactWhatsappText">Fale conosco</strong><span>Resposta rápida</span></div>
+        </a>
+        <div>
+          <span class="contact-circle">☎</span>
+          <div><small>Telefone</small><strong id="contactPhone">Não informado</strong><span id="contactHours">Atendimento comercial</span></div>
+        </div>
+        <div>
+          <span class="contact-circle">●</span>
+          <div><small>Atendimento</small><strong id="contactArea">São Paulo e Região</strong><span>Consulte disponibilidade</span></div>
+        </div>
+        <button type="button" data-whatsapp>
+          <span class="contact-circle">▣</span>
+          <div><small>Orçamento</small><strong>Gratuito e sem compromisso</strong><span>Solicite agora</span></div>
+        </button>
+      </div>
+    </section>
   </main>
 
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-company">
+        <a class="site-brand footer-logo" href="#inicio">
+          <img src="assets/img/logo-ejs.webp" alt="Logo EJS Empreiteira">
+          <span><strong>EJS</strong><small>EMPREITEIRA</small></span>
+        </a>
+        <p>Construímos, reformamos e transformamos seu espaço com qualidade, organização e compromisso em cada detalhe.</p>
+        <span id="footerCnpj">CNPJ: Não informado</span>
+      </div>
+
+      <div class="footer-column">
+        <strong>Navegação</strong>
+        <a href="#inicio">Início</a>
+        <a href="#sobre">Sobre</a>
+        <a href="#servicos">Serviços</a>
+        <a href="obras.html">Obras</a>
+      </div>
+
+      <div class="footer-column">
+        <strong>Serviços</strong>
+        <span>Demolição</span>
+        <span>Alvenaria</span>
+        <span>Pintura</span>
+        <span>Elétrica</span>
+        <span>Gesso</span>
+        <span>Hidráulica</span>
+      </div>
+
+      <div class="footer-column">
+        <strong>Siga-nos</strong>
+        <a id="footerInstagram" href="#" target="_blank" rel="noopener">Instagram</a>
+        <a id="footerWhatsapp" href="#" target="_blank" rel="noopener">WhatsApp</a>
+      </div>
+    </div>
+    <div class="container footer-bottom">© <span id="year"></span> EJS Empreiteira. Todos os direitos reservados.</div>
+  </footer>
+
+  <a id="floatingWhatsapp" class="floating-whatsapp" href="#" target="_blank" rel="noopener" aria-label="Falar com a EJS pelo WhatsApp">◔</a>
+
+  <div class="mobile-bottom-cta"><button class="mobile-wa" type="button" data-whatsapp>◔ WhatsApp</button><button class="mobile-budget" type="button" data-whatsapp>▣ Orçamento</button></div>
+
   <script src="assets/js/accessibility.js"></script>
+  <script src="assets/js/site-common.js"></script>
   <script src="assets/js/app.js"></script>
 </body>
 </html>

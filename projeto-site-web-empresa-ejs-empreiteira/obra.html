@@ -1,26 +1,65 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#262120">
   <title>Obra | EJS Empreiteira</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body class="project-page">
+<body class="public-site project-page">
   <a class="skip-link" href="#projectMain">Pular para o conteúdo principal</a>
-  <header class="header project-header">
-    <a class="brand-logo" href="index.html"><img src="assets/img/logo-ejs.webp" alt="EJS Empreiteira"></a>
-    <div class="brand-name">EJS Empreiteira</div>
-    <div class="project-header-actions"><button class="accessibility-toggle" id="accessibilityToggle" aria-label="Abrir opções de acessibilidade" aria-expanded="false">◐</button><a class="back-link" href="index.html#obras">← Voltar</a></div>
+
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="site-brand" href="index.html" aria-label="EJS Empreiteira - início">
+        <img src="assets/img/logo-ejs.webp" alt="Logo EJS Empreiteira">
+        <span><strong>EJS</strong><small>EMPREITEIRA</small></span>
+      </a>
+      <nav class="desktop-nav" aria-label="Navegação principal">
+        <a href="index.html">Início</a>
+        <a href="index.html#sobre">Sobre</a>
+        <a href="index.html#servicos">Serviços</a>
+        <a class="active" href="obras.html">Obras</a>
+        <a href="index.html#depoimentos">Depoimentos</a>
+        <a href="index.html#contato">Contato</a>
+      </nav>
+      <div class="header-cta-wrap">
+        <a class="header-whatsapp" id="headerWhatsapp" href="#" target="_blank" rel="noopener"><span class="wa-mark">◔</span><span id="headerWhatsappText">WhatsApp</span></a>
+        <button class="accessibility-toggle" id="accessibilityToggle" type="button" aria-label="Abrir opções de acessibilidade" aria-expanded="false">◐</button>
+        <button class="mobile-menu-toggle" id="menuToggle" type="button" aria-label="Abrir menu" aria-expanded="false"><i></i><i></i><i></i></button>
+      </div>
+    </div>
+    <nav class="mobile-nav" id="mobileNav" aria-label="Menu mobile">
+      <a href="index.html">Início</a>
+      <a href="index.html#sobre">Sobre</a>
+      <a href="index.html#servicos">Serviços</a>
+      <a href="obras.html">Obras</a>
+      <a href="index.html#depoimentos">Depoimentos</a>
+      <a href="index.html#contato">Contato</a>
+      <a id="mobileWhatsapp" href="#" target="_blank" rel="noopener">Falar no WhatsApp</a>
+    </nav>
     <aside class="accessibility-panel" id="accessibilityPanel" aria-label="Opções de acessibilidade">
       <div class="accessibility-panel-head"><strong>Acessibilidade visual</strong><span>Escolha a visualização mais confortável.</span></div>
-      <div class="accessibility-group"><span>Tema do site</span><div class="theme-options"><button type="button" data-theme-option="cimento"><i class="swatch swatch-cimento"></i>Claro</button><button type="button" data-theme-option="areia"><i class="swatch swatch-areia"></i>Areia</button><button type="button" data-theme-option="escuro"><i class="swatch swatch-escuro"></i>Escuro</button><button type="button" data-theme-option="contraste"><i class="swatch swatch-contraste"></i>Alto contraste</button></div></div>
-      <div class="accessibility-group"><span>Tamanho do texto</span><div class="text-options"><button type="button" data-text-size="normal">A</button><button type="button" data-text-size="large">A+</button><button type="button" data-text-size="xlarge">A++</button></div></div>
+      <div class="accessibility-group"><span>Tema do site</span><div class="theme-options">
+        <button type="button" data-theme-option="cimento"><i class="swatch swatch-cimento"></i>Claro</button>
+        <button type="button" data-theme-option="areia"><i class="swatch swatch-areia"></i>Areia</button>
+        <button type="button" data-theme-option="escuro"><i class="swatch swatch-escuro"></i>Escuro</button>
+        <button type="button" data-theme-option="contraste"><i class="swatch swatch-contraste"></i>Contraste</button>
+      </div></div>
+      <div class="accessibility-group"><span>Tamanho do texto</span><div class="text-options">
+        <button type="button" data-text-size="normal">A</button><button type="button" data-text-size="large">A+</button><button type="button" data-text-size="xlarge">A++</button>
+      </div></div>
     </aside>
   </header>
-  <main class="project-main" id="projectMain"></main>
+
+  <main id="projectMain"></main>
+
   <script src="assets/js/accessibility.js"></script>
+  <script src="assets/js/site-common.js"></script>
   <script src="assets/js/project.js"></script>
 </body>
 </html>

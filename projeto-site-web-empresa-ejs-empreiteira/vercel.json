@@ -5,6 +5,8 @@
     { "source": "/login", "destination": "/admin/login.html", "permanent": false },
     { "source": "/login.html", "destination": "/admin/login.html", "permanent": false },
     { "source": "/admin", "destination": "/admin/login.html", "permanent": false },
-    { "source": "/admin/login", "destination": "/admin/login.html", "permanent": false }
+    { "source": "/admin/login", "destination": "/admin/login.html", "permanent": false },
+    { "source": "/obras", "destination": "/obras.html", "permanent": false },
+    { "source": "/obra", "destination": "/obra.html", "permanent": false }
   ]
 }

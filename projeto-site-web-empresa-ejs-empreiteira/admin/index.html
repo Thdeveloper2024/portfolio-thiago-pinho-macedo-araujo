@@ -3,24 +3,31 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#262120">
   <title>Painel ADM | EJS Empreiteira</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../assets/css/style.css">
 </head>
-<body class="admin-body admin-corporate">
+<body class="admin-body">
   <div class="admin-shell">
     <aside class="admin-sidebar" id="adminSidebar">
       <div class="admin-brand">
         <img src="../assets/img/logo-ejs.webp" alt="EJS Empreiteira">
         <div><strong>EJS Empreiteira</strong><span>Painel administrativo</span></div>
       </div>
+
       <nav class="admin-nav">
         <button data-nav="home" class="active"><span>⌂</span>Início</button>
         <button data-nav="new"><span>＋</span>Cadastrar obras</button>
         <button data-nav="works"><span>▦</span>Obras cadastradas</button>
         <button data-nav="settings"><span>⚙</span>Configurações</button>
       </nav>
+
       <div class="admin-sidebar-footer">
         <a href="../index.html" target="_blank" rel="noopener">Ver site</a>
+        <a href="../obras.html" target="_blank" rel="noopener">Ver portfólio</a>
         <button id="logout" class="admin-logout">Sair</button>
       </div>
     </aside>
@@ -32,64 +39,186 @@
         <div id="globalStatus" class="admin-status" aria-live="polite"></div>
       </header>
 
-      <main class="admin-main admin-main-v22">
+      <main class="admin-main">
         <section data-admin-view="home">
-          <div class="admin-page-head"><div><span class="eyebrow">VISÃO GERAL</span><h1>Bem-vindo ao painel</h1><p>Acompanhe os projetos e a sincronização do site.</p></div></div>
+          <div class="admin-page-head">
+            <div><span class="eyebrow">VISÃO GERAL</span><h1>Bem-vindo ao painel</h1><p>Acompanhe os projetos publicados e gerencie o novo portfólio.</p></div>
+            <button class="btn btn-primary admin-head-action" data-nav="new">+ Nova obra</button>
+          </div>
+
           <div class="admin-dashboard-cards">
             <article><span>Projetos publicados</span><strong id="dashProjects">0</strong><small>Portfólio atual</small></article>
             <article><span>Obras finalizadas</span><strong id="dashCompleted">0</strong><small>Contagem pública</small></article>
             <article><span>Sincronização</span><strong id="dashSync">...</strong><small>Vercel Blob</small></article>
           </div>
-          <section class="admin-panel admin-panel-v22"><div class="admin-panel-title"><div><span class="eyebrow">PORTFÓLIO</span><h2>Projetos mais recentes</h2></div><button class="admin-link-button" data-nav="works">Ver todos</button></div><div id="recentWorks" class="recent-works"></div></section>
+
+          <section class="admin-panel">
+            <div class="admin-panel-title">
+              <div><span class="eyebrow">PORTFÓLIO</span><h2>Projetos mais recentes</h2></div>
+              <button class="admin-link-button" data-nav="works">Ver todos</button>
+            </div>
+            <div id="recentWorks" class="recent-works"></div>
+          </section>
         </section>
 
         <section data-admin-view="new" hidden>
-          <div class="admin-page-head"><div><span class="eyebrow">PORTFÓLIO</span><h1 id="workFormTitle">Cadastrar nova obra</h1><p>As imagens serão enviadas para o Vercel Blob e ficarão disponíveis em qualquer dispositivo.</p></div></div>
-          <section class="admin-panel admin-panel-v22">
-            <div class="admin-grid">
-              <label>Título da obra<input id="workTitle" placeholder="Ex.: Reforma residencial"></label>
-              <label>Descrição<input id="workDesc" placeholder="Breve descrição do projeto"></label>
-              <label>Imagem principal<input id="workImage" type="file" accept="image/*"></label>
-              <label>Fotos adicionais<input id="workGallery" type="file" accept="image/*" multiple></label>
-              <label>Vídeos da obra<input id="workVideos" type="file" accept="video/mp4,video/webm,video/quicktime" multiple></label>
+          <div class="admin-page-head">
+            <div>
+              <span class="eyebrow">PORTFÓLIO</span>
+              <h1 id="workFormTitle">Cadastrar nova obra</h1>
+              <p>Preencha os dados que serão exibidos nos cards, página de portfólio e página interna da obra.</p>
             </div>
+          </div>
+
+          <section class="admin-panel admin-form-section">
+            <div class="admin-form-group-title">
+              <div><span class="eyebrow">INFORMAÇÕES PRINCIPAIS</span><h2>Identificação da obra</h2></div>
+            </div>
+
+            <div class="admin-grid admin-grid-3">
+              <label class="admin-field admin-span-2">Título da obra
+                <input id="workTitle" maxlength="160" placeholder="Ex.: Reforma Completa — Vila Mariana/SP">
+              </label>
+              <label class="admin-field">Categoria principal
+                <select id="workCategory">
+                  <option value="Reforma">Reforma completa</option>
+                  <option value="Demolição">Demolição</option>
+                  <option value="Alvenaria">Alvenaria</option>
+                  <option value="Pintura">Pintura</option>
+                  <option value="Elétrica">Elétrica</option>
+                  <option value="Gesso">Gesso</option>
+                  <option value="Hidráulica">Hidráulica</option>
+                </select>
+              </label>
+
+              <label class="admin-field">Tipo de projeto
+                <input id="workType" maxlength="100" placeholder="Ex.: Reforma Residencial">
+              </label>
+              <label class="admin-field admin-span-2">Localização
+                <input id="workLocation" maxlength="140" placeholder="Ex.: Vila Mariana — São Paulo/SP">
+              </label>
+
+              <label class="admin-field admin-span-3">Descrição completa
+                <textarea id="workDesc" rows="5" maxlength="1800" placeholder="Descreva o que foi executado, principais soluções, acabamentos e resultado da obra."></textarea>
+              </label>
+            </div>
+          </section>
+
+          <section class="admin-panel admin-form-section">
+            <div class="admin-form-group-title">
+              <div><span class="eyebrow">DETALHES TÉCNICOS</span><h2>Informações exibidas no projeto</h2></div>
+            </div>
+
+            <div class="admin-grid admin-grid-4">
+              <label class="admin-field">Área
+                <input id="workArea" maxlength="40" placeholder="Ex.: 120 m²">
+              </label>
+              <label class="admin-field">Prazo de execução
+                <input id="workDuration" maxlength="60" placeholder="Ex.: 45 dias">
+              </label>
+              <label class="admin-field">Ano de conclusão
+                <input id="workYear" type="number" min="1990" max="2100" step="1" placeholder="2026">
+              </label>
+              <label class="admin-field">Status
+                <select id="workStatus">
+                  <option value="Concluída">Concluída</option>
+                  <option value="Em andamento">Em andamento</option>
+                  <option value="Planejada">Planejada</option>
+                </select>
+              </label>
+
+              <label class="admin-field admin-span-3">Serviços executados
+                <input id="workServices" maxlength="500" placeholder="Ex.: Alvenaria, Elétrica, Hidráulica, Pintura e Gesso">
+                <small>Separe os serviços por vírgula. Eles aparecerão na página da obra.</small>
+              </label>
+              <label class="admin-field admin-checkbox-field">
+                <input id="workFeatured" type="checkbox">
+                <span><strong>Obra em destaque</strong><small>Exibir como projeto principal na página de obras.</small></span>
+              </label>
+            </div>
+          </section>
+
+          <section class="admin-panel admin-form-section">
+            <div class="admin-form-group-title">
+              <div><span class="eyebrow">MÍDIAS</span><h2>Fotos e vídeos da obra</h2></div>
+            </div>
+
+            <div class="admin-grid admin-grid-3">
+              <label class="admin-field">Imagem principal
+                <input id="workImage" type="file" accept="image/*">
+                <small>Usada como capa nos cards e no destaque.</small>
+              </label>
+              <label class="admin-field">Fotos adicionais
+                <input id="workGallery" type="file" accept="image/*" multiple>
+                <small>Você pode selecionar várias fotos.</small>
+              </label>
+              <label class="admin-field">Vídeos da obra
+                <input id="workVideos" type="file" accept="video/mp4,video/webm,video/quicktime" multiple>
+                <small>MP4, WebM ou MOV.</small>
+              </label>
+            </div>
+
             <div id="editAppendMedia" class="admin-append-media" hidden>
-              <div class="admin-panel-title"><div><span class="eyebrow">MÍDIAS CADASTRADAS</span><h3>Fotos e vídeos desta obra</h3></div></div>
-              <div id="editExistingMedia" class="admin-existing-media"></div>
-              <div class="admin-panel-title admin-add-media-title"><div><span class="eyebrow">ADICIONAR MÍDIAS</span><h3>Somar novas fotos ou vídeos à obra</h3></div></div>
-              <div class="admin-grid">
-                <label>Adicionar mais fotos<input id="workAppendGallery" type="file" accept="image/*" multiple></label>
-                <label>Adicionar mais vídeos<input id="workAppendVideos" type="file" accept="video/mp4,video/webm,video/quicktime" multiple></label>
+              <div class="admin-panel-title compact">
+                <div><span class="eyebrow">MÍDIAS CADASTRADAS</span><h3>Arquivos atuais</h3></div>
               </div>
-              <p class="small-note">Esses arquivos serão acrescentados aos que a obra já possui, sem apagar as fotos ou vídeos existentes.</p>
+              <div id="editExistingMedia" class="admin-existing-media"></div>
+
+              <div class="admin-panel-title compact admin-add-media-title">
+                <div><span class="eyebrow">ADICIONAR MÍDIAS</span><h3>Somar novas fotos ou vídeos</h3></div>
+              </div>
+              <div class="admin-grid admin-grid-2">
+                <label class="admin-field">Adicionar mais fotos<input id="workAppendGallery" type="file" accept="image/*" multiple></label>
+                <label class="admin-field">Adicionar mais vídeos<input id="workAppendVideos" type="file" accept="video/mp4,video/webm,video/quicktime" multiple></label>
+              </div>
+              <p class="small-note">Os novos arquivos serão acrescentados sem apagar os arquivos já cadastrados.</p>
             </div>
-            <div class="admin-form-actions"><button class="btn btn-primary" id="addWork">Publicar obra</button><button class="btn btn-secondary" id="cancelEdit" type="button" hidden>Cancelar edição</button></div>
-            <p class="small-note">Para melhor desempenho, prefira JPG/WebP nas fotos e MP4/WebM nos vídeos. Imagens: até 12 MB cada. Vídeos: até 80 MB cada.</p>
+
+            <div class="admin-form-actions">
+              <button class="btn btn-primary" id="addWork">Publicar obra</button>
+              <button class="btn btn-secondary" id="cancelEdit" type="button" hidden>Cancelar edição</button>
+            </div>
+            <p class="small-note">Fotos: até 12 MB por arquivo. Vídeos: até 80 MB por arquivo. O painel otimiza automaticamente imagens grandes para WebP quando possível.</p>
           </section>
         </section>
 
         <section data-admin-view="works" hidden>
-          <div class="admin-page-head"><div><span class="eyebrow">GESTÃO</span><h1>Obras cadastradas</h1><p>Edite ou exclua qualquer projeto, inclusive os projetos iniciais.</p></div></div>
-          <section class="admin-panel admin-panel-v22"><div id="adminWorks" class="admin-works"></div></section>
+          <div class="admin-page-head">
+            <div><span class="eyebrow">GESTÃO</span><h1>Obras cadastradas</h1><p>Edite dados, mídias, destaque ou exclua projetos do portfólio.</p></div>
+            <button class="btn btn-primary admin-head-action" data-nav="new">+ Nova obra</button>
+          </div>
+          <section class="admin-panel"><div id="adminWorks" class="admin-works"></div></section>
         </section>
 
         <section data-admin-view="settings" hidden>
-          <div class="admin-page-head"><div><span class="eyebrow">EMPRESA</span><h1>Configurações</h1><p>Dados exibidos no site público.</p></div></div>
-          <section class="admin-panel admin-panel-v22">
-            <div class="admin-grid">
-              <label>WhatsApp<input id="whatsapp" placeholder="5511999999999"></label>
-              <label>Instagram<input id="instagram" placeholder="https://instagram.com/... "></label>
-              <label>CNPJ<input id="cnpj" placeholder="00.000.000/0000-00"></label>
-              <label>Contagem inicial de obras finalizadas<input id="completedBase" type="number" min="0" step="1" placeholder="Ex.: 100"></label>
+          <div class="admin-page-head">
+            <div><span class="eyebrow">EMPRESA</span><h1>Configurações</h1><p>Dados utilizados no cabeçalho, contato, indicadores e rodapé.</p></div>
+          </div>
+
+          <section class="admin-panel">
+            <div class="admin-grid admin-grid-3">
+              <label class="admin-field">WhatsApp<input id="whatsapp" placeholder="5511999999999"></label>
+              <label class="admin-field">Telefone<input id="phone" placeholder="(11) 3456-7890"></label>
+              <label class="admin-field">Instagram<input id="instagram" placeholder="https://instagram.com/..."></label>
+
+              <label class="admin-field">CNPJ<input id="cnpj" placeholder="00.000.000/0000-00"></label>
+              <label class="admin-field">Área de atendimento<input id="serviceArea" placeholder="Ex.: São Paulo e Região"></label>
+              <label class="admin-field">Horário de atendimento<input id="businessHours" placeholder="Ex.: Seg a Sex das 8h às 18h"></label>
+
+              <label class="admin-field">Anos de experiência<input id="experienceYears" type="number" min="0" step="1" placeholder="6"></label>
+              <label class="admin-field">Índice de satisfação (%)<input id="satisfactionRate" type="number" min="0" max="100" step="1" placeholder="98"></label>
+              <label class="admin-field">Contagem inicial de obras finalizadas<input id="completedBase" type="number" min="0" step="1" placeholder="Ex.: 100"></label>
             </div>
+
             <button class="btn btn-primary" id="saveSettings">Salvar configurações</button>
-            <p class="small-note">A contagem pública começa no número definido e aumenta automaticamente quando novas obras são cadastradas pelo painel.</p>
+            <p class="small-note">A contagem pública soma a base definida aqui às novas obras cadastradas pelo painel.</p>
             <p id="settingsMsg" class="form-msg"></p>
           </section>
         </section>
       </main>
     </div>
   </div>
+
   <script src="../assets/js/admin.js"></script>
 </body>
 </html>

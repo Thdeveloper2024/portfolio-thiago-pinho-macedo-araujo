@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#262120">
+  <meta name="description" content="Conheça as obras e projetos realizados pela EJS Empreiteira.">
+  <title>Nossas Obras | EJS Empreiteira</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="public-site works-page">
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo principal</a>
+
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="site-brand" href="index.html" aria-label="EJS Empreiteira - início">
+        <img src="assets/img/logo-ejs.webp" alt="Logo EJS Empreiteira">
+        <span><strong>EJS</strong><small>EMPREITEIRA</small></span>
+      </a>
+      <nav class="desktop-nav" aria-label="Navegação principal">
+        <a href="index.html">Início</a>
+        <a href="index.html#sobre">Sobre</a>
+        <a href="index.html#servicos">Serviços</a>
+        <a class="active" href="obras.html">Obras</a>
+        <a href="index.html#depoimentos">Depoimentos</a>
+        <a href="index.html#contato">Contato</a>
+      </nav>
+      <div class="header-cta-wrap">
+        <a class="header-whatsapp" id="headerWhatsapp" href="#" target="_blank" rel="noopener"><span class="wa-mark">◔</span><span id="headerWhatsappText">WhatsApp</span></a>
+        <button class="accessibility-toggle" id="accessibilityToggle" type="button" aria-label="Abrir opções de acessibilidade" aria-expanded="false">◐</button>
+        <button class="mobile-menu-toggle" id="menuToggle" type="button" aria-label="Abrir menu" aria-expanded="false"><i></i><i></i><i></i></button>
+      </div>
+    </div>
+    <nav class="mobile-nav" id="mobileNav" aria-label="Menu mobile">
+      <a href="index.html">Início</a>
+      <a href="index.html#sobre">Sobre</a>
+      <a href="index.html#servicos">Serviços</a>
+      <a href="obras.html">Obras</a>
+      <a href="index.html#depoimentos">Depoimentos</a>
+      <a href="index.html#contato">Contato</a>
+      <a id="mobileWhatsapp" href="#" target="_blank" rel="noopener">Falar no WhatsApp</a>
+    </nav>
+    <aside class="accessibility-panel" id="accessibilityPanel" aria-label="Opções de acessibilidade">
+      <div class="accessibility-panel-head"><strong>Acessibilidade visual</strong><span>Escolha a visualização mais confortável.</span></div>
+      <div class="accessibility-group"><span>Tema do site</span><div class="theme-options">
+        <button type="button" data-theme-option="cimento"><i class="swatch swatch-cimento"></i>Claro</button>
+        <button type="button" data-theme-option="areia"><i class="swatch swatch-areia"></i>Areia</button>
+        <button type="button" data-theme-option="escuro"><i class="swatch swatch-escuro"></i>Escuro</button>
+        <button type="button" data-theme-option="contraste"><i class="swatch swatch-contraste"></i>Contraste</button>
+      </div></div>
+      <div class="accessibility-group"><span>Tamanho do texto</span><div class="text-options">
+        <button type="button" data-text-size="normal">A</button><button type="button" data-text-size="large">A+</button><button type="button" data-text-size="xlarge">A++</button>
+      </div></div>
+    </aside>
+  </header>
+
+  <main id="conteudo">
+    <section class="works-banner">
+      <div class="works-banner-overlay"></div>
+      <div class="container works-banner-content">
+        <div class="breadcrumbs"><a href="index.html">Início</a><span>›</span><strong>Obras</strong></div>
+        <h1>Nossas <em>Obras</em></h1>
+        <p>Projetos de construção e reforma concluídos com qualidade, segurança e compromisso.</p>
+      </div>
+    </section>
+
+    <section class="portfolio-page-section">
+      <div class="container">
+        <div class="portfolio-filters" id="portfolioFilters">
+          <button class="active" type="button" data-filter="Todos"><span>▦</span>Todos</button>
+          <button type="button" data-filter="Demolição"><span>⌁</span>Demolição</button>
+          <button type="button" data-filter="Alvenaria"><span>▦</span>Alvenaria</button>
+          <button type="button" data-filter="Pintura"><span>▭</span>Pintura</button>
+          <button type="button" data-filter="Elétrica"><span>ϟ</span>Elétrica</button>
+          <button type="button" data-filter="Gesso"><span>⌔</span>Gesso</button>
+          <button type="button" data-filter="Hidráulica"><span>⌘</span>Hidráulica</button>
+        </div>
+
+        <section class="portfolio-featured" id="portfolioFeatured" aria-label="Obra em destaque"></section>
+        <div class="portfolio-grid" id="portfolioGrid"></div>
+        <p class="portfolio-empty" id="portfolioEmpty" hidden>Nenhuma obra encontrada nesta categoria.</p>
+      </div>
+    </section>
+
+    <section class="trust-strip trust-strip-page">
+      <div class="container trust-grid">
+        <article><span class="trust-icon">◉</span><div><strong id="completedProjectsCount">0+</strong><small>Obras entregues</small></div></article>
+        <article><span class="trust-icon">☆</span><div><strong id="satisfactionRate">98%</strong><small>Clientes satisfeitos</small></div></article>
+        <article><span class="trust-icon">◇</span><div><strong id="experienceYears">6+</strong><small>Anos de experiência</small></div></article>
+        <article><span class="trust-icon">⌂</span><div><strong>100%</strong><small>Compromisso e qualidade</small></div></article>
+      </div>
+    </section>
+
+    <section class="contact-strip" id="contato">
+      <div class="container contact-strip-grid">
+        <a id="contactWhatsapp" href="#" target="_blank" rel="noopener">
+          <span class="contact-circle contact-circle-wa">◔</span>
+          <div><small>WhatsApp</small><strong id="contactWhatsappText">Fale conosco</strong><span>Resposta rápida</span></div>
+        </a>
+        <div><span class="contact-circle">☎</span><div><small>Telefone</small><strong id="contactPhone">Não informado</strong><span id="contactHours">Atendimento comercial</span></div></div>
+        <div><span class="contact-circle">●</span><div><small>Atendimento</small><strong id="contactArea">São Paulo e Região</strong><span>Consulte disponibilidade</span></div></div>
+        <button type="button" data-whatsapp><span class="contact-circle">▣</span><div><small>Orçamento</small><strong>Gratuito e sem compromisso</strong><span>Solicite agora</span></div></button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-company">
+        <a class="site-brand footer-logo" href="index.html">
+          <img src="assets/img/logo-ejs.webp" alt="Logo EJS Empreiteira">
+          <span><strong>EJS</strong><small>EMPREITEIRA</small></span>
+        </a>
+        <p>Construímos, reformamos e transformamos seu espaço com qualidade, organização e compromisso em cada detalhe.</p>
+        <span id="footerCnpj">CNPJ: Não informado</span>
+      </div>
+      <div class="footer-column"><strong>Navegação</strong><a href="index.html">Início</a><a href="index.html#sobre">Sobre</a><a href="index.html#servicos">Serviços</a><a href="obras.html">Obras</a></div>
+      <div class="footer-column"><strong>Serviços</strong><span>Demolição</span><span>Alvenaria</span><span>Pintura</span><span>Elétrica</span><span>Gesso</span><span>Hidráulica</span></div>
+      <div class="footer-column"><strong>Siga-nos</strong><a id="footerInstagram" href="#" target="_blank" rel="noopener">Instagram</a><a id="footerWhatsapp" href="#" target="_blank" rel="noopener">WhatsApp</a></div>
+    </div>
+    <div class="container footer-bottom">© <span id="year"></span> EJS Empreiteira. Todos os direitos reservados.</div>
+  </footer>
+
+  <a id="floatingWhatsapp" class="floating-whatsapp" href="#" target="_blank" rel="noopener" aria-label="Falar com a EJS pelo WhatsApp">◔</a>
+  <div class="mobile-bottom-cta"><button class="mobile-wa" type="button" data-whatsapp>◔ WhatsApp</button><button class="mobile-budget" type="button" data-whatsapp>▣ Orçamento</button></div>
+
+  <script src="assets/js/accessibility.js"></script>
+  <script src="assets/js/site-common.js"></script>
+  <script src="assets/js/obras.js"></script>
+</body>
+</html>
