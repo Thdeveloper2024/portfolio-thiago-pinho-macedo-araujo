@@ -1645,3 +1645,10 @@ body.public-site{background:var(--public-bg)}
 :root[data-theme] .footer-contact-strip .contact-strip-grid{
   background:#ffffff!important;
 }
+
+/* V37 — chamada final sem moldura externa.
+   As bordas dos botões permanecem inalteradas. */
+.project-more-section .project-more-grid{
+  border:0!important;
+  box-shadow:none!important;
+}
