@@ -49,8 +49,28 @@ async function saveState(message='Alterações salvas.'){
   setStatus(message);
 }
 
+async function optimizeImage(file){
+  if(!file || !String(file.type||'').startsWith('image/')) return file;
+  if(file.type==='image/svg+xml' || file.size < 450*1024) return file;
+  try{
+    const bitmap=await createImageBitmap(file);
+    const maxSide=1800;
+    const scale=Math.min(1,maxSide/Math.max(bitmap.width,bitmap.height));
+    const width=Math.max(1,Math.round(bitmap.width*scale));
+    const height=Math.max(1,Math.round(bitmap.height*scale));
+    const canvas=document.createElement('canvas');canvas.width=width;canvas.height=height;
+    const ctx=canvas.getContext('2d',{alpha:false});ctx.drawImage(bitmap,0,0,width,height);
+    bitmap.close?.();
+    const blob=await new Promise(resolve=>canvas.toBlob(resolve,'image/webp',0.84));
+    if(!blob || blob.size>=file.size) return file;
+    const base=file.name.replace(/\.[^.]+$/,'')||'imagem';
+    return new File([blob],`${base}.webp`,{type:'image/webp',lastModified:Date.now()});
+  }catch{return file;}
+}
+
 async function uploadFile(file){
   if(!file)return null;
+  file=await optimizeImage(file);
   const response=await fetch(`/api/upload?filename=${encodeURIComponent(file.name)}`,{
     method:'POST',
     headers:{'Content-Type':file.type||'application/octet-stream'},
@@ -82,7 +102,7 @@ function resetForm(){
   $('workFormTitle').textContent='Cadastrar nova obra';
   $('addWork').textContent='Publicar obra';
   $('cancelEdit').hidden=true;
-  $('workTitle').value='';$('workDesc').value='';$('workImage').value='';$('workGallery').value='';$('workVideos').value='';if($('workAppendGallery'))$('workAppendGallery').value='';if($('workAppendVideos'))$('workAppendVideos').value='';if($('editAppendMedia'))$('editAppendMedia').hidden=true;
+  $('workTitle').value='';$('workDesc').value='';$('workImage').value='';$('workGallery').value='';$('workVideos').value='';if($('workAppendGallery'))$('workAppendGallery').value='';if($('workAppendVideos'))$('workAppendVideos').value='';if($('editAppendMedia'))$('editAppendMedia').hidden=true;if($('editExistingMedia'))$('editExistingMedia').innerHTML='';
 }
 $('cancelEdit').onclick=resetForm;
 
@@ -131,11 +151,49 @@ $('addWork').addEventListener('click',async()=>{
   finally{btn.disabled=false;if(editingIndex<0)btn.textContent='Publicar obra';}
 });
 
+function renderEditMedia(){
+  const host=$('editExistingMedia');
+  if(!host || editingIndex<0){if(host)host.innerHTML='';return;}
+  const w=state.works[editingIndex];
+  const photos=Array.isArray(w.gallery)?w.gallery:[];
+  const videos=Array.isArray(w.videos)?w.videos:[];
+  host.innerHTML='';
+  if(!photos.length&&!videos.length){host.innerHTML='<p class="small-note">Nenhuma mídia cadastrada nesta obra.</p>';return;}
+  photos.forEach((src,idx)=>{
+    const card=document.createElement('article');card.className='admin-media-item';
+    card.innerHTML=`<div class="admin-media-preview"><img src="${escapeHtml(src)}" alt="Foto ${idx+1}" loading="lazy"></div><div><strong>Foto ${idx+1}</strong><button type="button" class="remove-media">Excluir foto</button></div>`;
+    card.querySelector('.remove-media').onclick=()=>removeMedia('image',idx);host.appendChild(card);
+  });
+  videos.forEach((src,idx)=>{
+    const card=document.createElement('article');card.className='admin-media-item';
+    card.innerHTML=`<div class="admin-media-preview admin-video-preview"><span>▶</span></div><div><strong>Vídeo ${idx+1}</strong><button type="button" class="remove-media">Excluir vídeo</button></div>`;
+    card.querySelector('.remove-media').onclick=()=>removeMedia('video',idx);host.appendChild(card);
+  });
+}
+
+async function removeMedia(type,idx){
+  if(editingIndex<0)return;
+  const w={...state.works[editingIndex]};
+  const label=type==='video'?'vídeo':'foto';
+  if(!confirm(`Excluir esta ${label} da obra?`))return;
+  if(type==='video'){
+    const videos=[...(w.videos||[])],paths=[...(w.videoPaths||[])];videos.splice(idx,1);paths.splice(idx,1);w.videos=videos;w.videoPaths=paths;
+  }else{
+    const gallery=[...(w.gallery||[])],paths=[...(w.galleryPaths||[])];gallery.splice(idx,1);paths.splice(idx,1);
+    w.gallery=gallery;w.galleryPaths=paths;
+    if(w.cover && !(gallery.includes(w.cover))){w.cover=gallery[0]||'assets/img/logo-ejs.webp';w.coverPath=paths[0]||'';}
+  }
+  state.works[editingIndex]=w;
+  try{await saveState(`${label[0].toUpperCase()+label.slice(1)} excluído(a) da obra.`);renderEditMedia();renderWorks();updateDashboard();}
+  catch(error){setStatus(error.message,'error');await loadState();}
+}
+
 function startEdit(i){
   editingIndex=i;const w=state.works[i];
   $('workFormTitle').textContent='Editar obra';$('addWork').textContent='Salvar alterações';$('cancelEdit').hidden=false;
   $('workTitle').value=w.title||'';$('workDesc').value=w.desc||'';$('workImage').value='';$('workGallery').value='';$('workVideos').value='';
   if($('workAppendGallery'))$('workAppendGallery').value='';if($('workAppendVideos'))$('workAppendVideos').value='';if($('editAppendMedia'))$('editAppendMedia').hidden=false;
+  renderEditMedia();
   showView('new');window.scrollTo({top:0,behavior:'smooth'});
 }
 
