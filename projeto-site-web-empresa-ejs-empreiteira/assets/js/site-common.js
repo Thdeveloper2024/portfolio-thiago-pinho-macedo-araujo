@@ -10,7 +10,8 @@ window.EJSCommon = (() => {
       experienceYears: 6,
       satisfactionRate: 98,
       completedBase: 0,
-      completedAdded: 0
+      completedAdded: 0,
+      services: [{"id": "demolicao", "name": "Demolição", "description": "Remoção segura e planejada, com organização e descarte responsável.", "icon": "demolition"}, {"id": "alvenaria", "name": "Alvenaria", "description": "Levantamento de paredes, adequações e estruturas com qualidade.", "icon": "masonry"}, {"id": "pintura", "name": "Pintura", "description": "Pintura interna e externa com preparação e acabamento cuidadoso.", "icon": "painting"}, {"id": "eletrica", "name": "Elétrica", "description": "Instalações, adequações e manutenções elétricas com segurança.", "icon": "electrical"}, {"id": "gesso", "name": "Gesso", "description": "Forros, sancas, divisórias e acabamentos em gesso para valorizar o ambiente.", "icon": "plaster"}, {"id": "hidraulica", "name": "Hidráulica", "description": "Instalações e manutenção hidráulica residencial e comercial.", "icon": "plumbing"}]
     },
     works: [
       {id:'obra-1',title:'Reforma completa residencial',desc:'Reforma completa com modernização dos ambientes, revisão das instalações e novos acabamentos.',category:'Reforma',type:'Reforma Residencial',location:'São Paulo/SP',area:'120 m²',duration:'45 dias',year:String(new Date().getFullYear()),status:'Concluída',services:['Alvenaria','Elétrica','Hidráulica','Pintura','Gesso'],featured:true,cover:'assets/img/hero-stages/08-todas.webp',gallery:['assets/img/hero-stages/01.webp','assets/img/hero-stages/07.webp','assets/img/hero-stages/08-todas.webp'],videos:[]},
@@ -60,6 +61,50 @@ window.EJSCommon = (() => {
     return [work?.location, work?.type].filter(Boolean);
   }
 
+  const serviceIconSymbols = {
+    demolition: '⌁', masonry: '▦', painting: '▭', electrical: 'ϟ', plaster: '⌔', plumbing: '⌘', tools: '⚒'
+  };
+
+  function getServices(settings) {
+    const source = Array.isArray(settings?.services) ? settings.services : fallback.settings.services;
+    return source.map((service, index) => typeof service === 'string'
+      ? { id: `service-${index}`, name: service, description: '', icon: 'tools' }
+      : service).filter(service => service?.name);
+  }
+
+  function serviceIcon(service) {
+    return serviceIconSymbols[service?.icon] || serviceIconSymbols.tools;
+  }
+
+  function whatsappIcon(pathPrefix = 'assets') {
+    return `<img class="whatsapp-icon" src="${pathPrefix}/img/whatsapp.svg" alt="" aria-hidden="true">`;
+  }
+
+
+  function adaptImageFrame(frame, image) {
+    if (!frame || !image) return;
+    frame.classList.add('adaptive-media-frame');
+    const apply = () => {
+      const width = image.naturalWidth || 0;
+      const height = image.naturalHeight || 0;
+      if (!width || !height) return;
+      const ratio = width / height;
+      const shape = ratio > 1.08 ? 'landscape' : ratio < .92 ? 'portrait' : 'square';
+      frame.dataset.mediaShape = shape;
+      const src = image.currentSrc || image.src;
+      if (src) frame.style.setProperty('--adaptive-backdrop', `url("${String(src).replace(/"/g, '\\"')}")`);
+    };
+    if (image.complete && image.naturalWidth) apply();
+    else image.addEventListener('load', apply, { once: true });
+  }
+
+  function initAdaptiveMedia(root = document) {
+    root.querySelectorAll('[data-adaptive-media]').forEach(frame => {
+      const image = frame.querySelector('img');
+      if (image) adaptImageFrame(frame, image);
+    });
+  }
+
   function initNavigation(settings) {
     const menuToggle = document.getElementById('menuToggle');
     const mobileNav = document.getElementById('mobileNav');
@@ -91,6 +136,9 @@ window.EJSCommon = (() => {
       el.addEventListener('click', () => window.open(link, '_blank', 'noopener'));
     });
 
+    const footerServices = document.getElementById('footerServices');
+    if (footerServices) footerServices.innerHTML = '<strong>Serviços</strong>' + getServices(settings).slice(0, 8).map(service => `<span>${esc(service.name)}</span>`).join('');
+
     const footerInstagram = document.getElementById('footerInstagram');
     if (footerInstagram) footerInstagram.href = settings?.instagram || '#';
 
@@ -121,5 +169,5 @@ window.EJSCommon = (() => {
     if (year) year.textContent = new Date().getFullYear();
   }
 
-  return { fallback, esc, getData, waLink, phoneLabel, categoryLabel, workMeta, initNavigation };
+  return { fallback, esc, getData, waLink, phoneLabel, categoryLabel, workMeta, getServices, serviceIcon, whatsappIcon, adaptImageFrame, initAdaptiveMedia, initNavigation };
 })();

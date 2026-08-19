@@ -1,4 +1,4 @@
-const { getData, esc, initNavigation } = window.EJSCommon;
+const { getData, esc, initNavigation, getServices, serviceIcon, initAdaptiveMedia } = window.EJSCommon;
 
 let pageData = { settings: {}, works: [] };
 let currentFilter = 'Todos';
@@ -18,7 +18,7 @@ function featuredTemplate(work) {
   ].filter(Boolean).join('');
 
   return `
-    <div class="portfolio-featured-image">
+    <div class="portfolio-featured-image" data-adaptive-media>
       <span class="featured-ribbon">DESTAQUE</span>
       <img src="${esc(work.cover || 'assets/img/hero-ejs.webp')}" alt="${esc(work.title)}" decoding="async" fetchpriority="high">
     </div>
@@ -39,7 +39,7 @@ function featuredTemplate(work) {
 function cardTemplate(work) {
   return `
     <article class="portfolio-card">
-      <a class="portfolio-card-media" href="obra.html?id=${encodeURIComponent(work.id)}">
+      <a class="portfolio-card-media" data-adaptive-media href="obra.html?id=${encodeURIComponent(work.id)}">
         <span>${esc(String(work.category || 'Projeto').toUpperCase())}</span>
         <img src="${esc(work.cover || 'assets/img/hero-ejs.webp')}" alt="${esc(work.title)}" loading="lazy" decoding="async">
       </a>
@@ -77,10 +77,16 @@ function renderPortfolio() {
 
   const rest = filtered.filter(work => work.id !== featured.id);
   grid.innerHTML = rest.map(cardTemplate).join('');
+  initAdaptiveMedia(document);
 }
 
 function initFilters() {
-  const buttons = [...document.querySelectorAll('#portfolioFilters [data-filter]')];
+  const host = document.getElementById('portfolioFilters');
+  const services = getServices(pageData.settings);
+  host.innerHTML = `<button class="active" type="button" data-filter="Todos"><span>▦</span>Todos</button>` + services.map(service =>
+    `<button type="button" data-filter="${esc(service.name)}"><span>${esc(serviceIcon(service))}</span>${esc(service.name)}</button>`
+  ).join('');
+  const buttons = [...host.querySelectorAll('[data-filter]')];
   buttons.forEach(button => {
     button.addEventListener('click', () => {
       currentFilter = button.dataset.filter || 'Todos';

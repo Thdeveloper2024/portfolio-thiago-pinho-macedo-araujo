@@ -22,6 +22,7 @@
         <button data-nav="home" class="active"><span>⌂</span>Início</button>
         <button data-nav="new"><span>＋</span>Cadastrar obras</button>
         <button data-nav="works"><span>▦</span>Obras cadastradas</button>
+        <button data-nav="services"><span>⚒</span>Serviços</button>
         <button data-nav="settings"><span>⚙</span>Configurações</button>
       </nav>
 
@@ -80,15 +81,7 @@
                 <input id="workTitle" maxlength="160" placeholder="Ex.: Reforma Completa — Vila Mariana/SP">
               </label>
               <label class="admin-field">Categoria principal
-                <select id="workCategory">
-                  <option value="Reforma">Reforma completa</option>
-                  <option value="Demolição">Demolição</option>
-                  <option value="Alvenaria">Alvenaria</option>
-                  <option value="Pintura">Pintura</option>
-                  <option value="Elétrica">Elétrica</option>
-                  <option value="Gesso">Gesso</option>
-                  <option value="Hidráulica">Hidráulica</option>
-                </select>
+                <select id="workCategory"><option value="Reforma">Reforma completa</option></select>
               </label>
 
               <label class="admin-field">Tipo de projeto
@@ -127,10 +120,11 @@
                 </select>
               </label>
 
-              <label class="admin-field admin-span-3">Serviços executados
-                <input id="workServices" maxlength="500" placeholder="Ex.: Alvenaria, Elétrica, Hidráulica, Pintura e Gesso">
-                <small>Separe os serviços por vírgula. Eles aparecerão na página da obra.</small>
-              </label>
+              <div class="admin-field admin-span-3">
+                <span class="admin-field-label">Serviços executados</span>
+                <div id="workServiceOptions" class="admin-service-selector"></div>
+                <small>Marque todos os serviços da empresa utilizados nesta obra.</small>
+              </div>
               <label class="admin-field admin-checkbox-field">
                 <input id="workFeatured" type="checkbox">
                 <span><strong>Obra em destaque</strong><small>Exibir como projeto principal na página de obras.</small></span>
@@ -188,6 +182,42 @@
             <button class="btn btn-primary admin-head-action" data-nav="new">+ Nova obra</button>
           </div>
           <section class="admin-panel"><div id="adminWorks" class="admin-works"></div></section>
+        </section>
+
+
+        <section data-admin-view="services" hidden>
+          <div class="admin-page-head">
+            <div><span class="eyebrow">SERVIÇOS</span><h1>Serviços da empresa</h1><p>Cadastre, edite ou exclua os serviços exibidos no site e disponíveis no cadastro das obras.</p></div>
+          </div>
+
+          <div class="admin-services-layout">
+            <section class="admin-panel admin-form-section">
+              <div class="admin-form-group-title"><div><span class="eyebrow">CADASTRO</span><h2 id="serviceFormTitle">Novo serviço</h2></div></div>
+              <div class="admin-grid admin-grid-2">
+                <label class="admin-field">Nome do serviço<input id="serviceName" maxlength="80" placeholder="Ex.: Impermeabilização"></label>
+                <label class="admin-field">Ícone
+                  <select id="serviceIcon">
+                    <option value="tools">Ferramentas</option>
+                    <option value="demolition">Demolição</option>
+                    <option value="masonry">Alvenaria</option>
+                    <option value="painting">Pintura</option>
+                    <option value="electrical">Elétrica</option>
+                    <option value="plaster">Gesso</option>
+                    <option value="plumbing">Hidráulica</option>
+                  </select>
+                </label>
+                <label class="admin-field admin-span-2">Descrição<textarea id="serviceDescription" rows="4" maxlength="360" placeholder="Descreva brevemente o serviço prestado."></textarea></label>
+              </div>
+              <div class="admin-form-actions">
+                <button class="btn btn-primary" id="saveService" type="button">Cadastrar serviço</button>
+                <button class="btn btn-secondary" id="cancelServiceEdit" type="button" hidden>Cancelar edição</button>
+              </div>
+            </section>
+            <section class="admin-panel">
+              <div class="admin-panel-title"><div><span class="eyebrow">CATÁLOGO</span><h2>Serviços cadastrados</h2></div></div>
+              <div id="adminServices" class="admin-services-list"></div>
+            </section>
+          </div>
         </section>
 
         <section data-admin-view="settings" hidden>

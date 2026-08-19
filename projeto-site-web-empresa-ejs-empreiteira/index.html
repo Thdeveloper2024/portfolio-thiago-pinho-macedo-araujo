@@ -33,7 +33,7 @@
 
       <div class="header-cta-wrap">
         <a class="header-whatsapp" id="headerWhatsapp" href="#" target="_blank" rel="noopener">
-          <span class="wa-mark">◔</span>
+          <img class="whatsapp-icon" src="assets/img/whatsapp.svg" alt="" aria-hidden="true">
           <span id="headerWhatsappText">WhatsApp</span>
         </a>
         <button class="accessibility-toggle" id="accessibilityToggle" type="button" aria-label="Abrir opções de acessibilidade" aria-expanded="false">◐</button>
@@ -102,38 +102,7 @@
           <h2>Soluções completas para sua obra do início ao fim</h2>
         </div>
 
-        <div class="services-six-grid">
-          <article class="service-mini-card">
-            <div class="service-line-icon" aria-hidden="true">⌁</div>
-            <h3>Demolição</h3>
-            <p>Remoção segura e planejada, com organização e descarte responsável.</p>
-          </article>
-          <article class="service-mini-card">
-            <div class="service-line-icon" aria-hidden="true">▦</div>
-            <h3>Alvenaria</h3>
-            <p>Levantamento de paredes, adequações e estruturas com qualidade.</p>
-          </article>
-          <article class="service-mini-card">
-            <div class="service-line-icon" aria-hidden="true">▭</div>
-            <h3>Pintura</h3>
-            <p>Pintura interna e externa com preparação e acabamento cuidadoso.</p>
-          </article>
-          <article class="service-mini-card">
-            <div class="service-line-icon" aria-hidden="true">ϟ</div>
-            <h3>Elétrica</h3>
-            <p>Instalações, adequações e manutenções elétricas com segurança.</p>
-          </article>
-          <article class="service-mini-card">
-            <div class="service-line-icon" aria-hidden="true">⌔</div>
-            <h3>Gesso</h3>
-            <p>Forros, sancas, divisórias e acabamentos em gesso para valorizar o ambiente.</p>
-          </article>
-          <article class="service-mini-card">
-            <div class="service-line-icon" aria-hidden="true">⌘</div>
-            <h3>Hidráulica</h3>
-            <p>Instalações e manutenção hidráulica residencial e comercial.</p>
-          </article>
-        </div>
+        <div class="services-six-grid" id="servicesGrid"></div>
       </div>
     </section>
 
@@ -197,7 +166,7 @@
     <section class="contact-strip" id="contato">
       <div class="container contact-strip-grid">
         <a id="contactWhatsapp" href="#" target="_blank" rel="noopener">
-          <span class="contact-circle contact-circle-wa">◔</span>
+          <span class="contact-circle contact-circle-wa"><img class="whatsapp-icon" src="assets/img/whatsapp.svg" alt="" aria-hidden="true"></span>
           <div><small>WhatsApp</small><strong id="contactWhatsappText">Fale conosco</strong><span>Resposta rápida</span></div>
         </a>
         <div>
@@ -235,15 +204,7 @@
         <a href="obras.html">Obras</a>
       </div>
 
-      <div class="footer-column">
-        <strong>Serviços</strong>
-        <span>Demolição</span>
-        <span>Alvenaria</span>
-        <span>Pintura</span>
-        <span>Elétrica</span>
-        <span>Gesso</span>
-        <span>Hidráulica</span>
-      </div>
+      <div class="footer-column" id="footerServices"><strong>Serviços</strong></div>
 
       <div class="footer-column">
         <strong>Siga-nos</strong>
@@ -254,9 +215,9 @@
     <div class="container footer-bottom">© <span id="year"></span> EJS Empreiteira. Todos os direitos reservados.</div>
   </footer>
 
-  <a id="floatingWhatsapp" class="floating-whatsapp" href="#" target="_blank" rel="noopener" aria-label="Falar com a EJS pelo WhatsApp">◔</a>
+  <a id="floatingWhatsapp" class="floating-whatsapp" href="#" target="_blank" rel="noopener" aria-label="Falar com a EJS pelo WhatsApp"><img class="whatsapp-icon" src="assets/img/whatsapp.svg" alt="" aria-hidden="true"></a>
 
-  <div class="mobile-bottom-cta"><button class="mobile-wa" type="button" data-whatsapp>◔ WhatsApp</button><button class="mobile-budget" type="button" data-whatsapp>▣ Orçamento</button></div>
+  <div class="mobile-bottom-cta"><button class="mobile-wa" type="button" data-whatsapp><img class="whatsapp-icon" src="assets/img/whatsapp.svg" alt="" aria-hidden="true"> WhatsApp</button><button class="mobile-budget" type="button" data-whatsapp>▣ Orçamento</button></div>
 
   <script src="assets/js/accessibility.js"></script>
   <script src="assets/js/site-common.js"></script>

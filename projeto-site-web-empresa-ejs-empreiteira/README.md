@@ -1,4 +1,4 @@
-# EJS Empreiteira — V31 Novo Visual + Portfólio Completo
+# EJS Empreiteira — V32 Projeto Responsivo + Gestão de Serviços
 
 ## Visão geral
 
@@ -11,6 +11,21 @@ Esta versão recria o visual público da EJS Empreiteira com base no layout de r
 - dourado EJS (`#d9a441`).
 
 O projeto continua preparado para Vercel, Vercel Blob privado, painel administrativo e cadastro de fotos/vídeos.
+
+## Principais mudanças da V32
+
+- ícone oficial/real do WhatsApp aplicado no cabeçalho, contatos, botão flutuante e barra mobile;
+- cabeçalho passa a acompanhar o modo de visualização escolhido pelo visitante;
+- cabeçalho mobile reorganizado com logo à esquerda e controles/menu à direita;
+- página individual da obra recriada com estrutura de destaque, galeria, descrição, informações técnicas e CTAs inspirados no mockup aprovado;
+- galeria responsiva com detecção automática da proporção real de cada imagem ou vídeo;
+- mídia principal sempre usa `object-fit: contain`, portanto não é cortada nem deformada;
+- fotos horizontais assumem proporção de desktop; fotos verticais recebem enquadramento responsivo com fundo da própria foto, sem esticar a imagem original;
+- no celular, o quadro da galeria muda entre horizontal, quadrado, retrato e retrato alto de acordo com a mídia ativa;
+- miniaturas de obras também preservam a imagem completa e usam preenchimento visual quando necessário;
+- nova área **Serviços** no painel ADM para cadastrar, editar e excluir os serviços prestados;
+- serviços cadastrados no ADM alimentam automaticamente a página inicial, filtros do portfólio, rodapé e seleção de serviços no cadastro das obras;
+- edição do nome de um serviço atualiza referências nas obras existentes.
 
 ## Principais mudanças da V31
 

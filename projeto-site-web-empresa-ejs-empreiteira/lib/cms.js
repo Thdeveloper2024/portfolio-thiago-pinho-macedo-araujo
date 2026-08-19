@@ -13,7 +13,8 @@ export const defaultState = {
     experienceYears: 6,
     satisfactionRate: 98,
     completedBase: 0,
-    completedAdded: 0
+    completedAdded: 0,
+    services: [{"id": "demolicao", "name": "Demolição", "description": "Remoção segura e planejada, com organização e descarte responsável.", "icon": "demolition"}, {"id": "alvenaria", "name": "Alvenaria", "description": "Levantamento de paredes, adequações e estruturas com qualidade.", "icon": "masonry"}, {"id": "pintura", "name": "Pintura", "description": "Pintura interna e externa com preparação e acabamento cuidadoso.", "icon": "painting"}, {"id": "eletrica", "name": "Elétrica", "description": "Instalações, adequações e manutenções elétricas com segurança.", "icon": "electrical"}, {"id": "gesso", "name": "Gesso", "description": "Forros, sancas, divisórias e acabamentos em gesso para valorizar o ambiente.", "icon": "plaster"}, {"id": "hidraulica", "name": "Hidráulica", "description": "Instalações e manutenção hidráulica residencial e comercial.", "icon": "plumbing"}]
   },
   works: [
     {
@@ -90,6 +91,28 @@ function normalizeServices(value) {
   return [...new Set(list.map(v => text(v, 80)).filter(Boolean))].slice(0, 20);
 }
 
+function slugService(value = '') {
+  return text(value, 90).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || `servico-${Date.now()}`;
+}
+
+function cleanCompanyServices(value) {
+  const source = Array.isArray(value) ? value : defaultState.settings.services;
+  const seen = new Set();
+  return source.map((item, index) => {
+    const name = text(item?.name || item, 80);
+    if (!name) return null;
+    let id = text(item?.id || slugService(name), 100);
+    if (seen.has(id)) id = `${id}-${index + 1}`;
+    seen.add(id);
+    return {
+      id,
+      name,
+      description: text(item?.description || '', 360),
+      icon: text(item?.icon || 'tools', 40)
+    };
+  }).filter(Boolean).slice(0, 24);
+}
+
 function cleanWork(w, i) {
   const category = text(w?.category || 'Reforma', 50) || 'Reforma';
   const gallery = Array.isArray(w?.gallery) ? w.gallery.map(String).filter(Boolean).slice(0, 40) : [];
@@ -149,7 +172,8 @@ function cleanState(input) {
       experienceYears: num(settings.experienceYears ?? defaultState.settings.experienceYears, 0, 100),
       satisfactionRate: num(settings.satisfactionRate ?? defaultState.settings.satisfactionRate, 0, 100),
       completedBase: num(settings.completedBase, 0),
-      completedAdded: num(settings.completedAdded, 0)
+      completedAdded: num(settings.completedAdded, 0),
+      services: cleanCompanyServices(settings.services)
     },
     works: cleanedWorks
   };

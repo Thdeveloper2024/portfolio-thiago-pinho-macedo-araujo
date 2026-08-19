@@ -1,4 +1,4 @@
-const { getData, esc, initNavigation } = window.EJSCommon;
+const { getData, esc, initNavigation, getServices, serviceIcon, initAdaptiveMedia } = window.EJSCommon;
 
 function mediaPreview(work) {
   const gallery = Array.isArray(work.gallery) ? work.gallery.filter(Boolean) : [];
@@ -8,15 +8,28 @@ function mediaPreview(work) {
   if (second) {
     return `
       <div class="home-project-media home-project-media-split">
-        <div><span>ANTES</span><img src="${esc(first)}" alt="${esc(work.title)} - imagem 1" loading="lazy" decoding="async"></div>
-        <div><span class="after">DEPOIS</span><img src="${esc(second)}" alt="${esc(work.title)} - imagem 2" loading="lazy" decoding="async"></div>
+        <div data-adaptive-media><span>ANTES</span><img src="${esc(first)}" alt="${esc(work.title)} - imagem 1" loading="lazy" decoding="async"></div>
+        <div data-adaptive-media><span class="after">DEPOIS</span><img src="${esc(second)}" alt="${esc(work.title)} - imagem 2" loading="lazy" decoding="async"></div>
       </div>`;
   }
   return `
-    <div class="home-project-media">
+    <div class="home-project-media" data-adaptive-media>
       <span class="project-category-tag">${esc(work.category || 'Projeto')}</span>
       <img src="${esc(first)}" alt="${esc(work.title)}" loading="lazy" decoding="async">
     </div>`;
+}
+
+
+function renderServices(settings) {
+  const host = document.getElementById('servicesGrid');
+  if (!host) return;
+  const services = getServices(settings);
+  host.innerHTML = services.map(service => `
+    <article class="service-mini-card">
+      <div class="service-line-icon" aria-hidden="true">${esc(serviceIcon(service))}</div>
+      <h3>${esc(service.name)}</h3>
+      <p>${esc(service.description || 'Serviço executado com planejamento, qualidade e atenção aos detalhes.')}</p>
+    </article>`).join('');
 }
 
 function renderHomeProjects(works) {
@@ -43,7 +56,9 @@ function renderHomeProjects(works) {
 (async () => {
   const data = await getData();
   initNavigation(data.settings);
+  renderServices(data.settings);
   renderHomeProjects(data.works);
+  initAdaptiveMedia(document);
 
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {

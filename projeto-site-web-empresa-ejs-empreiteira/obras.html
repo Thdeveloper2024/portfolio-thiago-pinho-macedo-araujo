@@ -29,7 +29,7 @@
         <a href="index.html#contato">Contato</a>
       </nav>
       <div class="header-cta-wrap">
-        <a class="header-whatsapp" id="headerWhatsapp" href="#" target="_blank" rel="noopener"><span class="wa-mark">◔</span><span id="headerWhatsappText">WhatsApp</span></a>
+        <a class="header-whatsapp" id="headerWhatsapp" href="#" target="_blank" rel="noopener"><img class="whatsapp-icon" src="assets/img/whatsapp.svg" alt="" aria-hidden="true"><span id="headerWhatsappText">WhatsApp</span></a>
         <button class="accessibility-toggle" id="accessibilityToggle" type="button" aria-label="Abrir opções de acessibilidade" aria-expanded="false">◐</button>
         <button class="mobile-menu-toggle" id="menuToggle" type="button" aria-label="Abrir menu" aria-expanded="false"><i></i><i></i><i></i></button>
       </div>
@@ -69,15 +69,7 @@
 
     <section class="portfolio-page-section">
       <div class="container">
-        <div class="portfolio-filters" id="portfolioFilters">
-          <button class="active" type="button" data-filter="Todos"><span>▦</span>Todos</button>
-          <button type="button" data-filter="Demolição"><span>⌁</span>Demolição</button>
-          <button type="button" data-filter="Alvenaria"><span>▦</span>Alvenaria</button>
-          <button type="button" data-filter="Pintura"><span>▭</span>Pintura</button>
-          <button type="button" data-filter="Elétrica"><span>ϟ</span>Elétrica</button>
-          <button type="button" data-filter="Gesso"><span>⌔</span>Gesso</button>
-          <button type="button" data-filter="Hidráulica"><span>⌘</span>Hidráulica</button>
-        </div>
+        <div class="portfolio-filters" id="portfolioFilters"></div>
 
         <section class="portfolio-featured" id="portfolioFeatured" aria-label="Obra em destaque"></section>
         <div class="portfolio-grid" id="portfolioGrid"></div>
@@ -97,7 +89,7 @@
     <section class="contact-strip" id="contato">
       <div class="container contact-strip-grid">
         <a id="contactWhatsapp" href="#" target="_blank" rel="noopener">
-          <span class="contact-circle contact-circle-wa">◔</span>
+          <span class="contact-circle contact-circle-wa"><img class="whatsapp-icon" src="assets/img/whatsapp.svg" alt="" aria-hidden="true"></span>
           <div><small>WhatsApp</small><strong id="contactWhatsappText">Fale conosco</strong><span>Resposta rápida</span></div>
         </a>
         <div><span class="contact-circle">☎</span><div><small>Telefone</small><strong id="contactPhone">Não informado</strong><span id="contactHours">Atendimento comercial</span></div></div>
@@ -118,14 +110,14 @@
         <span id="footerCnpj">CNPJ: Não informado</span>
       </div>
       <div class="footer-column"><strong>Navegação</strong><a href="index.html">Início</a><a href="index.html#sobre">Sobre</a><a href="index.html#servicos">Serviços</a><a href="obras.html">Obras</a></div>
-      <div class="footer-column"><strong>Serviços</strong><span>Demolição</span><span>Alvenaria</span><span>Pintura</span><span>Elétrica</span><span>Gesso</span><span>Hidráulica</span></div>
+      <div class="footer-column" id="footerServices"><strong>Serviços</strong></div>
       <div class="footer-column"><strong>Siga-nos</strong><a id="footerInstagram" href="#" target="_blank" rel="noopener">Instagram</a><a id="footerWhatsapp" href="#" target="_blank" rel="noopener">WhatsApp</a></div>
     </div>
     <div class="container footer-bottom">© <span id="year"></span> EJS Empreiteira. Todos os direitos reservados.</div>
   </footer>
 
-  <a id="floatingWhatsapp" class="floating-whatsapp" href="#" target="_blank" rel="noopener" aria-label="Falar com a EJS pelo WhatsApp">◔</a>
-  <div class="mobile-bottom-cta"><button class="mobile-wa" type="button" data-whatsapp>◔ WhatsApp</button><button class="mobile-budget" type="button" data-whatsapp>▣ Orçamento</button></div>
+  <a id="floatingWhatsapp" class="floating-whatsapp" href="#" target="_blank" rel="noopener" aria-label="Falar com a EJS pelo WhatsApp"><img class="whatsapp-icon" src="assets/img/whatsapp.svg" alt="" aria-hidden="true"></a>
+  <div class="mobile-bottom-cta"><button class="mobile-wa" type="button" data-whatsapp><img class="whatsapp-icon" src="assets/img/whatsapp.svg" alt="" aria-hidden="true"> WhatsApp</button><button class="mobile-budget" type="button" data-whatsapp>▣ Orçamento</button></div>
 
   <script src="assets/js/accessibility.js"></script>
   <script src="assets/js/site-common.js"></script>
