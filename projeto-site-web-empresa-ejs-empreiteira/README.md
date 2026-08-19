@@ -243,3 +243,10 @@ Esta versão inclui os seguintes ajustes:
 ### Observação sobre a imagem institucional
 
 A imagem de equipe da seção institucional está configurada por URL externa e possui fallback automático para `assets/img/hero-stages/04.webp` caso a imagem remota não esteja disponível.
+
+
+## Atualização V35
+
+- O rodapé permanece escuro em todos os temas; apenas o cabeçalho acompanha a visualização selecionada.
+- O botão **Voltar** é exibido somente nas páginas internas (`obras.html` e `obra.html`), não na página inicial.
+- O tema escuro recebeu contraste reforçado nos filtros, cards e etiquetas de serviços para manter textos e ícones legíveis.

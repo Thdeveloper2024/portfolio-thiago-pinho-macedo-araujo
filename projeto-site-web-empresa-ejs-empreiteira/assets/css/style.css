@@ -1503,3 +1503,134 @@ body.public-site{background:var(--public-bg)}
 .testimonial-item .quote-mark{position:static!important;display:block!important;margin:5px 0 -2px!important}
 .admin-service-choice strong,.admin-service-row strong{white-space:normal!important;overflow-wrap:anywhere}
 @media(max-width:760px){.site-footer>.footer-grid{padding-top:24px}}
+
+/* =========================================================
+   V35 — rodapé sempre escuro, Voltar só nas páginas internas
+   e contraste reforçado dos serviços no tema escuro
+   ========================================================= */
+
+/* O rodapé NÃO acompanha o tema claro/areia. Ele mantém exatamente
+   a mesma base escura usada no modo escuro. Regras específicas abaixo
+   vencem os estilos antigos do tema cimento que deixavam o footer branco. */
+:root[data-theme="cimento"] .site-footer,
+:root[data-theme="areia"] .site-footer,
+:root[data-theme="escuro"] .site-footer,
+:root[data-theme="contraste"] .site-footer,
+:root[data-theme="cimento"] .project-site-footer,
+:root[data-theme="areia"] .project-site-footer,
+:root[data-theme="escuro"] .project-site-footer,
+:root[data-theme="contraste"] .project-site-footer{
+  background:#151a1e!important;
+  color:#ffffff!important;
+  border-color:rgba(255,255,255,.10)!important;
+}
+:root[data-theme="cimento"] .site-footer .footer-company p,
+:root[data-theme="cimento"] .site-footer .footer-column a,
+:root[data-theme="cimento"] .site-footer .footer-column span,
+:root[data-theme="cimento"] .site-footer .footer-company>span,
+:root[data-theme="areia"] .site-footer .footer-company p,
+:root[data-theme="areia"] .site-footer .footer-column a,
+:root[data-theme="areia"] .site-footer .footer-column span,
+:root[data-theme="areia"] .site-footer .footer-company>span{
+  color:#c9d0d5!important;
+}
+:root[data-theme="cimento"] .site-footer .footer-column strong,
+:root[data-theme="cimento"] .site-footer .footer-logo strong,
+:root[data-theme="cimento"] .site-footer .footer-logo small,
+:root[data-theme="areia"] .site-footer .footer-column strong,
+:root[data-theme="areia"] .site-footer .footer-logo strong,
+:root[data-theme="areia"] .site-footer .footer-logo small{
+  color:#ffffff!important;
+}
+:root[data-theme="cimento"] .site-footer .footer-bottom,
+:root[data-theme="areia"] .site-footer .footer-bottom{
+  color:#9ca6ad!important;
+  border-color:rgba(255,255,255,.12)!important;
+}
+
+/* A faixa dos indicadores permanece escura dentro do rodapé em qualquer tema. */
+:root[data-theme="cimento"] .site-footer .footer-trust-strip,
+:root[data-theme="areia"] .site-footer .footer-trust-strip,
+:root[data-theme="escuro"] .site-footer .footer-trust-strip,
+:root[data-theme="contraste"] .site-footer .footer-trust-strip{
+  background:#151a1e!important;
+  color:#ffffff!important;
+  border-color:rgba(255,255,255,.09)!important;
+}
+:root[data-theme="cimento"] .site-footer .footer-trust-strip .trust-grid small,
+:root[data-theme="areia"] .site-footer .footer-trust-strip .trust-grid small{
+  color:#c8d0d5!important;
+}
+
+/* No tema escuro os serviços deixam de usar fundo claro com texto claro.
+   Ícone e texto passam a usar alto contraste e o item ativo continua dourado. */
+:root[data-theme="escuro"] .portfolio-filters button{
+  background:#2c3237!important;
+  color:#f7f9fa!important;
+  border-color:#4c565e!important;
+  box-shadow:none!important;
+}
+:root[data-theme="escuro"] .portfolio-filters button:hover{
+  background:#363e44!important;
+  border-color:#69757e!important;
+}
+:root[data-theme="escuro"] .portfolio-filters button.active{
+  background:var(--gold)!important;
+  color:#1b1715!important;
+  border-color:var(--gold)!important;
+}
+:root[data-theme="escuro"] .portfolio-filters button .ejs-icon,
+:root[data-theme="escuro"] .portfolio-filters button .filter-svg{
+  color:currentColor!important;
+  stroke:currentColor!important;
+}
+
+:root[data-theme="escuro"] .service-mini-card{
+  background:#2b3034!important;
+  border-color:#444d54!important;
+  color:#ffffff!important;
+}
+:root[data-theme="escuro"] .service-mini-card:hover{
+  background:#333a40!important;
+  border-color:var(--gold)!important;
+}
+:root[data-theme="escuro"] .service-mini-card h3{
+  color:#ffffff!important;
+}
+:root[data-theme="escuro"] .service-mini-card p{
+  color:#cbd2d7!important;
+}
+:root[data-theme="escuro"] .service-mini-card .service-line-icon{
+  background:#20262a!important;
+  color:var(--gold)!important;
+  border-color:#505a61!important;
+}
+:root[data-theme="escuro"] .service-mini-card .service-svg{
+  color:var(--gold)!important;
+  stroke:currentColor!important;
+}
+
+/* Tags de serviços da página individual da obra. A especificidade é
+   intencional para sobrescrever as regras antigas que usavam fundo marfim. */
+:root[data-theme="escuro"] .project-showcase .project-service-tags span,
+:root[data-theme="escuro"] .project-showcase .project-service-tags .project-service-chip{
+  background:#30373c!important;
+  color:#ffffff!important;
+  border:1px solid #59646c!important;
+}
+:root[data-theme="escuro"] .project-showcase .project-service-tags span .service-chip-svg,
+:root[data-theme="escuro"] .project-showcase .project-service-tags .project-service-chip .service-chip-svg{
+  color:var(--gold)!important;
+  stroke:currentColor!important;
+}
+
+/* Contraste extra para textos e ícones clicáveis no tema escuro. */
+:root[data-theme="escuro"] .page-back-button{
+  background:#2b3034!important;
+  color:#ffffff!important;
+  border-color:#4c565e!important;
+}
+:root[data-theme="escuro"] .page-back-button svg{
+  color:currentColor!important;
+  stroke:currentColor!important;
+}

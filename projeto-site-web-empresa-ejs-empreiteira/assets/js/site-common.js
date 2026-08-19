@@ -174,6 +174,14 @@ window.EJSCommon = (() => {
 
   function initBackButton() {
     if (document.querySelector('.global-backbar')) return;
+
+    // A página inicial não exibe o botão Voltar. Em todas as páginas
+    // internas ele continua disponível para retornar à navegação anterior.
+    const path = String(location.pathname || '/').replace(/\/+$/, '');
+    const fileName = path.split('/').pop() || '';
+    const isHome = fileName === '' || fileName.toLowerCase() === 'index.html';
+    if (isHome) return;
+
     const header = document.querySelector('.site-header');
     if (!header) return;
     const bar = document.createElement('div');
