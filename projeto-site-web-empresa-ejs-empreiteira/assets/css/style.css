@@ -1710,3 +1710,121 @@ body{background:var(--page-bg);color:var(--text);transition:background .25s,colo
 .admin-media-item strong{font-size:12px;color:#4d3a2f}
 .admin-media-item .remove-media{border:0;background:#8d3c34;color:#fff;border-radius:6px;padding:8px 10px;font-weight:700;cursor:pointer}
 .admin-add-media-title{margin-top:18px;padding-top:18px;border-top:1px solid #e2d8d1}
+
+/* ===== V30 — manipulador responsivo automático de fotos e vídeos =====
+   - nunca corta a mídia original;
+   - nunca estica/deforma a foto ou o vídeo;
+   - desktop usa um quadro horizontal responsivo;
+   - mobile adapta o quadro à orientação real do arquivo;
+   - fotos verticais no desktop ganham fundo preenchido com a própria foto,
+     mantendo a imagem principal 100% visível. */
+.project-media-section{
+  --project-media-side:clamp(20px,5vw,80px);
+}
+.project-media-track{
+  width:100%;
+  border-radius:14px!important;
+  overflow-x:auto!important;
+  overflow-y:hidden!important;
+}
+.project-media-slide{
+  position:relative!important;
+  isolation:isolate;
+  width:100%!important;
+  height:auto!important;
+  min-height:clamp(420px,58vh,720px)!important;
+  max-height:min(78vh,860px)!important;
+  aspect-ratio:16 / 9!important;
+  overflow:hidden!important;
+  background:color-mix(in srgb,var(--page-bg) 88%,#171412 12%)!important;
+}
+.project-media-slide::before{
+  content:"";
+  position:absolute;
+  z-index:-2;
+  inset:-30px;
+  pointer-events:none;
+  opacity:0;
+  transition:opacity .25s ease;
+}
+.project-image-slide.has-image-backdrop::before{
+  background-image:linear-gradient(rgba(20,17,16,.22),rgba(20,17,16,.22)),var(--media-backdrop);
+  background-position:center;
+  background-repeat:no-repeat;
+  background-size:cover;
+  filter:blur(22px) saturate(.78);
+  transform:scale(1.08);
+  opacity:.52;
+}
+.project-media-slide::after{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  inset:0;
+  pointer-events:none;
+  background:linear-gradient(90deg,rgba(20,17,16,.12),transparent 18%,transparent 82%,rgba(20,17,16,.12));
+}
+.project-media-slide img,
+.project-media-slide video{
+  position:relative!important;
+  z-index:1;
+  width:100%!important;
+  height:100%!important;
+  max-width:100%!important;
+  max-height:100%!important;
+  min-width:0!important;
+  min-height:0!important;
+  margin:0!important;
+  object-fit:contain!important;
+  object-position:center center!important;
+  transform:none!important;
+  background:transparent!important;
+}
+/* Imagens realmente horizontais aproveitam todo o quadro do desktop. */
+.project-media-slide.media-landscape img,
+.project-media-slide.media-ultrawide img{
+  width:100%!important;
+  height:100%!important;
+}
+/* Vídeo usa fundo neutro para não duplicar o stream e não aumentar tráfego. */
+.project-video-slide{
+  background:radial-gradient(circle at center,color-mix(in srgb,var(--page-bg) 82%,#3a322d 18%),color-mix(in srgb,var(--page-bg) 94%,#000 6%))!important;
+}
+
+@media (min-width:701px){
+  .project-media-slide{
+    min-height:0!important;
+    height:min(calc((100vw - (var(--project-media-side) * 2)) * .5625),calc(100svh - 190px),820px)!important;
+    aspect-ratio:16 / 9!important;
+  }
+  /* Para foto vertical/quadrada no desktop, a original permanece inteira ao centro;
+     o fundo expandido evita aparência de "layout de celular" isolado no meio da tela. */
+  .project-media-slide.media-portrait img,
+  .project-media-slide.media-tall img,
+  .project-media-slide.media-square img{
+    filter:drop-shadow(0 12px 30px rgba(0,0,0,.18));
+  }
+}
+
+@media (max-width:700px){
+  .project-media-section{padding-left:0!important;padding-right:0!important}
+  .project-media-track{border-radius:0!important}
+  .project-media-slide{
+    min-height:0!important;
+    max-height:78svh!important;
+    height:auto!important;
+    aspect-ratio:4 / 5!important;
+  }
+  .project-media-slide.media-landscape,
+  .project-media-slide.media-ultrawide{aspect-ratio:16 / 9!important}
+  .project-media-slide.media-square{aspect-ratio:1 / 1!important}
+  .project-media-slide.media-portrait{aspect-ratio:4 / 5!important}
+  .project-media-slide.media-tall{aspect-ratio:9 / 16!important;max-height:78svh!important}
+  .project-image-slide.has-image-backdrop::before{opacity:.18;filter:blur(18px) saturate(.72)}
+  .project-media-slide::after{background:linear-gradient(0deg,rgba(20,17,16,.08),transparent 16%,transparent 84%,rgba(20,17,16,.08))}
+}
+
+@media (max-width:420px){
+  .project-media-slide{max-height:76svh!important}
+  .project-media-slide.media-tall{max-height:76svh!important}
+}

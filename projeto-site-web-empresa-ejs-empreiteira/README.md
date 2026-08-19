@@ -72,3 +72,11 @@ O Blob criado pelo usuário está em modo privado. Por isso as imagens cadastrad
 - Card institucional final corrigido no mobile e posicionado abaixo da imagem, sem cobrir o panorama.
 - WhatsApp flutuante movido para fora do rodapé, acompanha a viewport durante a rolagem e aparece somente em telas de até 620px.
 - Botão flutuante removido do desktop.
+
+## Atualização V30 — mídia responsiva automática
+- Fotos e vídeos cadastrados pelo ADM agora têm a proporção real detectada automaticamente no navegador.
+- Nenhuma foto/vídeo é cortado ou deformado: a mídia principal usa sempre `object-fit: contain`.
+- No desktop, a galeria usa um quadro horizontal 16:9 responsivo e aproveita melhor a largura disponível.
+- Fotos verticais/quadradas no desktop permanecem inteiras e recebem um fundo ampliado/desfocado da própria imagem, evitando a aparência de “foto de celular” perdida no meio da tela.
+- No celular, o quadro muda automaticamente entre horizontal, quadrado, retrato e retrato alto conforme a proporção real do arquivo.
+- O mesmo manipulador funciona para arquivos enviados por celular, notebook ou computador sem exigir tratamento manual no painel.

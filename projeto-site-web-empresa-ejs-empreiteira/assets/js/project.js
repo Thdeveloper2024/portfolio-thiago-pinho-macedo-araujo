@@ -1,6 +1,54 @@
 const fallback=[{id:'obra-1',title:'Residência contemporânea fictícia',desc:'Conceito visual demonstrativo com fachada moderna.',cover:'assets/img/hero-stages/07.webp',gallery:['assets/img/hero-stages/07.webp'],videos:[]}];
 function esc(v=''){return String(v).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));}
 
+/*
+ * Manipulador responsivo de mídia
+ * --------------------------------
+ * Detecta a proporção REAL de cada foto/vídeo depois que o navegador lê o
+ * arquivo e informa isso ao CSS. A mídia sempre usa object-fit: contain, então
+ * nunca é cortada ou deformada. Em desktop, fotos verticais recebem um fundo
+ * ampliado/desfocado da própria imagem para ocupar o quadro horizontal sem
+ * esticar nem recortar a foto original. Em mobile, o quadro muda de proporção
+ * de acordo com a orientação do arquivo.
+ */
+function classifyMedia(slide,media,width,height){
+  if(!slide||!media||!width||!height)return;
+  const ratio=width/height;
+  slide.classList.remove('media-landscape','media-portrait','media-square','media-ultrawide','media-tall');
+  if(ratio>=2)slide.classList.add('media-ultrawide');
+  else if(ratio>1.08)slide.classList.add('media-landscape');
+  else if(ratio<0.62)slide.classList.add('media-tall');
+  else if(ratio<0.92)slide.classList.add('media-portrait');
+  else slide.classList.add('media-square');
+
+  slide.style.setProperty('--media-ratio',String(ratio));
+  slide.dataset.mediaRatio=ratio.toFixed(4);
+
+  if(media.tagName==='IMG'){
+    const src=media.currentSrc||media.src;
+    if(src){
+      slide.classList.add('has-image-backdrop');
+      slide.style.setProperty('--media-backdrop',`url("${String(src).replace(/"/g,'\\"')}")`);
+    }
+  }
+}
+
+function installMediaManipulator(slide,media){
+  if(!slide||!media)return;
+  const apply=()=>{
+    if(media.tagName==='IMG')classifyMedia(slide,media,media.naturalWidth,media.naturalHeight);
+    else classifyMedia(slide,media,media.videoWidth,media.videoHeight);
+  };
+
+  if(media.tagName==='IMG'){
+    if(media.complete&&media.naturalWidth)apply();
+    else media.addEventListener('load',apply,{once:true});
+  }else{
+    if(media.readyState>=1&&media.videoWidth)apply();
+    else media.addEventListener('loadedmetadata',apply,{once:true});
+  }
+}
+
 async function load(){
   let works=fallback,settings={cnpj:'não informado',whatsapp:'',instagram:''};
   try{const r=await fetch('/api/cms',{cache:'no-store'});if(r.ok){const d=await r.json();if(Array.isArray(d.works)&&d.works.length)works=d.works;settings=d.settings||settings;}}catch{}
@@ -11,8 +59,8 @@ async function load(){
   const videos=(Array.isArray(work.videos)?work.videos:[]).filter(Boolean);
   const media=[...gallery.map(src=>({type:'image',src})),...videos.map(src=>({type:'video',src}))];
   const mediaHtml=media.map((m,i)=>m.type==='video'
-    ? `<article class="project-media-slide project-video-slide" data-media-index="${i}"><span class="project-media-type">Vídeo</span><video ${i===0?`src="${esc(m.src)}"`:`data-src="${esc(m.src)}"`} controls playsinline preload="none" aria-label="Vídeo da obra ${esc(work.title)}"></video></article>`
-    : `<article class="project-media-slide" data-media-index="${i}"><img ${i===0?`src="${esc(m.src)}" fetchpriority="high"`:`data-src="${esc(m.src)}"`} alt="${esc(work.title)}" decoding="async"></article>`).join('');
+    ? `<article class="project-media-slide project-video-slide" data-media-index="${i}"><span class="project-media-type">Vídeo</span><video ${i===0?`src="${esc(m.src)}"`:`data-src="${esc(m.src)}"`} controls playsinline preload="metadata" aria-label="Vídeo da obra ${esc(work.title)}"></video></article>`
+    : `<article class="project-media-slide project-image-slide" data-media-index="${i}"><img ${i===0?`src="${esc(m.src)}" fetchpriority="high"`:`data-src="${esc(m.src)}"`} alt="${esc(work.title)}" decoding="async"></article>`).join('');
   const wa=(settings.whatsapp||'').replace(/\D/g,'');
   const ig=settings.instagram||'#';
   document.getElementById('projectMain').innerHTML=`
@@ -32,15 +80,27 @@ async function load(){
 
   const track=document.getElementById('projectMediaTrack'),dots=document.getElementById('projectMediaDots'),slides=[...track.children];
   let index=0;
-  function hydrate(i){
-    [i-1,i,i+1].forEach(n=>{if(n<0||n>=slides.length)return;const el=slides[n].querySelector('img[data-src],video[data-src]');if(el){el.src=el.dataset.src;el.removeAttribute('data-src');if(el.tagName==='VIDEO'&&n===i)el.load();}});
+
+  function prepareSlide(i){
+    if(i<0||i>=slides.length)return;
+    const slide=slides[i];
+    const mediaEl=slide.querySelector('img,video');
+    if(!mediaEl)return;
+    const deferred=mediaEl.dataset.src;
+    if(deferred){mediaEl.src=deferred;mediaEl.removeAttribute('data-src');if(mediaEl.tagName==='VIDEO')mediaEl.load();}
+    if(!slide.dataset.manipulatorInstalled){
+      installMediaManipulator(slide,mediaEl);
+      slide.dataset.manipulatorInstalled='1';
+    }
   }
+
+  function hydrate(i){[i-1,i,i+1].forEach(prepareSlide);}
   slides.forEach((_,i)=>{const b=document.createElement('button');b.type='button';b.setAttribute('aria-label',`Ver mídia ${i+1}`);b.onclick=()=>go(i);dots.appendChild(b);});
   const dotButtons=[...dots.children];
   function go(i){index=(i+slides.length)%slides.length;hydrate(index);slides[index].scrollIntoView({behavior:'smooth',inline:'start',block:'nearest'});updateDots();}
   function updateDots(){dotButtons.forEach((d,i)=>d.classList.toggle('active',i===index));}
   document.getElementById('projectMediaPrev').onclick=()=>go(index-1);document.getElementById('projectMediaNext').onclick=()=>go(index+1);
-  let scrollTimer;track.addEventListener('scroll',()=>{clearTimeout(scrollTimer);scrollTimer=setTimeout(()=>{const w=track.clientWidth||1;index=Math.round(track.scrollLeft/w);hydrate(index);updateDots();},70);},{passive:true});
+  let scrollTimer;track.addEventListener('scroll',()=>{clearTimeout(scrollTimer);scrollTimer=setTimeout(()=>{const w=track.clientWidth||1;index=Math.max(0,Math.min(slides.length-1,Math.round(track.scrollLeft/w)));hydrate(index);updateDots();},70);},{passive:true});
   hydrate(0);updateDots();
 }
 load();
