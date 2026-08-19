@@ -218,3 +218,28 @@ Esta versão acrescenta:
 ### Cadastro de ícone de serviço
 
 No painel, acesse **Serviços**. Ao criar ou editar um serviço, escolha um ícone no campo **Ícone** ou clique diretamente no catálogo visual. O ícone selecionado será utilizado automaticamente nos cards de serviços e nos filtros do portfólio.
+
+
+## Atualização V34
+
+Esta versão inclui os seguintes ajustes:
+
+- rodapé permanentemente escuro em todos os temas; somente o cabeçalho acompanha a cor escolhida pelo visitante;
+- cores de textos, botões e ícones adaptadas ao tema para manter contraste e legibilidade;
+- botão pequeno **Voltar** inserido automaticamente nas páginas públicas;
+- ícone de calendário padronizado em todos os botões de orçamento;
+- página individual da obra com galeria à esquerda e informações à direita no desktop; no mobile o conteúdo é empilhado;
+- imagens e vídeos usam `object-fit: contain`, preservando a mídia inteira sem cortes ou deformações, inclusive fotos verticais de celular;
+- no mobile, a galeria mostra o contador numérico e oculta os pontos de paginação;
+- localização da obra passou para o painel de informações, deixando acima da galeria somente o nome da obra;
+- filtros e categorias sem truncamento de nomes longos, inclusive **Impermeabilização**;
+- novos serviços padrão: Impermeabilização, Limpeza pós-obra, Drywall e Instalação de grama;
+- pacote de ícones ampliado com limpeza, drywall, grama, concreto e andaime;
+- seção institucional usa uma imagem profissional de construção civil por URL externa, com fallback para a imagem local anterior;
+- indicadores reposicionados no topo do rodapé e o card de contato colocado imediatamente antes do copyright;
+- depoimentos dinâmicos: clientes podem enviar pelo site, todos podem rolar a lista e o ADM pode cadastrar ou excluir depoimentos;
+- novo endpoint `/api/testimonials` para leitura/envio público e suporte administrativo.
+
+### Observação sobre a imagem institucional
+
+A imagem de equipe da seção institucional está configurada por URL externa e possui fallback automático para `assets/img/hero-stages/04.webp` caso a imagem remota não esteja disponível.

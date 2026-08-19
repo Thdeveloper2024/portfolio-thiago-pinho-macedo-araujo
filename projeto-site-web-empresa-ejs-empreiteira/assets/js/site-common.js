@@ -17,14 +17,19 @@ window.EJSCommon = (() => {
         { id: 'pintura', name: 'Pintura', description: 'Pintura interna e externa com preparação e acabamento cuidadoso.', icon: 'painting' },
         { id: 'eletrica', name: 'Elétrica', description: 'Instalações, adequações e manutenções elétricas com segurança.', icon: 'electrical' },
         { id: 'gesso', name: 'Gesso', description: 'Forros, sancas, divisórias e acabamentos em gesso para valorizar o ambiente.', icon: 'plaster' },
-        { id: 'hidraulica', name: 'Hidráulica', description: 'Instalações e manutenção hidráulica residencial e comercial.', icon: 'plumbing' }
+        { id: 'hidraulica', name: 'Hidráulica', description: 'Instalações e manutenção hidráulica residencial e comercial.', icon: 'plumbing' },
+        { id: 'impermeabilizacao', name: 'Impermeabilização', description: 'Proteção de lajes, paredes e áreas molhadas contra infiltrações.', icon: 'waterproof' },
+        { id: 'limpeza-pos-obra', name: 'Limpeza pós-obra', description: 'Limpeza técnica e organização final para entrega do ambiente.', icon: 'cleaning' },
+        { id: 'drywall', name: 'Drywall', description: 'Montagem de paredes, divisórias e fechamentos em drywall.', icon: 'drywall' },
+        { id: 'instalacao-de-grama', name: 'Instalação de grama', description: 'Preparação do solo e instalação de placas de grama.', icon: 'grass' }
       ]
     },
     works: [
       {id:'obra-1',title:'Reforma completa residencial',desc:'Reforma completa com modernização dos ambientes, revisão das instalações e novos acabamentos.',category:'Reforma',type:'Reforma Residencial',location:'São Paulo/SP',area:'120 m²',duration:'45 dias',year:String(new Date().getFullYear()),status:'Concluída',services:['Alvenaria','Elétrica','Hidráulica','Pintura','Gesso'],featured:true,cover:'assets/img/hero-stages/08-todas.webp',gallery:['assets/img/hero-stages/01.webp','assets/img/hero-stages/07.webp','assets/img/hero-stages/08-todas.webp'],videos:[]},
       {id:'obra-2',title:'Construção e alvenaria',desc:'Execução de etapas de alvenaria e preparação para acabamentos.',category:'Alvenaria',type:'Construção Residencial',location:'São Paulo/SP',duration:'30 dias',year:String(new Date().getFullYear()),status:'Concluída',services:['Alvenaria'],featured:false,cover:'assets/img/hero-stages/04.webp',gallery:['assets/img/hero-stages/04.webp','assets/img/hero-stages/05.webp'],videos:[]},
       {id:'obra-3',title:'Pintura e acabamento residencial',desc:'Preparação de superfícies, correções e pintura para renovação completa do ambiente.',category:'Pintura',type:'Pintura Residencial',location:'São Paulo/SP',duration:'12 dias',year:String(new Date().getFullYear()),status:'Concluída',services:['Pintura'],featured:false,cover:'assets/img/hero-stages/07.webp',gallery:['assets/img/hero-stages/06.webp','assets/img/hero-stages/07.webp'],videos:[]}
-    ]
+    ],
+    testimonials: []
   };
 
   const esc = (value = '') => String(value).replace(/[&<>'"]/g, c => ({
@@ -82,7 +87,8 @@ window.EJSCommon = (() => {
         const data = await response.json();
         return {
           settings: { ...fallback.settings, ...(data.settings || {}) },
-          works: Array.isArray(data.works) ? data.works : []
+          works: Array.isArray(data.works) ? data.works : [],
+          testimonials: Array.isArray(data.testimonials) ? data.testimonials : []
         };
       }
     } catch {}
@@ -158,7 +164,31 @@ window.EJSCommon = (() => {
     });
   }
 
+
+  function hydrateUiIcons(root = document) {
+    root.querySelectorAll('[data-ui-icon]').forEach(host => {
+      const icon = host.dataset.uiIcon || 'tools';
+      host.innerHTML = uiIcon(icon, host.dataset.iconClass || 'button-svg');
+    });
+  }
+
+  function initBackButton() {
+    if (document.querySelector('.global-backbar')) return;
+    const header = document.querySelector('.site-header');
+    if (!header) return;
+    const bar = document.createElement('div');
+    bar.className = 'global-backbar';
+    bar.innerHTML = `<div class="container"><button type="button" class="page-back-button" aria-label="Voltar para a página anterior">${uiIcon('back','back-svg')}<span>Voltar</span></button></div>`;
+    header.insertAdjacentElement('afterend', bar);
+    bar.querySelector('button').addEventListener('click', () => {
+      if (history.length > 1) history.back();
+      else location.href = 'index.html';
+    });
+  }
+
   function initNavigation(settings) {
+    hydrateUiIcons(document);
+    initBackButton();
     const menuToggle = document.getElementById('menuToggle');
     const mobileNav = document.getElementById('mobileNav');
     if (menuToggle && mobileNav) {
@@ -237,6 +267,8 @@ window.EJSCommon = (() => {
     whatsappIcon,
     adaptImageFrame,
     initAdaptiveMedia,
+    hydrateUiIcons,
+    initBackButton,
     initNavigation
   };
 })();

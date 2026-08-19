@@ -23,6 +23,7 @@
         <button data-nav="new"><span>＋</span>Cadastrar obras</button>
         <button data-nav="works"><span>▦</span>Obras cadastradas</button>
         <button data-nav="services"><span>⚒</span>Serviços</button>
+        <button data-nav="testimonials"><span>★</span>Depoimentos</button>
         <button data-nav="settings"><span>⚙</span>Configurações</button>
       </nav>
 
@@ -50,6 +51,7 @@
           <div class="admin-dashboard-cards">
             <article><span>Projetos publicados</span><strong id="dashProjects">0</strong><small>Portfólio atual</small></article>
             <article><span>Obras finalizadas</span><strong id="dashCompleted">0</strong><small>Contagem pública</small></article>
+            <article><span>Depoimentos</span><strong id="dashTestimonials">0</strong><small>Publicados no site</small></article>
             <article><span>Sincronização</span><strong id="dashSync">...</strong><small>Vercel Blob</small></article>
           </div>
 
@@ -224,6 +226,29 @@
             <section class="admin-panel">
               <div class="admin-panel-title"><div><span class="eyebrow">CATÁLOGO</span><h2>Serviços cadastrados</h2></div></div>
               <div id="adminServices" class="admin-services-list"></div>
+            </section>
+          </div>
+        </section>
+
+        <section data-admin-view="testimonials" hidden>
+          <div class="admin-page-head">
+            <div><span class="eyebrow">DEPOIMENTOS</span><h1>Depoimentos de clientes</h1><p>Cadastre depoimentos manualmente e exclua os enviados pelos clientes quando necessário.</p></div>
+          </div>
+          <div class="admin-services-layout">
+            <section class="admin-panel admin-form-section">
+              <div class="admin-form-group-title"><div><span class="eyebrow">NOVO</span><h2>Cadastrar depoimento</h2></div></div>
+              <div class="admin-grid admin-grid-2">
+                <label class="admin-field">Nome do cliente<input id="testimonialAdminName" maxlength="100" placeholder="Nome"></label>
+                <label class="admin-field">Cidade / bairro<input id="testimonialAdminLocation" maxlength="120" placeholder="Ex.: Vila Mariana - SP"></label>
+                <label class="admin-field admin-span-2">Obra ou serviço<input id="testimonialAdminProject" maxlength="140" placeholder="Ex.: Reforma residencial"></label>
+                <label class="admin-field admin-span-2">Depoimento<textarea id="testimonialAdminMessage" rows="5" maxlength="900" placeholder="Escreva o depoimento do cliente."></textarea></label>
+                <label class="admin-field">Avaliação<select id="testimonialAdminRating"><option value="5">5 estrelas</option><option value="4">4 estrelas</option><option value="3">3 estrelas</option><option value="2">2 estrelas</option><option value="1">1 estrela</option></select></label>
+              </div>
+              <div class="admin-form-actions"><button class="btn btn-primary" id="saveTestimonial" type="button">Cadastrar depoimento</button></div>
+            </section>
+            <section class="admin-panel">
+              <div class="admin-panel-title"><div><span class="eyebrow">PUBLICADOS</span><h2>Todos os depoimentos</h2></div></div>
+              <div id="adminTestimonials" class="admin-testimonials-list"></div>
             </section>
           </div>
         </section>

@@ -76,30 +76,17 @@
         <p class="portfolio-empty" id="portfolioEmpty" hidden>Nenhuma obra encontrada nesta categoria.</p>
       </div>
     </section>
-
-    <section class="trust-strip trust-strip-page">
-      <div class="container trust-grid">
-        <article><span class="trust-icon">◉</span><div><strong id="completedProjectsCount">0+</strong><small>Obras entregues</small></div></article>
-        <article><span class="trust-icon">☆</span><div><strong id="satisfactionRate">98%</strong><small>Clientes satisfeitos</small></div></article>
-        <article><span class="trust-icon">◇</span><div><strong id="experienceYears">6+</strong><small>Anos de experiência</small></div></article>
-        <article><span class="trust-icon">⌂</span><div><strong>100%</strong><small>Compromisso e qualidade</small></div></article>
-      </div>
-    </section>
-
-    <section class="contact-strip" id="contato">
-      <div class="container contact-strip-grid">
-        <a id="contactWhatsapp" href="#" target="_blank" rel="noopener">
-          <span class="contact-circle contact-circle-wa"><img class="whatsapp-icon" src="assets/img/whatsapp.svg" alt="" aria-hidden="true"></span>
-          <div><small>WhatsApp</small><strong id="contactWhatsappText">Fale conosco</strong><span>Resposta rápida</span></div>
-        </a>
-        <div><span class="contact-circle">☎</span><div><small>Telefone</small><strong id="contactPhone">Não informado</strong><span id="contactHours">Atendimento comercial</span></div></div>
-        <div><span class="contact-circle">●</span><div><small>Atendimento</small><strong id="contactArea">São Paulo e Região</strong><span>Consulte disponibilidade</span></div></div>
-        <button type="button" data-whatsapp><span class="contact-circle">▣</span><div><small>Orçamento</small><strong>Gratuito e sem compromisso</strong><span>Solicite agora</span></div></button>
-      </div>
-    </section>
   </main>
 
   <footer class="site-footer">
+    <section class="trust-strip footer-trust-strip" aria-label="Indicadores da EJS Empreiteira">
+          <div class="container trust-grid">
+            <article><span class="trust-icon" data-ui-icon="users"></span><div><strong id="completedProjectsCount">0+</strong><small>Obras entregues</small></div></article>
+            <article><span class="trust-icon" data-ui-icon="star"></span><div><strong id="satisfactionRate">98%</strong><small>Clientes satisfeitos</small></div></article>
+            <article><span class="trust-icon" data-ui-icon="shield"></span><div><strong id="experienceYears">6+</strong><small>Anos de experiência</small></div></article>
+            <article><span class="trust-icon" data-ui-icon="helmet"></span><div><strong>100%</strong><small>Compromisso e qualidade</small></div></article>
+          </div>
+        </section>
     <div class="container footer-grid">
       <div class="footer-company">
         <a class="site-brand footer-logo" href="index.html">
@@ -113,11 +100,24 @@
       <div class="footer-column" id="footerServices"><strong>Serviços</strong></div>
       <div class="footer-column"><strong>Siga-nos</strong><a id="footerInstagram" href="#" target="_blank" rel="noopener">Instagram</a><a id="footerWhatsapp" href="#" target="_blank" rel="noopener">WhatsApp</a></div>
     </div>
+
+    <section class="contact-strip footer-contact-strip" id="contato">
+          <div class="container contact-strip-grid">
+            <a id="contactWhatsapp" href="#" target="_blank" rel="noopener">
+              <span class="contact-circle contact-circle-wa"><img class="whatsapp-icon" src="assets/img/whatsapp.svg" alt="" aria-hidden="true"></span>
+              <div><small>WhatsApp</small><strong id="contactWhatsappText">Fale conosco</strong><span>Resposta rápida</span></div>
+            </a>
+            <div><span class="contact-circle" data-ui-icon="phone"></span><div><small>Telefone</small><strong id="contactPhone">Não informado</strong><span id="contactHours">Atendimento comercial</span></div></div>
+            <div><span class="contact-circle" data-ui-icon="location"></span><div><small>Atendimento</small><strong id="contactArea">São Paulo e Região</strong><span>Consulte disponibilidade</span></div></div>
+            <button type="button" data-whatsapp><span class="contact-circle" data-ui-icon="calendar"></span><div><small>Orçamento</small><strong>Gratuito e sem compromisso</strong><span>Solicite agora</span></div></button>
+          </div>
+        </section>
+
     <div class="container footer-bottom">© <span id="year"></span> EJS Empreiteira. Todos os direitos reservados.</div>
   </footer>
 
   <a id="floatingWhatsapp" class="floating-whatsapp" href="#" target="_blank" rel="noopener" aria-label="Falar com a EJS pelo WhatsApp"><img class="whatsapp-icon" src="assets/img/whatsapp.svg" alt="" aria-hidden="true"></a>
-  <div class="mobile-bottom-cta"><button class="mobile-wa" type="button" data-whatsapp><img class="whatsapp-icon" src="assets/img/whatsapp.svg" alt="" aria-hidden="true"> WhatsApp</button><button class="mobile-budget" type="button" data-whatsapp>▣ Orçamento</button></div>
+  <div class="mobile-bottom-cta"><button class="mobile-wa" type="button" data-whatsapp><img class="whatsapp-icon" src="assets/img/whatsapp.svg" alt="" aria-hidden="true"> WhatsApp</button><button class="mobile-budget" type="button" data-whatsapp><span data-ui-icon="calendar"></span> Orçamento</button></div>
 
   <script src="assets/js/accessibility.js"></script>
   <script src="assets/js/icons.js"></script>

@@ -20,6 +20,10 @@
     carpentry: '<path d="M5 5h14v14H5z"/><path d="M8 8h8v8H8z"/><path d="M3 3l3 3M21 3l-3 3M3 21l3-3M21 21l-3-3"/>',
     welding: '<path d="M4 16h7l2-4 2 4h5"/><path d="m12 3 1 4M7 5l3 3M17 5l-3 3"/><path d="M8 19h8"/>',
     cleaning: '<path d="M8 4h8l-1 5H9L8 4Z"/><path d="M10 9v10M14 9v10"/><path d="M7 19h10"/><path d="M18 5h3M19.5 3.5v3"/>',
+    drywall: '<rect x="4" y="4" width="16" height="16" rx="1.5"/><path d="M12 4v16M4 10h16M7 7h2M15 14h2"/>',
+    grass: '<path d="M3 18h18"/><path d="M6 18c0-5 2-8 4-11 0 4 1 7 2 11"/><path d="M12 18c1-5 3-8 6-11-1 4-1 7-1 11"/><path d="M4 21h16"/>',
+    concrete: '<path d="M5 18h10l4-5-7-7H5z"/><circle cx="8" cy="20" r="1.5"/><circle cx="16" cy="20" r="1.5"/><path d="M15 8h4l2 2"/>',
+    scaffold: '<path d="M5 3v18M19 3v18M5 7h14M5 13h14M5 19h14M5 7l14 6M19 7 5 13"/>',
     landscaping: '<path d="M12 3v18"/><path d="M12 8c-4 0-6-2-6-5 4 0 6 2 6 5ZM12 12c4 0 6-2 6-5-4 0-6 2-6 5Z"/><path d="M7 21h10"/>',
     stairs: '<path d="M3 19h5v-4h4v-4h4V7h5"/>',
     ruler: '<path d="m5 19 14-14 3 3L8 22 5 19Z"/><path d="m12 12 2 2M15 9l2 2M9 15l2 2"/>',
@@ -32,6 +36,7 @@
     users: '<circle cx="9" cy="8" r="3"/><path d="M3 20a6 6 0 0 1 12 0"/><circle cx="17" cy="9" r="2"/><path d="M15 15a5 5 0 0 1 6 5"/>',
     shield: '<path d="M12 3 20 6v6c0 5-3.4 8-8 10-4.6-2-8-5-8-10V6l8-3Z"/><path d="m8 12 3 3 5-6"/>',
     phone: '<path d="M6 3h4l2 5-3 2a14 14 0 0 0 5 5l2-3 5 2v4c0 1.7-1.3 3-3 3C10.3 21 3 13.7 3 5c0-1.1.9-2 2-2h1Z"/>',
+    back: '<path d="M15 6l-6 6 6 6"/><path d="M9 12h10"/>',
     quote: '<path d="M7 17H3v-5a6 6 0 0 1 6-6v3a3 3 0 0 0-3 3h1v5ZM18 17h-4v-5a6 6 0 0 1 6-6v3a3 3 0 0 0-3 3h1v5Z"/>'
   };
 
@@ -40,7 +45,7 @@
     ['electrical','Elétrica / Plugue'],['plaster','Gesso / Forro'],['plumbing','Hidráulica / Torneira'],['hammer','Martelo'],
     ['drill','Furadeira'],['wrench','Chave / Manutenção'],['helmet','Capacete / Obra'],['building','Construção / Prédio'],
     ['roofing','Telhado'],['flooring','Piso'],['tile','Revestimento / Azulejo'],['waterproof','Impermeabilização'],
-    ['carpentry','Marcenaria'],['welding','Solda'],['cleaning','Limpeza pós-obra'],['landscaping','Paisagismo'],['stairs','Escadas']
+    ['carpentry','Marcenaria'],['welding','Solda'],['cleaning','Limpeza pós-obra'],['drywall','Drywall / Placas'],['grass','Instalação de grama'],['landscaping','Paisagismo'],['concrete','Concreto / Betoneira'],['scaffold','Andaime / Estrutura'],['stairs','Escadas']
   ].map(([key,label])=>({key,label}));
 
   function svg(key, className='ejs-icon'){

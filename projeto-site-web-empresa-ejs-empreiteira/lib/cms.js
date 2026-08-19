@@ -14,7 +14,8 @@ export const defaultState = {
     satisfactionRate: 98,
     completedBase: 0,
     completedAdded: 0,
-    services: [{"id": "demolicao", "name": "Demolição", "description": "Remoção segura e planejada, com organização e descarte responsável.", "icon": "demolition"}, {"id": "alvenaria", "name": "Alvenaria", "description": "Levantamento de paredes, adequações e estruturas com qualidade.", "icon": "masonry"}, {"id": "pintura", "name": "Pintura", "description": "Pintura interna e externa com preparação e acabamento cuidadoso.", "icon": "painting"}, {"id": "eletrica", "name": "Elétrica", "description": "Instalações, adequações e manutenções elétricas com segurança.", "icon": "electrical"}, {"id": "gesso", "name": "Gesso", "description": "Forros, sancas, divisórias e acabamentos em gesso para valorizar o ambiente.", "icon": "plaster"}, {"id": "hidraulica", "name": "Hidráulica", "description": "Instalações e manutenção hidráulica residencial e comercial.", "icon": "plumbing"}]
+    services: [{"id": "demolicao", "name": "Demolição", "description": "Remoção segura e planejada, com organização e descarte responsável.", "icon": "demolition"}, {"id": "alvenaria", "name": "Alvenaria", "description": "Levantamento de paredes, adequações e estruturas com qualidade.", "icon": "masonry"}, {"id": "pintura", "name": "Pintura", "description": "Pintura interna e externa com preparação e acabamento cuidadoso.", "icon": "painting"}, {"id": "eletrica", "name": "Elétrica", "description": "Instalações, adequações e manutenções elétricas com segurança.", "icon": "electrical"}, {"id": "gesso", "name": "Gesso", "description": "Forros, sancas, divisórias e acabamentos em gesso para valorizar o ambiente.", "icon": "plaster"}, {"id": "hidraulica", "name": "Hidráulica", "description": "Instalações e manutenção hidráulica residencial e comercial.", "icon": "plumbing"}, {"id": "impermeabilizacao", "name": "Impermeabilização", "description": "Proteção de lajes, paredes, áreas molhadas e superfícies contra infiltrações.", "icon": "waterproof"}, {"id": "limpeza-pos-obra", "name": "Limpeza pós-obra", "description": "Limpeza técnica e organização final para entrega do ambiente pronto para uso.", "icon": "cleaning"}, {"id": "drywall", "name": "Drywall", "description": "Montagem de paredes, divisórias, fechamentos e soluções em placas de drywall.", "icon": "drywall"}, {"id": "instalacao-de-grama", "name": "Instalação de grama", "description": "Preparação do solo e instalação de placas de grama para áreas externas.", "icon": "grass"}],
+    schemaVersion: 34
   },
   works: [
     {
@@ -74,7 +75,8 @@ export const defaultState = {
       counted: false,
       builtin: true
     }
-  ]
+  ],
+  testimonials: []
 };
 
 const text = (value, max = 400) => String(value ?? '').trim().slice(0, max);
@@ -143,10 +145,38 @@ function cleanWork(w, i) {
   };
 }
 
+
+function cleanTestimonials(value) {
+  const list = Array.isArray(value) ? value : [];
+  return list.map((item, index) => ({
+    id: text(item?.id || `depoimento-${Date.now()}-${index}`, 180),
+    name: text(item?.name || 'Cliente EJS', 100),
+    location: text(item?.location || '', 120),
+    project: text(item?.project || '', 140),
+    message: text(item?.message || '', 900),
+    rating: num(item?.rating ?? 5, 1, 5),
+    createdAt: text(item?.createdAt || new Date().toISOString(), 40),
+    source: text(item?.source || 'admin', 20)
+  })).filter(item => item.message).slice(-200);
+}
+
+function normalizeKey(value='') {
+  return String(value).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();
+}
+
 function cleanState(input) {
   const settings = input?.settings && typeof input.settings === 'object' ? input.settings : {};
   const works = Array.isArray(input?.works) ? input.works : defaultState.works;
   const cleanedWorks = works.map(cleanWork);
+  let cleanedServices = cleanCompanyServices(settings.services);
+  const schemaVersion = num(settings.schemaVersion ?? 0, 0, 999);
+  if (schemaVersion < 34) {
+    const existing = new Set(cleanedServices.map(service => normalizeKey(service.name)));
+    for (const service of defaultState.settings.services) {
+      if (!existing.has(normalizeKey(service.name))) cleanedServices.push(service);
+    }
+    cleanedServices = cleanCompanyServices(cleanedServices);
+  }
 
   // Mantém somente uma obra como destaque principal. Se houver mais de uma,
   // a primeira continua marcada; se nenhuma estiver marcada, a primeira vira destaque.
@@ -173,9 +203,11 @@ function cleanState(input) {
       satisfactionRate: num(settings.satisfactionRate ?? defaultState.settings.satisfactionRate, 0, 100),
       completedBase: num(settings.completedBase, 0),
       completedAdded: num(settings.completedAdded, 0),
-      services: cleanCompanyServices(settings.services)
+      services: cleanedServices,
+      schemaVersion: 34
     },
-    works: cleanedWorks
+    works: cleanedWorks,
+    testimonials: cleanTestimonials(input?.testimonials)
   };
 }
 

@@ -12,9 +12,10 @@ let state = {
     satisfactionRate: 98,
     completedBase: 0,
     completedAdded: 0,
-    services: [{"id": "demolicao", "name": "Demolição", "description": "Remoção segura e planejada, com organização e descarte responsável.", "icon": "demolition"}, {"id": "alvenaria", "name": "Alvenaria", "description": "Levantamento de paredes, adequações e estruturas com qualidade.", "icon": "masonry"}, {"id": "pintura", "name": "Pintura", "description": "Pintura interna e externa com preparação e acabamento cuidadoso.", "icon": "painting"}, {"id": "eletrica", "name": "Elétrica", "description": "Instalações, adequações e manutenções elétricas com segurança.", "icon": "electrical"}, {"id": "gesso", "name": "Gesso", "description": "Forros, sancas, divisórias e acabamentos em gesso para valorizar o ambiente.", "icon": "plaster"}, {"id": "hidraulica", "name": "Hidráulica", "description": "Instalações e manutenção hidráulica residencial e comercial.", "icon": "plumbing"}]
+    services: [{"id": "demolicao", "name": "Demolição", "description": "Remoção segura e planejada, com organização e descarte responsável.", "icon": "demolition"}, {"id": "alvenaria", "name": "Alvenaria", "description": "Levantamento de paredes, adequações e estruturas com qualidade.", "icon": "masonry"}, {"id": "pintura", "name": "Pintura", "description": "Pintura interna e externa com preparação e acabamento cuidadoso.", "icon": "painting"}, {"id": "eletrica", "name": "Elétrica", "description": "Instalações, adequações e manutenções elétricas com segurança.", "icon": "electrical"}, {"id": "gesso", "name": "Gesso", "description": "Forros, sancas, divisórias e acabamentos em gesso para valorizar o ambiente.", "icon": "plaster"}, {"id": "hidraulica", "name": "Hidráulica", "description": "Instalações e manutenção hidráulica residencial e comercial.", "icon": "plumbing"}, {"id": "impermeabilizacao", "name": "Impermeabilização", "description": "Proteção de lajes, paredes, áreas molhadas e superfícies contra infiltrações.", "icon": "waterproof"}, {"id": "limpeza-pos-obra", "name": "Limpeza pós-obra", "description": "Limpeza técnica e organização final para entrega do ambiente pronto para uso.", "icon": "cleaning"}, {"id": "drywall", "name": "Drywall", "description": "Montagem de paredes, divisórias e fechamentos em drywall.", "icon": "drywall"}, {"id": "instalacao-de-grama", "name": "Instalação de grama", "description": "Preparação do solo e instalação de placas de grama.", "icon": "grass"}]
   },
-  works: []
+  works: [],
+  testimonials: []
 };
 let editingIndex = -1;
 let editingServiceIndex = -1;
@@ -138,6 +139,7 @@ function setChecked(id, checked = false) {
 
 async function loadState() {
   state = await api('/api/cms');
+  state.testimonials = Array.isArray(state.testimonials) ? state.testimonials : [];
 
   [
     'whatsapp', 'phone', 'instagram', 'cnpj', 'serviceArea', 'businessHours',
@@ -146,6 +148,7 @@ async function loadState() {
 
   refreshWorkServiceControls();
   renderServices();
+  renderAdminTestimonials();
   renderServiceIconPalette();
   updateDashboard();
   renderWorks();
@@ -706,9 +709,62 @@ async function removeService(index) {
   }
 }
 
+
+function renderAdminTestimonials() {
+  const host = $('adminTestimonials');
+  if (!host) return;
+  const list = Array.isArray(state.testimonials) ? [...state.testimonials].reverse() : [];
+  if (!list.length) {
+    host.innerHTML = '<div class="admin-empty">Nenhum depoimento cadastrado.</div>';
+    return;
+  }
+  host.innerHTML = list.map(item => `
+    <article class="admin-testimonial-row" data-testimonial-id="${escapeHtml(item.id)}">
+      <div class="admin-testimonial-stars">${'★'.repeat(Math.max(1, Math.min(5, Number(item.rating) || 5)))}</div>
+      <div><strong>${escapeHtml(item.name || 'Cliente EJS')}</strong><span>${escapeHtml(item.location || item.project || 'Cliente EJS')}</span><p>${escapeHtml(item.message || '')}</p><small>${item.source === 'cliente' ? 'Enviado pelo cliente' : 'Cadastrado pelo ADM'}</small></div>
+      <div class="admin-work-actions"><button class="delete-work delete-testimonial" type="button" data-id="${escapeHtml(item.id)}">Excluir</button></div>
+    </article>`).join('');
+  host.querySelectorAll('.delete-testimonial').forEach(button => button.addEventListener('click', () => removeTestimonial(button.dataset.id)));
+}
+
+$('saveTestimonial')?.addEventListener('click', async () => {
+  const name = $('testimonialAdminName')?.value.trim() || '';
+  const message = $('testimonialAdminMessage')?.value.trim() || '';
+  if (name.length < 2 || message.length < 10) return alert('Informe o nome e um depoimento com pelo menos 10 caracteres.');
+  const item = {
+    id: `depoimento-${Date.now()}-${Math.random().toString(36).slice(2,8)}`,
+    name,
+    location: $('testimonialAdminLocation')?.value.trim() || '',
+    project: $('testimonialAdminProject')?.value.trim() || '',
+    message,
+    rating: Math.max(1, Math.min(5, Number($('testimonialAdminRating')?.value) || 5)),
+    createdAt: new Date().toISOString(),
+    source: 'admin'
+  };
+  state.testimonials = Array.isArray(state.testimonials) ? state.testimonials : [];
+  state.testimonials.push(item);
+  try {
+    await saveState('Depoimento cadastrado.');
+    ['testimonialAdminName','testimonialAdminLocation','testimonialAdminProject','testimonialAdminMessage'].forEach(id => setValue(id,''));
+    setValue('testimonialAdminRating','5');
+    renderAdminTestimonials();
+  } catch (error) { setStatus(error.message, 'error'); }
+});
+
+async function removeTestimonial(id) {
+  const item = (state.testimonials || []).find(t => t.id === id);
+  if (!item || !confirm(`Excluir o depoimento de "${item.name}"?`)) return;
+  state.testimonials = state.testimonials.filter(t => t.id !== id);
+  try {
+    await saveState('Depoimento excluído.');
+    renderAdminTestimonials();
+  } catch (error) { setStatus(error.message, 'error'); await loadState(); }
+}
+
 function updateDashboard() {
   $('dashProjects').textContent = state.works.length;
   $('dashCompleted').textContent = (Number(state.settings.completedBase) || 0) + (Number(state.settings.completedAdded) || 0);
+  if ($('dashTestimonials')) $('dashTestimonials').textContent = (state.testimonials || []).length;
   $('dashSync').textContent = 'Online';
 
   const preview = $('recentWorks');
@@ -736,6 +792,7 @@ function showView(name) {
   });
   if (name === 'works') renderWorks();
   if (name === 'services') renderServices();
+  if (name === 'testimonials') renderAdminTestimonials();
   document.body.classList.remove('admin-menu-open');
 }
 

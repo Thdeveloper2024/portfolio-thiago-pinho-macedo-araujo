@@ -88,7 +88,7 @@
           <h1>Construímos, reformamos e <em>transformamos</em> seu espaço.</h1>
           <p>Da demolição ao acabamento, cuidamos de cada detalhe com qualidade, segurança e compromisso com o seu projeto.</p>
           <div class="hero-actions">
-            <button class="btn btn-primary" type="button" data-whatsapp>Solicitar orçamento</button>
+            <button class="btn btn-primary" type="button" data-whatsapp><span data-ui-icon="calendar"></span>Solicitar orçamento</button>
             <a class="btn btn-outline-light" href="obras.html">Ver obras</a>
           </div>
         </div>
@@ -103,15 +103,6 @@
         </div>
 
         <div class="services-six-grid" id="servicesGrid"></div>
-      </div>
-    </section>
-
-    <section class="trust-strip" aria-label="Indicadores da EJS Empreiteira">
-      <div class="container trust-grid">
-        <article><span class="trust-icon">◉</span><div><strong id="completedProjectsCount">0+</strong><small>Obras entregues</small></div></article>
-        <article><span class="trust-icon">☆</span><div><strong id="satisfactionRate">98%</strong><small>Clientes satisfeitos</small></div></article>
-        <article><span class="trust-icon">◇</span><div><strong id="experienceYears">6+</strong><small>Anos de experiência</small></div></article>
-        <article><span class="trust-icon">⌂</span><div><strong>100%</strong><small>Compromisso e qualidade</small></div></article>
       </div>
     </section>
 
@@ -130,15 +121,22 @@
         <section class="testimonial-box" id="depoimentos">
           <span class="section-kicker">Depoimentos</span>
           <h2>O que nossos clientes dizem</h2>
-          <div class="testimonial-card">
-            <div class="quote-mark">“</div>
-            <p>A EJS Empreiteira cuidou de cada etapa com organização e atenção aos detalhes. O resultado ficou excelente e o acompanhamento durante a obra fez toda a diferença.</p>
-            <div class="testimonial-person">
-              <div class="testimonial-avatar">EJS</div>
-              <div><strong>Cliente EJS</strong><span>Projeto residencial</span></div>
-            </div>
-            <div class="testimonial-dots"><i class="active"></i><i></i><i></i><i></i></div>
-          </div>
+          <div class="testimonials-scroller" id="testimonialsList" aria-live="polite"></div>
+          <details class="testimonial-submit-box">
+            <summary>Adicionar meu depoimento</summary>
+            <form id="testimonialForm" class="testimonial-form">
+              <div class="testimonial-form-grid">
+                <label>Seu nome<input id="testimonialName" maxlength="100" required></label>
+                <label>Cidade / bairro<input id="testimonialLocation" maxlength="120"></label>
+                <label class="span-2">Obra ou serviço<input id="testimonialProject" maxlength="140" placeholder="Ex.: Reforma residencial"></label>
+                <label class="span-2">Depoimento<textarea id="testimonialMessage" rows="4" maxlength="900" minlength="10" required></textarea></label>
+                <label>Avaliação<select id="testimonialRating"><option value="5">5 estrelas</option><option value="4">4 estrelas</option><option value="3">3 estrelas</option><option value="2">2 estrelas</option><option value="1">1 estrela</option></select></label>
+                <input id="testimonialWebsite" class="testimonial-honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">
+              </div>
+              <button class="btn btn-primary" type="submit">Enviar depoimento</button>
+              <p id="testimonialFormStatus" class="testimonial-form-status"></p>
+            </form>
+          </details>
         </section>
       </div>
     </section>
@@ -146,7 +144,7 @@
     <section class="about-section" id="sobre">
       <div class="container about-grid">
         <div class="about-media">
-          <img src="assets/img/hero-stages/04.webp" alt="Equipe e processo de obra EJS Empreiteira" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1400&q=82" onerror="this.onerror=null;this.src='assets/img/hero-stages/04.webp'" alt="Equipe profissional de construção civil em obra" loading="lazy">
           <span class="about-badge"><strong id="aboutExperienceYears">6+</strong> anos construindo com responsabilidade</span>
         </div>
         <div class="about-copy">
@@ -158,34 +156,21 @@
             <span>✓ Acompanhamento em cada etapa</span>
             <span>✓ Soluções para diferentes tipos de obra</span>
           </div>
-          <button class="btn btn-primary" type="button" data-whatsapp>Fazer orçamento</button>
+          <button class="btn btn-primary" type="button" data-whatsapp><span data-ui-icon="calendar"></span>Fazer orçamento</button>
         </div>
-      </div>
-    </section>
-
-    <section class="contact-strip" id="contato">
-      <div class="container contact-strip-grid">
-        <a id="contactWhatsapp" href="#" target="_blank" rel="noopener">
-          <span class="contact-circle contact-circle-wa"><img class="whatsapp-icon" src="assets/img/whatsapp.svg" alt="" aria-hidden="true"></span>
-          <div><small>WhatsApp</small><strong id="contactWhatsappText">Fale conosco</strong><span>Resposta rápida</span></div>
-        </a>
-        <div>
-          <span class="contact-circle">☎</span>
-          <div><small>Telefone</small><strong id="contactPhone">Não informado</strong><span id="contactHours">Atendimento comercial</span></div>
-        </div>
-        <div>
-          <span class="contact-circle">●</span>
-          <div><small>Atendimento</small><strong id="contactArea">São Paulo e Região</strong><span>Consulte disponibilidade</span></div>
-        </div>
-        <button type="button" data-whatsapp>
-          <span class="contact-circle">▣</span>
-          <div><small>Orçamento</small><strong>Gratuito e sem compromisso</strong><span>Solicite agora</span></div>
-        </button>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
+    <section class="trust-strip footer-trust-strip" aria-label="Indicadores da EJS Empreiteira">
+          <div class="container trust-grid">
+            <article><span class="trust-icon" data-ui-icon="users"></span><div><strong id="completedProjectsCount">0+</strong><small>Obras entregues</small></div></article>
+            <article><span class="trust-icon" data-ui-icon="star"></span><div><strong id="satisfactionRate">98%</strong><small>Clientes satisfeitos</small></div></article>
+            <article><span class="trust-icon" data-ui-icon="shield"></span><div><strong id="experienceYears">6+</strong><small>Anos de experiência</small></div></article>
+            <article><span class="trust-icon" data-ui-icon="helmet"></span><div><strong>100%</strong><small>Compromisso e qualidade</small></div></article>
+          </div>
+        </section>
     <div class="container footer-grid">
       <div class="footer-company">
         <a class="site-brand footer-logo" href="#inicio">
@@ -212,12 +197,25 @@
         <a id="footerWhatsapp" href="#" target="_blank" rel="noopener">WhatsApp</a>
       </div>
     </div>
+
+    <section class="contact-strip footer-contact-strip" id="contato">
+          <div class="container contact-strip-grid">
+            <a id="contactWhatsapp" href="#" target="_blank" rel="noopener">
+              <span class="contact-circle contact-circle-wa"><img class="whatsapp-icon" src="assets/img/whatsapp.svg" alt="" aria-hidden="true"></span>
+              <div><small>WhatsApp</small><strong id="contactWhatsappText">Fale conosco</strong><span>Resposta rápida</span></div>
+            </a>
+            <div><span class="contact-circle" data-ui-icon="phone"></span><div><small>Telefone</small><strong id="contactPhone">Não informado</strong><span id="contactHours">Atendimento comercial</span></div></div>
+            <div><span class="contact-circle" data-ui-icon="location"></span><div><small>Atendimento</small><strong id="contactArea">São Paulo e Região</strong><span>Consulte disponibilidade</span></div></div>
+            <button type="button" data-whatsapp><span class="contact-circle" data-ui-icon="calendar"></span><div><small>Orçamento</small><strong>Gratuito e sem compromisso</strong><span>Solicite agora</span></div></button>
+          </div>
+        </section>
+
     <div class="container footer-bottom">© <span id="year"></span> EJS Empreiteira. Todos os direitos reservados.</div>
   </footer>
 
   <a id="floatingWhatsapp" class="floating-whatsapp" href="#" target="_blank" rel="noopener" aria-label="Falar com a EJS pelo WhatsApp"><img class="whatsapp-icon" src="assets/img/whatsapp.svg" alt="" aria-hidden="true"></a>
 
-  <div class="mobile-bottom-cta"><button class="mobile-wa" type="button" data-whatsapp><img class="whatsapp-icon" src="assets/img/whatsapp.svg" alt="" aria-hidden="true"> WhatsApp</button><button class="mobile-budget" type="button" data-whatsapp>▣ Orçamento</button></div>
+  <div class="mobile-bottom-cta"><button class="mobile-wa" type="button" data-whatsapp><img class="whatsapp-icon" src="assets/img/whatsapp.svg" alt="" aria-hidden="true"> WhatsApp</button><button class="mobile-budget" type="button" data-whatsapp><span data-ui-icon="calendar"></span> Orçamento</button></div>
 
   <script src="assets/js/accessibility.js"></script>
   <script src="assets/js/icons.js"></script>

@@ -1351,3 +1351,155 @@ body.public-site{background:var(--public-bg)}
 }
 .contact-circle{color:#fff!important}
 .contact-circle-wa{color:#fff!important}
+
+/* =========================================================
+   V34 — navegação, rodapé fixo escuro, projeto lateral,
+   categorias longas, depoimentos e contraste adaptativo
+   ========================================================= */
+:root{
+  --btn-primary-bg:var(--gold);
+  --btn-primary-text:#201a16;
+  --btn-secondary-bg:#ffffff;
+  --btn-secondary-text:#1f2933;
+  --btn-secondary-border:#d7dde1;
+}
+:root[data-theme="cimento"]{
+  --header-bg:#ffffff;--header-text:#1d252c;--header-soft:#46515a;--header-panel:#ffffff;--header-border:#e2e7ea;
+  --btn-secondary-bg:#ffffff;--btn-secondary-text:#1d252c;--btn-secondary-border:#d9dfe3;
+}
+:root[data-theme="areia"]{
+  --header-bg:#fffdfa;--header-text:#30251d;--header-soft:#65594f;--header-panel:#fffdfa;--header-border:#e8dfd7;
+  --btn-secondary-bg:#fffaf3;--btn-secondary-text:#30251d;--btn-secondary-border:#e1d4c7;
+}
+:root[data-theme="escuro"]{
+  --header-bg:#151a1e;--header-text:#ffffff;--header-soft:#e1e6e9;--header-panel:#151a1e;--header-border:rgba(255,255,255,.16);
+  --btn-secondary-bg:#31383d;--btn-secondary-text:#ffffff;--btn-secondary-border:#4b555c;
+}
+:root[data-theme="contraste"]{
+  --header-bg:#000000;--header-text:#ffffff;--header-soft:#ffffff;--header-panel:#000000;--header-border:#ffffff;
+  --btn-primary-bg:#ffea00;--btn-primary-text:#000000;--btn-secondary-bg:#000000;--btn-secondary-text:#ffffff;--btn-secondary-border:#ffffff;
+}
+
+.btn-primary,.header-whatsapp,.mobile-budget{background:var(--btn-primary-bg)!important;color:var(--btn-primary-text)!important}
+.btn-secondary{background:var(--btn-secondary-bg)!important;color:var(--btn-secondary-text)!important;border-color:var(--btn-secondary-border)!important}
+.btn svg,.header-whatsapp svg,.mobile-bottom-cta svg,.page-back-button svg{color:currentColor!important;stroke:currentColor!important}
+.button-svg{width:18px;height:18px;flex:0 0 auto}
+
+/* apenas o cabeçalho acompanha o tema; o rodapé permanece sempre escuro */
+.site-footer,.project-site-footer{
+  background:#151a1e!important;color:#ffffff!important;border-color:rgba(255,255,255,.1)!important;
+}
+.site-footer .footer-company p,.site-footer .footer-column a,.site-footer .footer-column span,.site-footer .footer-company>span{color:#c9d0d5!important}
+.site-footer .footer-column strong,.site-footer .footer-logo strong,.site-footer .footer-logo small{color:#ffffff!important}
+.site-footer .footer-column a:hover{color:var(--gold)!important}
+.site-footer .footer-bottom{color:#9ca6ad!important;border-color:rgba(255,255,255,.12)!important}
+
+/* indicadores agora imediatamente acima do card de contato */
+.footer-trust-strip,.trust-strip.footer-trust-strip{
+  margin-top:26px;background:#151a1e!important;color:#ffffff!important;border-top:1px solid rgba(255,255,255,.09)!important;border-bottom:1px solid rgba(255,255,255,.09)!important;
+}
+.footer-trust-strip .trust-grid small{color:#c8d0d5!important}
+.footer-trust-strip .trust-grid article:not(:last-child)::after{background:rgba(255,255,255,.14)!important}
+.trust-svg{width:29px;height:29px;color:var(--gold);stroke:currentColor}
+
+/* card de contato penúltimo elemento do rodapé */
+.site-footer .footer-contact-strip,.project-site-footer .footer-contact-strip{
+  background:transparent!important;border:0!important;padding:18px 0 4px!important;color:#1f2933!important;
+}
+.footer-contact-strip .contact-strip-grid{
+  background:#ffffff!important;border:1px solid #e2e6e9;border-radius:12px;overflow:hidden;color:#1f2933!important;
+  box-shadow:0 9px 30px rgba(0,0,0,.13)
+}
+.footer-contact-strip .contact-strip-grid>a,.footer-contact-strip .contact-strip-grid>div,.footer-contact-strip .contact-strip-grid>button{color:#1f2933!important;background:#ffffff!important}
+.footer-contact-strip small,.footer-contact-strip span:not(.contact-circle){color:#68727b!important}
+.footer-contact-strip strong{color:#1f2933!important}
+.footer-contact-strip .contact-circle{background:#151a1e!important;color:#ffffff!important}
+.footer-contact-strip .contact-circle-wa{background:#25d366!important}
+.contact-svg{width:22px;height:22px;color:currentColor}
+
+/* botão de voltar em todas as páginas */
+.global-backbar{background:var(--public-bg);border-bottom:1px solid var(--line);padding:7px 0;position:relative;z-index:40}
+.page-back-button{border:1px solid var(--line);background:var(--public-surface);color:var(--public-text);border-radius:8px;min-height:34px;padding:6px 11px;display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;cursor:pointer;box-shadow:0 2px 8px rgba(10,20,30,.04)}
+.back-svg{width:16px;height:16px}
+
+/* serviços e filtros: nomes longos nunca são truncados */
+.services-six-grid{grid-template-columns:repeat(auto-fit,minmax(165px,1fr))!important}
+.service-mini-card{min-width:0!important;overflow:visible!important}
+.service-mini-card h3{white-space:normal!important;overflow:visible!important;text-overflow:clip!important;overflow-wrap:anywhere;word-break:normal;line-height:1.25}
+.portfolio-filters{display:flex!important;flex-wrap:wrap!important;grid-template-columns:none!important;align-items:stretch;gap:10px!important}
+.portfolio-filters button{width:auto!important;min-width:max-content!important;max-width:none!important;height:auto!important;min-height:44px;padding:9px 15px!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;gap:8px!important;white-space:nowrap!important;overflow:visible!important;text-overflow:clip!important;flex:0 0 auto!important}
+.portfolio-filters button span{overflow:visible!important;text-overflow:clip!important;white-space:nowrap!important}
+.portfolio-filters button .filter-svg{display:block!important;flex:0 0 20px!important;color:currentColor!important}
+.portfolio-card-media>span{max-width:calc(100% - 16px)!important;white-space:normal!important;overflow:visible!important;text-overflow:clip!important;line-height:1.15!important;padding:5px 8px!important}
+.portfolio-card-media>span .category-svg{display:block!important;flex:0 0 14px!important}
+
+/* imagem institucional profissional; não corta o conteúdo importante */
+.about-media img{object-position:center center}
+
+/* depoimentos públicos roláveis */
+.testimonial-box{min-width:0}
+.testimonials-scroller{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:5px 2px 12px;scrollbar-width:thin;scrollbar-color:#c9cfd3 transparent}
+.testimonial-item{flex:0 0 min(390px,88%);scroll-snap-align:start;border:1px solid var(--line);background:var(--public-surface);border-radius:14px;padding:18px;box-shadow:var(--shadow-sm);color:var(--public-text)}
+.testimonial-item p{font-size:12px;line-height:1.7;color:var(--public-soft);min-height:82px}
+.testimonial-stars{color:var(--gold);letter-spacing:.08em;font-size:13px}
+.testimonial-item .quote-mark{color:var(--gold);font-size:36px;line-height:1;margin:5px 0 -2px}
+.testimonial-empty{padding:24px;border:1px dashed var(--line);border-radius:12px;color:var(--public-soft)}
+.testimonial-submit-box{margin-top:14px;border:1px solid var(--line);border-radius:12px;background:var(--public-surface);overflow:hidden}
+.testimonial-submit-box summary{cursor:pointer;padding:13px 15px;font-weight:800;font-size:12px;color:var(--public-text)}
+.testimonial-form{padding:0 15px 16px}.testimonial-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}.testimonial-form-grid .span-2{grid-column:1/-1}
+.testimonial-form label{display:grid;gap:6px;font-size:10px;font-weight:700;color:var(--public-text)}
+.testimonial-form input,.testimonial-form textarea,.testimonial-form select{width:100%;border:1px solid var(--line);border-radius:8px;background:var(--public-bg);color:var(--public-text);padding:10px;outline:none}
+.testimonial-honeypot{position:absolute!important;left:-9999px!important;width:1px!important;height:1px!important;opacity:0!important}.testimonial-form-status{font-size:10px;color:var(--public-soft);margin:8px 0 0}
+
+/* página de obra: título em cima; galeria completa à esquerda e informações à direita */
+.project-showcase{padding:22px 0 46px!important;background:var(--public-bg)!important;color:var(--public-text)!important}
+.project-showcase-head{max-width:1240px!important;text-align:left!important;margin-bottom:15px!important}
+.project-showcase-head h1{margin:0!important;color:var(--public-text)!important;font-size:clamp(30px,3.3vw,48px)!important}
+.project-detail-grid{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(340px,.72fr);gap:24px;align-items:start}
+.project-gallery-column{min-width:0}
+.project-gallery-shell{width:100%!important;height:clamp(440px,62vh,650px)!important;aspect-ratio:auto!important;background:#101416!important;border-radius:14px!important;overflow:hidden!important;box-shadow:var(--shadow-sm)!important}
+.project-media-track,.project-media-slide{height:100%!important;min-height:0!important}
+.project-media-slide{position:relative;background:#101416!important;display:flex!important;align-items:center!important;justify-content:center!important;overflow:hidden!important}
+.project-media-slide::before{content:"";position:absolute;inset:-24px;background-image:var(--media-backdrop);background-size:cover;background-position:center;filter:blur(24px) brightness(.55) saturate(.8);opacity:.42;transform:scale(1.08);z-index:0}
+.project-media-slide.media-landscape::before,.project-media-slide.media-ultrawide::before{opacity:.12}
+.project-media-slide img,.project-media-slide video{position:relative;z-index:1;width:100%!important;height:100%!important;max-width:100%!important;max-height:100%!important;object-fit:contain!important;object-position:center!important}
+.project-info-panel{width:auto!important;margin:0!important;padding:22px!important;background:var(--public-surface)!important;color:var(--public-text)!important;border:1px solid var(--line)!important;border-radius:14px!important;box-shadow:var(--shadow-sm)!important;position:sticky;top:104px}
+.project-about-copy h2{font-size:24px!important;color:var(--public-text)!important;margin:7px 0 9px}.project-about-copy p{color:var(--public-soft)!important;font-size:12px!important;line-height:1.7!important}
+.project-facts-stack{display:grid;margin-top:18px;border-top:1px solid var(--line)}
+.project-fact-inline{display:flex!important;align-items:center!important;gap:11px!important;padding:11px 0!important;border-bottom:1px solid var(--line)!important;min-width:0!important}
+.project-fact-inline>span{display:grid;place-items:center;width:26px;flex:0 0 26px;color:var(--gold)!important}
+.project-fact-inline div{display:grid;gap:2px;min-width:0}.project-fact-inline small{font-size:8px;color:var(--public-soft)!important;text-transform:uppercase;letter-spacing:.06em}.project-fact-inline strong{font-size:11px!important;color:var(--public-text)!important;overflow-wrap:anywhere}
+.project-service-tags{display:flex!important;flex-wrap:wrap!important;gap:7px!important;justify-content:flex-start!important;margin-top:14px!important}.project-service-chip{display:inline-flex!important;align-items:center!important;gap:5px!important;color:var(--public-text)!important;background:color-mix(in srgb,var(--gold) 12%,var(--public-surface))!important;border:1px solid color-mix(in srgb,var(--gold) 35%,transparent)!important;border-radius:999px!important;padding:7px 9px!important;font-size:9px!important}.service-chip-svg{width:15px;height:15px;color:currentColor}
+.project-inline-actions{display:grid!important;grid-template-columns:1fr 1fr!important;gap:9px!important;margin-top:18px!important}.project-inline-actions .btn{min-width:0!important;padding:10px 12px!important}.project-wa-button{background:#25d366!important;color:#ffffff!important}.project-budget-button{color:var(--btn-primary-text)!important}
+.project-media-dots{display:flex}
+.project-counter{left:14px!important;top:14px!important;bottom:auto!important}
+
+/* ADM: depoimentos */
+.admin-testimonials-list{display:grid;gap:10px}.admin-testimonial-row{display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:start;border:1px solid #e3e6e8;border-radius:12px;padding:14px;background:#fff}.admin-testimonial-stars{color:#d9a441;font-size:12px;white-space:nowrap}.admin-testimonial-row>div:nth-child(2){display:grid;gap:4px}.admin-testimonial-row strong{font-size:12px}.admin-testimonial-row span,.admin-testimonial-row small{font-size:9px;color:#66717a}.admin-testimonial-row p{font-size:10px;line-height:1.55;margin:3px 0;color:#48525a}
+.admin-dashboard-cards{grid-template-columns:repeat(4,minmax(0,1fr))}
+
+@media (max-width:980px){
+  .project-detail-grid{grid-template-columns:1fr!important}.project-info-panel{position:static!important}.project-gallery-shell{height:clamp(390px,60vh,590px)!important}.admin-dashboard-cards{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:760px){
+  .global-backbar{padding:5px 0}.page-back-button{min-height:31px;padding:5px 9px;font-size:10px}
+  .portfolio-filters{flex-wrap:nowrap!important;overflow-x:auto!important;scrollbar-width:none!important}.portfolio-filters::-webkit-scrollbar{display:none}.portfolio-filters button{min-width:max-content!important;padding:8px 12px!important}
+  .project-showcase{padding:14px 0 28px!important}.project-showcase-head{width:calc(100% - 28px)!important;margin-bottom:10px!important}.project-showcase-head h1{text-align:left!important;font-size:25px!important}
+  .project-detail-grid{width:100%!important;grid-template-columns:1fr!important;gap:0!important}.project-gallery-column{width:100%!important}.project-gallery-shell{height:min(68vh,560px)!important;min-height:360px!important;border-radius:0!important;border-left:0!important;border-right:0!important;box-shadow:none!important}
+  .project-media-dots{display:none!important}.project-info-panel{width:calc(100% - 28px)!important;margin:15px auto 0!important;padding:18px!important;border-radius:12px!important}.project-about-copy h2{font-size:21px!important}.project-inline-actions{grid-template-columns:1fr!important}
+  .testimonial-form-grid{grid-template-columns:1fr}.testimonial-form-grid .span-2{grid-column:auto}.testimonial-item{flex-basis:88%}
+  .footer-trust-strip{margin-top:20px}.site-footer .footer-contact-strip{padding-top:14px!important}.footer-contact-strip .contact-strip-grid{border-radius:10px}
+  .admin-testimonial-row{grid-template-columns:1fr}.admin-dashboard-cards{grid-template-columns:1fr 1fr}
+}
+@media (max-width:480px){
+  .services-six-grid{grid-template-columns:1fr 1fr!important}.service-mini-card h3{font-size:11px!important}.testimonial-item{flex-basis:94%}.project-gallery-shell{height:min(62vh,500px)!important;min-height:330px!important}.admin-dashboard-cards{grid-template-columns:1fr}
+}
+/* refinamentos finais V34 */
+.site-footer{padding-top:0!important}
+.site-footer>.footer-trust-strip{margin-top:0!important}
+.site-footer>.footer-grid{padding-top:32px}
+.footer-contact-strip .contact-strip-grid>*:not(:last-child){border-color:#e2e6e9!important}
+.testimonial-item{position:relative}
+.testimonial-item .quote-mark{position:static!important;display:block!important;margin:5px 0 -2px!important}
+.admin-service-choice strong,.admin-service-row strong{white-space:normal!important;overflow-wrap:anywhere}
+@media(max-width:760px){.site-footer>.footer-grid{padding-top:24px}}
