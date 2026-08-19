@@ -1634,3 +1634,14 @@ body.public-site{background:var(--public-bg)}
   color:currentColor!important;
   stroke:currentColor!important;
 }
+
+/* V36 — somente o card de contatos permanece branco.
+   A área externa acompanha o fundo escuro do rodapé em todos os temas. */
+:root[data-theme] .site-footer .footer-contact-strip,
+:root[data-theme] .project-site-footer .footer-contact-strip{
+  background:#151a1e!important;
+  border-color:transparent!important;
+}
+:root[data-theme] .footer-contact-strip .contact-strip-grid{
+  background:#ffffff!important;
+}
