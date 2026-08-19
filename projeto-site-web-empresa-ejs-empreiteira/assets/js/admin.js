@@ -58,7 +58,20 @@ function parseServices(value = '') {
   return [...new Set(String(value).split(',').map(s => s.trim()).filter(Boolean))].slice(0, 20);
 }
 
-const serviceIconSymbols = { demolition:'⌁', masonry:'▦', painting:'▭', electrical:'ϟ', plaster:'⌔', plumbing:'⌘', tools:'⚒' };
+const SERVICE_ICON_OPTIONS = (window.EJSIcons?.catalog || [
+  { key:'tools', label:'Ferramentas / geral' },
+  { key:'demolition', label:'Demolição' },
+  { key:'masonry', label:'Alvenaria' },
+  { key:'painting', label:'Pintura' },
+  { key:'electrical', label:'Elétrica' },
+  { key:'plaster', label:'Gesso' },
+  { key:'plumbing', label:'Hidráulica' }
+]);
+
+function iconSvg(name, className = 'ui-icon') {
+  if (window.EJSIcons?.svg) return window.EJSIcons.svg(name || 'tools', className);
+  return `<span class="${className}">⚒</span>`;
+}
 
 function companyServices() {
   return Array.isArray(state.settings?.services) ? state.settings.services : [];
@@ -86,12 +99,31 @@ function refreshWorkServiceControls(selected = []) {
   const selectedSet = new Set((selected || []).map(String));
   host.innerHTML = companyServices().map((service, index) => {
     const id = `workService_${index}`;
-    return `<label class="admin-service-choice" for="${id}"><input id="${id}" type="checkbox" value="${escapeHtml(service.name)}" ${selectedSet.has(service.name) ? 'checked' : ''}><span>${escapeHtml(serviceIconSymbols[service.icon] || '⚒')}</span><strong>${escapeHtml(service.name)}</strong></label>`;
+    return `<label class="admin-service-choice" for="${id}"><input id="${id}" type="checkbox" value="${escapeHtml(service.name)}" ${selectedSet.has(service.name) ? 'checked' : ''}><span class="admin-service-choice-icon">${iconSvg(service.icon || 'tools', 'admin-inline-svg')}</span><strong>${escapeHtml(service.name)}</strong></label>`;
   }).join('') || '<p class="small-note">Cadastre os serviços da empresa na aba Serviços.</p>';
 }
 
 function selectedWorkServices() {
   return [...document.querySelectorAll('#workServiceOptions input[type="checkbox"]:checked')].map(input => input.value);
+}
+
+function renderServiceIconPalette(selected = $('serviceIcon')?.value || 'tools') {
+  const select = $('serviceIcon');
+  const host = $('serviceIconPalette');
+  const safeSelected = SERVICE_ICON_OPTIONS.some(option => option.key === selected) ? selected : 'tools';
+  if (select) {
+    select.innerHTML = SERVICE_ICON_OPTIONS.map(option => `<option value="${escapeHtml(option.key)}">${escapeHtml(option.label)}</option>`).join('');
+    select.value = safeSelected;
+  }
+  if (!host) return;
+  host.innerHTML = SERVICE_ICON_OPTIONS.map(option => `<button class="admin-icon-chip ${safeSelected === option.key ? 'active' : ''}" data-icon-choice="${escapeHtml(option.key)}" type="button" title="${escapeHtml(option.label)}" aria-selected="${safeSelected === option.key}">${iconSvg(option.key, 'admin-icon-svg')}<span>${escapeHtml(option.label)}</span></button>`).join('');
+  host.querySelectorAll('[data-icon-choice]').forEach(button => {
+    button.addEventListener('click', () => {
+      const key = button.dataset.iconChoice || 'tools';
+      setValue('serviceIcon', key);
+      renderServiceIconPalette(key);
+    });
+  });
 }
 
 function setValue(id, value = '') {
@@ -114,6 +146,7 @@ async function loadState() {
 
   refreshWorkServiceControls();
   renderServices();
+  renderServiceIconPalette();
   updateDashboard();
   renderWorks();
 }
@@ -575,6 +608,7 @@ function resetServiceForm() {
   setValue('serviceName');
   setValue('serviceDescription');
   setValue('serviceIcon', 'tools');
+  renderServiceIconPalette('tools');
 }
 
 function renderServices() {
@@ -587,7 +621,7 @@ function renderServices() {
   }
   host.innerHTML = services.map((service, index) => `
     <article class="admin-service-row">
-      <span class="admin-service-row-icon">${escapeHtml(serviceIconSymbols[service.icon] || '⚒')}</span>
+      <span class="admin-service-row-icon">${iconSvg(service.icon || 'tools', 'admin-icon-svg')}</span>
       <div><strong>${escapeHtml(service.name)}</strong><p>${escapeHtml(service.description || 'Sem descrição.')}</p></div>
       <div class="admin-work-actions"><button class="edit-service" data-index="${index}" type="button">Editar</button><button class="delete-work delete-service" data-index="${index}" type="button">Excluir</button></div>
     </article>`).join('');
@@ -605,11 +639,13 @@ function startServiceEdit(index) {
   setValue('serviceName', service.name);
   setValue('serviceDescription', service.description);
   setValue('serviceIcon', service.icon || 'tools');
+  renderServiceIconPalette(service.icon || 'tools');
   showView('services');
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 $('cancelServiceEdit')?.addEventListener('click', resetServiceForm);
+$('serviceIcon')?.addEventListener('change', event => renderServiceIconPalette(event.target.value || 'tools'));
 
 $('saveService')?.addEventListener('click', async () => {
   const name = $('serviceName').value.trim();

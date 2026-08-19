@@ -1,4 +1,4 @@
-const { getData, esc, initNavigation, waLink, whatsappIcon } = window.EJSCommon;
+const { getData, esc, initNavigation, waLink, whatsappIcon, iconSvg } = window.EJSCommon;
 
 function classifyMedia(slide, media, width, height) {
   if (!slide || !media || !width || !height) return;
@@ -41,9 +41,9 @@ function installMediaManipulator(slide, media) {
   }
 }
 
-function fact(icon, label, value, extraClass = '') {
+function fact(iconMarkup, label, value, extraClass = '') {
   if (!value) return '';
-  return `<article class="project-fact-inline ${extraClass}"><span>${icon}</span><div><small>${label}</small><strong>${esc(value)}</strong></div></article>`;
+  return `<article class="project-fact-inline ${extraClass}"><span>${iconMarkup}</span><div><small>${label}</small><strong>${esc(value)}</strong></div></article>`;
 }
 
 async function loadProject() {
@@ -84,7 +84,7 @@ async function loadProject() {
         <div class="breadcrumbs project-breadcrumbs"><a href="index.html">Início</a><span>›</span><a href="obras.html">Obras</a><span>›</span><strong>${esc(work.title)}</strong></div>
         <span class="section-kicker">${work.featured ? 'Obra em destaque' : esc(work.category || 'Projeto EJS')}</span>
         <h1>${esc(work.title)}</h1>
-        <div class="project-location-line">${work.location ? `<span>⌖ ${esc(work.location)}</span>` : ''}${work.type ? `<span>• ${esc(work.type)}</span>` : ''}</div>
+        <div class="project-location-line">${work.location ? `<span>${iconSvg('location', 'mini-svg')} ${esc(work.location)}</span>` : ''}${work.type ? `<span>• ${esc(work.type)}</span>` : ''}</div>
       </div>
 
       <div class="container project-gallery-wrap">
@@ -105,9 +105,9 @@ async function loadProject() {
         </div>
 
         <div class="project-facts-inline">
-          ${fact('▣', 'Prazo', work.duration)}
-          ${fact('▥', 'Área', work.area)}
-          ${fact('⚒', 'Serviços', serviceSummary, 'project-services-fact')}
+          ${fact(iconSvg('time', 'mini-svg'), 'Prazo', work.duration)}
+          ${fact(iconSvg('area', 'mini-svg'), 'Área', work.area)}
+          ${fact(iconSvg('tools', 'mini-svg'), 'Serviços', serviceSummary, 'project-services-fact')}
         </div>
 
         <div class="project-extra-meta">
@@ -120,7 +120,7 @@ async function loadProject() {
 
         <div class="project-inline-actions">
           <a class="btn project-wa-button" href="${whatsapp}" target="_blank" rel="noopener">${whatsappIcon('assets')}<span><strong>WhatsApp</strong><small>${esc(data.settings.whatsapp ? 'Fale com a EJS' : 'Solicitar orçamento')}</small></span></a>
-          <a class="btn btn-primary project-budget-button" href="${whatsapp}" target="_blank" rel="noopener"><span class="budget-icon">▣</span><span><strong>Orçamento</strong><small>Gratuito e rápido</small></span></a>
+          <a class="btn btn-primary project-budget-button" href="${whatsapp}" target="_blank" rel="noopener"><span class="budget-icon">${iconSvg('budget', 'mini-svg')}</span><span><strong>Orçamento</strong><small>Gratuito e rápido</small></span></a>
         </div>
       </div>
     </section>
@@ -143,7 +143,7 @@ async function loadProject() {
     </footer>
 
     <a class="floating-whatsapp" href="${whatsapp}" target="_blank" rel="noopener" aria-label="Falar com a EJS pelo WhatsApp">${whatsappIcon('assets')}</a>
-    <div class="mobile-bottom-cta"><a class="mobile-wa" href="${whatsapp}" target="_blank" rel="noopener">${whatsappIcon('assets')} WhatsApp</a><a class="mobile-budget" href="${whatsapp}" target="_blank" rel="noopener">▣ Orçamento</a></div>`;
+    <div class="mobile-bottom-cta"><a class="mobile-wa" href="${whatsapp}" target="_blank" rel="noopener">${whatsappIcon('assets')} WhatsApp</a><a class="mobile-budget" href="${whatsapp}" target="_blank" rel="noopener">${iconSvg('budget', 'mini-svg')} Orçamento</a></div>`;
 
   const track = document.getElementById('projectMediaTrack');
   const galleryShell = document.getElementById('projectGalleryShell');

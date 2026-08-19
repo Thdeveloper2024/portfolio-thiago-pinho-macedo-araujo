@@ -19,14 +19,13 @@ function mediaPreview(work) {
     </div>`;
 }
 
-
 function renderServices(settings) {
   const host = document.getElementById('servicesGrid');
   if (!host) return;
   const services = getServices(settings);
   host.innerHTML = services.map(service => `
     <article class="service-mini-card">
-      <div class="service-line-icon" aria-hidden="true">${esc(serviceIcon(service))}</div>
+      <div class="service-line-icon" aria-hidden="true">${serviceIcon(service, 'service-svg')}</div>
       <h3>${esc(service.name)}</h3>
       <p>${esc(service.description || 'Serviço executado com planejamento, qualidade e atenção aos detalhes.')}</p>
     </article>`).join('');

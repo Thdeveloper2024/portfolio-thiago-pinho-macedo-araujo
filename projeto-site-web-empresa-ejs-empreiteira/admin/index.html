@@ -197,15 +197,23 @@
                 <label class="admin-field">Nome do serviço<input id="serviceName" maxlength="80" placeholder="Ex.: Impermeabilização"></label>
                 <label class="admin-field">Ícone
                   <select id="serviceIcon">
-                    <option value="tools">Ferramentas</option>
+                    <option value="tools">Ferramentas / geral</option>
                     <option value="demolition">Demolição</option>
                     <option value="masonry">Alvenaria</option>
                     <option value="painting">Pintura</option>
                     <option value="electrical">Elétrica</option>
                     <option value="plaster">Gesso</option>
                     <option value="plumbing">Hidráulica</option>
+                    <option value="flooring">Pisos e revestimentos</option>
+                    <option value="roofing">Cobertura / telhado</option>
+                    <option value="finish">Acabamentos</option>
                   </select>
+                  <small>Selecione um ícone do catálogo ou clique diretamente nos atalhos abaixo.</small>
                 </label>
+                <div class="admin-field admin-span-2">
+                  <span class="admin-field-label">Catálogo de ícones</span>
+                  <div id="serviceIconPalette" class="admin-icon-palette"></div>
+                </div>
                 <label class="admin-field admin-span-2">Descrição<textarea id="serviceDescription" rows="4" maxlength="360" placeholder="Descreva brevemente o serviço prestado."></textarea></label>
               </div>
               <div class="admin-form-actions">
@@ -249,6 +257,7 @@
     </div>
   </div>
 
+  <script src="../assets/js/icons.js"></script>
   <script src="../assets/js/admin.js"></script>
 </body>
 </html>

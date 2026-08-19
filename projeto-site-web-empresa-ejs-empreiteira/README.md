@@ -197,3 +197,24 @@ Também foram adicionados atalhos `/obras` e `/obra` no `vercel.json`.
 ## Versão
 
 **EJS Empreiteira V31 — Novo Visual + Portfólio Completo**
+
+---
+
+## Atualização V33.1 — tema claro, ícones e portfólio compacto
+
+Esta versão acrescenta:
+
+- cabeçalho branco/cinza quando o tema **Claro (cimento)** está ativo;
+- visual geral mais claro, com superfícies brancas e cinzas e dourado como destaque;
+- pacote local com mais de 20 ícones de construção em `assets/js/icons.js`;
+- seleção visual de ícones no painel ADM para os serviços da empresa;
+- ícones específicos para demolição, alvenaria, pintura, elétrica, gesso, hidráulica, piso, telhado, impermeabilização, marcenaria, solda, ferramentas e outros;
+- filtros da página de obras usando os ícones cadastrados no ADM;
+- ícones lineares de localização, área, prazo e calendário nos cards;
+- card de **obra em destaque** mais compacto no desktop, com foto à esquerda e informações à direita;
+- correção para fotos verticais, quadradas e horizontais sem corte, usando `object-fit: contain` e fundo adaptativo;
+- página individual da obra ajustada para o tema claro, mantendo a galeria responsiva no desktop e no mobile.
+
+### Cadastro de ícone de serviço
+
+No painel, acesse **Serviços**. Ao criar ou editar um serviço, escolha um ícone no campo **Ícone** ou clique diretamente no catálogo visual. O ícone selecionado será utilizado automaticamente nos cards de serviços e nos filtros do portfólio.
