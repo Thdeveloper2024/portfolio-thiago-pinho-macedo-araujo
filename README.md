@@ -1,4 +1,3 @@
-@@ -1,80 +1,104 @@
 # Thiago Pinho Macedo Araujo
 > Estudante de desenvolvimento de sistemas
  
